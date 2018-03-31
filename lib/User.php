@@ -359,7 +359,7 @@ class User
                     $emotion_q = DBManager::getData('emotion', 'em_name', 'id', $data->getEmotion(), '', '', '', 'OBJECT');
                     $emotion_txt = $emotion_q->em_name;
                     $text .= $this->AddTagOnElement($user, $data->getId(), './app/a_event_tag_add.php', 0, $text);
-                    $tbody .= '<tr><td class="event-time">' . $data->getMoment() . Event::updateEventDate($data->getId(), './app/a_event_date.php', '').'</td>
+                    $tbody .= '<tr><td class="event-time">' . $data->getMoment() . Event::updateEventDate($data->getId(), './app/a_event_date.php', $data->getMoment()).'</td>
                         <td>' . $event_type_txt . $this->AddCatOnElement($data->getId(), './app/a_event_type.php', $event_type_txt) . '</td>
                         <td>' . $emotion_txt . $this->AddEmotionOnElement($data->getId(), './app/a_event_emo.php', $emotion_txt) . '</td>
                         <td>' . $data->getNote() . $this->AddNoteOnElement($data->getId(), './app/a_event_note.php', $data->getNote()) . '</td><td>' . $text . '</td></tr>';
