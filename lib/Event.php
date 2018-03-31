@@ -165,7 +165,7 @@ class Event
         if ($text) $return = '<hr>';
         $form = new Form();
         $return .= $form->CreateForm($action, 'POST', '')
-            ->AddInput('moment', 'Date', 'date', '', '', '', 'required')
+            ->AddInput('moment', '', 'date', '', '', '', 'required')
             ->AddInput('id', '', 'hidden', $id)
             ->EndForm('Modifier', 'primary');
         return $return;
