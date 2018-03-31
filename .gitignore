@@ -1,0 +1,14 @@
+.DS_Store
+.idea
+.idea_modules/
+out/
+vendor/
+*.json
+*.lock
+*.sql
+cal.html
+lib/DB.php
+lib/DB_local.php
+img/
+js/js/
+_jquery-ui-1.12.1.custom/

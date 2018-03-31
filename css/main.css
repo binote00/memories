@@ -1,0 +1,66 @@
+.header-wrap{
+    margin-top: 80px;
+}
+form .btn{
+    margin-top: 10px;
+}
+
+hr .style {
+    height: 10px;
+    border: 0;
+    box-shadow: 0 10px 10px -10px #8c8b8b inset;
+}
+
+.card{
+    margin-top: 10px;
+}
+
+.bg-del{
+    background-color: #BDBDBD;
+}
+
+a.popup{
+    color:#000;
+}
+a.popup span
+{
+    position:absolute;
+    z-index:10;
+    margin-top:25px;
+    margin-left:-50px;
+    color:#fff;
+    background:rgba(65,113,172,.9);
+    padding:15px;
+    border-radius:3px;
+    box-shadow:0 0 2px rgba(65,113,172,.5);
+    opacity:0;
+    transform:scale(0) rotate(-12deg);
+    transition:all .25s;
+}
+a.popup:hover span, a.popup:focus span, a.popup-light:hover span, a.popup-light:focus span{
+    transform:scale(1) rotate(0);
+    opacity:1;
+}
+a.popup-light span{
+    position:absolute;
+    z-index:10;
+    margin-top:-70%;
+    margin-left:-5%;
+    color:#000;
+    background:rgba(217,212,206,.9);
+    padding:10px;
+    border-radius:5px;
+    box-shadow:0 0 2px rgba(217,212,206,.5);
+    opacity:0;
+    transform:scale(0) rotate(-12deg);
+    transition:all .5s;
+}
+
+.img-popup-l, .img-popup-h{
+    width: 100%;
+}
+@media (min-width: 1199px){
+    .img-popup-l{
+        width: 200%;
+    }
+}

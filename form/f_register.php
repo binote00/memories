@@ -1,0 +1,18 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Binote
+ * Date: 10-11-17
+ * Time: 09:55
+ */
+
+$form = new Form();
+
+$content = $form->CreateForm('./app/a_register.php','POST', 'S\'enregistrer')
+    ->AddInput('first_name', 'Prénom')
+    ->AddInput('last_name', 'Nom')
+    ->AddInput('birth_date', 'Date de Naissance', 'date')
+    ->AddInput('email', 'Email', 'email', '','', '','required')
+    ->AddInput('login', 'Identifiant', 'text', '', '', '','required')
+    ->AddInput('pwd', 'Mot de passe', 'password', '', '', '','required')
+    ->EndForm('Valider');
