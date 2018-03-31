@@ -10,7 +10,6 @@ if(!isset($_SESSION['id'])){
     header('Location: index.php');
 }else{
     $content .= Output::ShowToDo([
-        'Modifier la date et l\'heure',
         'Ajouter un lieu via API Google',
     ], 'warning', true);
     $user = new User();

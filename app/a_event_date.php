@@ -8,9 +8,9 @@
 
 require_once '../inc/actions.inc.php';
 
-if(isset($_POST['id']) && isset($_POST['date'])){
+if(isset($_POST['id']) && isset($_POST['moment'])){
     $event = new Event();
-    $ok = $event->updateEvent($_POST['id'], 'date', $_POST['date']);
+    $ok = $event->updateEvent($_POST['id'], 'moment', $_POST['moment']);
     if($ok){
         Output::ShowAlert(TXT_EVENT_MOD_DONE, 'success');
     }else{
