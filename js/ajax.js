@@ -293,12 +293,4 @@ $(document).ready(function($)
     $('.mem-note').on('click', function(){
         $(this).html();
     });
-
-    /**
-     * Events
-     */
-
-    $('.event-time').on('click', function(){
-        $(this).html();
-    });
 });
