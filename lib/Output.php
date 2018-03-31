@@ -347,6 +347,23 @@ Trait Output
                     </div>
                 </div>';
     }
+
+    /**
+     * @param $data
+     * @return string
+     */
+    public static function viewTimelineData($data)
+    {
+        $emotion_q = DBManager::getData('emotion', 'em_name', 'id', $data->getEmotion(), '', '', '', 'OBJECT');
+        $event_type_q = DBManager::getData('events_type', 'event_name', 'id', $data->getEventType(), '', '', '', 'OBJECT');
+
+        return '<div class="timeline__item">
+                    <div class="timeline__content">
+                        <h2>'.$data->getMoment().'</h2>
+                        <h2>'.ucfirst($event_type_q->event_name).'</h2><p>' . $emotion_q->em_name .'</p>
+                    </div>
+                </div>';
+    }
 }
 
 

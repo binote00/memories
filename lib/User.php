@@ -725,4 +725,18 @@ class User
         }
         return $str;
     }
+
+    public function getTimelineEventsFromUser($user)
+    {
+        $events = '';
+        if ($user) {
+            $results = DBManager::getData('event', ['id', DBManager::SQLDateFormat('moment', 'BIRTH'), 'note', 'emotion', 'event_type'], 'user_id', $user, 'moment', 'DESC', 20, 'CLASS');
+            if ($results) {
+                foreach ($results as $data) {
+                    $events .= Output::viewTimelineData($data);
+                }
+            }
+        }
+        return $events;
+    }
 }

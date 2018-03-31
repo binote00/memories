@@ -102,6 +102,42 @@ trait DBManager
     }
 
     /**
+     * @param string $table
+     * @param array|string $selectField
+     * @param string $order
+     * @param string $orderBy
+     * @param mixed $limit
+     * @param string $fetch [object or array or multi]
+     * @return array|int|mixed
+     */
+    public static function getAllData($table, $selectField, $order = '', $orderBy = 'DESC', $limit = '', $fetch = 'ALL')
+    {
+        if ($order) {
+            $order = ' ORDER BY ' . $order . ' ' . $orderBy;
+        }
+        if (is_array($limit)) {
+            if ($limit[0] < 0) $limit[0] = 0;
+            $order .= ' LIMIT ' . $limit[0] . ', ' . $limit[1];
+        } elseif ($limit) {
+            $order .= ' LIMIT ' . $limit;
+        }
+        $dbh = DB::connect();
+        $selectFields = self::getSelectFields($selectField, ',');
+        $query = "SELECT $selectFields FROM $table " . $order;
+        $result = $dbh->query($query);
+        if ($fetch == 'OBJECT') {
+            $data = $result->fetchObject();
+        } elseif ($fetch == 'CLASS') {
+            $data = $result->fetchAll(PDO::FETCH_CLASS, ucfirst($table));
+        } elseif ($fetch == 'COUNT') {
+            $data = $result->rowCount();
+        } else {
+            $data = $result->fetchAll();
+        }
+        return $data;
+    }
+
+    /**
      * Générateur de résultat [SELECT FROM WHERE]
      *
      * @param string $table

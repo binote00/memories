@@ -9,9 +9,9 @@
 if(!isset($_SESSION['id'])){
     header('Location: index.php');
 }else{
-    $content .= Output::ShowToDo([
-        'Envoyer un email aux personnes',
-    ], 'warning', true);
+//    $content .= Output::ShowToDo([
+//        'Envoyer un email aux personnes',
+//    ], 'warning', true);
     $people = new People();
     $pers = $people->viewPeople($_SESSION['id']);
     if($pers){

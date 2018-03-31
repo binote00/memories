@@ -26,3 +26,7 @@ if(!isset($_SESSION['id'])){
     $redirect = 'event';
     include_once 'v_modal_tag_add.php';
 }
+/**
+ * https://developers.google.com/maps/documentation/javascript/mysql-to-maps?hl=fr
+ * https://developers.google.com/maps/documentation/javascript/places
+ */

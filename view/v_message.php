@@ -9,7 +9,6 @@ if(!isset($_SESSION['id'])){
     header('Location: index.php');
 }else{
     $content .= Output::ShowToDo([
-        'Supprimer un Tag par élément [Actuellement en test, cliquez sur les #Tags dans la colonne Tags]',
         'Afficher les émotions',
     ], 'warning', true);
     $user = new User();
