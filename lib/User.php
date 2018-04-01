@@ -231,7 +231,7 @@ class User
         $lcase = preg_match('@[a-z]@', $password);
         $number = preg_match('@[0-9]@', $password);
         $special = preg_match('@[^\w]@', $password);
-        if (($ucase + $lcase + $number + $special) < 3 || strlen($password) < 8) {
+        if (($ucase + $lcase + $number + $special) < 4 || strlen($password) < 8) {
             return false;
         }
         return true;

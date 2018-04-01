@@ -293,4 +293,15 @@ $(document).ready(function($)
     $('.mem-note').on('click', function(){
         $(this).html();
     });
+
+    /**
+     * pwd validation
+     */
+
+    $(function(){
+        $("input[name=pwd]")[0].oninvalid = function () {
+            this.setCustomValidity("Le mot de passe doit contenir au moins 8 charactères et au moins une lettre majuscule, une lettre minuscule, un chiffre et un charactère spécial");
+            this.setCustomValidity("");
+        };
+    });
 });

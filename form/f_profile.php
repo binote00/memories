@@ -17,7 +17,7 @@ if ($_SESSION) {
             ->AddInput('birth_date', 'Date de Naissance', 'date', $user->getBirthDate())
             ->AddInput('email', 'Email', 'email', $user->getEmail(), '', '', 'required')
             ->AddInput('login', 'Identifiant', 'text', $user->getLogin(), '', '', 'disabled')
-            ->AddInput('pwd', 'Nouveau mot de passe', 'password', '', '', '', 'pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"')
+            ->AddInput('pwd', 'Nouveau mot de passe', 'password', '', '', '', 'pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w]).{8,}"')
             ->AddInput('id', '', 'hidden', $user->getId())
             ->EndForm('Modifier', 'danger');
     } else {
