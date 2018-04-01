@@ -17,6 +17,7 @@ class Event
     private $moment;
     private $emotion;
     private $note;
+    public $time;
 
     /**
      * @return mixed

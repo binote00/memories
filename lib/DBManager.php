@@ -265,14 +265,18 @@ trait DBManager
      *
      * @param string $date
      * @param string $mode
+     * @param string $alias
      * @return string
      */
-    public static function SQLDateFormat($date, $mode = 'LOG')
+    public static function SQLDateFormat($date, $mode = 'LOG', $alias = '')
     {
+        if (!$alias) {
+            $alias = $date;
+        }
         if ($mode == 'BIRTH') {
-            return 'DATE_FORMAT(' . $date . ',\'%d-%m-%Y\') AS ' . $date;
+            return 'DATE_FORMAT(' . $date . ',\'%d-%m-%Y\') AS ' . $alias;
         } elseif ($mode == 'LOG') {
-            return 'DATE_FORMAT(' . $date . ',\'%d-%m %H:%i\') AS ' . $date;
+            return 'DATE_FORMAT(' . $date . ',\'%d-%m %H:%i\') AS ' . $alias;
         }
     }
 }
