@@ -14,6 +14,7 @@ define('TXT_DELOG', 'Deconnexion');
 define('TXT_SEARCH', 'Recherche');
 define('TXT_PREV', 'Précédent');
 define('TXT_NEXT', 'Suivant');
+define('TXT_PASSWORD_CHECK', 'Le mot de passe doit contenir au moins 8 charactères et au moins une lettre majuscule, une lettre minuscule, un chiffre et un charactère spécial');
 
 define('TXT_PROFILE', 'profil');
 define('TXT_PROFILE_MOD_DONE', TXT_PROFILE . ' modifié avec succès!');
