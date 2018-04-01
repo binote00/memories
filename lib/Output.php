@@ -358,12 +358,12 @@ Trait Output
         $emotion_q = DBManager::getData('emotion', 'em_name', 'id', $data->getEmotion(), '', '', '', 'OBJECT');
         $event_type_q = DBManager::getData('events_type', 'event_name', 'id', $data->getEventType(), '', '', '', 'OBJECT');
         $dbh = DB::connect();
-        $result = $dbh->prepare("SELECT tl.id,tag_name FROM tag AS t,tag_link AS tl WHERE t.id=tl.tag_id AND tl.data_type=:data_type AND tl.data_id=:data_id");
-        $result->bindParam(':data_type', 5, 1);
-        $result->bindParam(':data_id', $data->getUserId(), 1);
-        $result->execute();
+        $result = $dbh->query("SELECT tl.id,tag_name FROM tag AS t,tag_link AS tl WHERE t.id=tl.tag_id AND tl.data_type=5 AND tl.data_id=".$data->getId());
         while ($data_tag = $result->fetchObject()) {
             $tags_txt .= '#'.$data_tag->tag_name . ' ';
+        }
+        if ($tags_txt) {
+            $tags_txt = '<hr>'.$tags_txt;
         }
 
         return '<div class="timeline__item">
