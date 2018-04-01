@@ -355,11 +355,17 @@ Trait Output
     public static function viewTimelineData($data)
     {
         $tags_txt = '';
+/*        $msg = '';*/
         $emotion_q = DBManager::getData('emotion', 'em_name', 'id', $data->getEmotion(), '', '', '', 'OBJECT');
         $event_type_q = DBManager::getData('events_type', 'event_name', 'id', $data->getEventType(), '', '', '', 'OBJECT');
+/*        $time = substr($data->getMoment(),0,10);
+        $messages_q = DBManager::getDatas('message', ['id', 'message'], ['user_id', 'moment'], [$data->getUserId(), $time], '', '', '', 'OBJECT');
+        while($data_msg = $messages_q->fetchObject()){
+            $msg.=''.$data_msg->id;
+        }*/
         $dbh = DB::connect();
-        $result = $dbh->query("SELECT tl.id,tag_name FROM tag AS t,tag_link AS tl WHERE t.id=tl.tag_id AND tl.data_type=5 AND tl.data_id=".$data->getId());
-        while ($data_tag = $result->fetchObject()) {
+        $resulttag = $dbh->query("SELECT tl.id,tag_name FROM tag AS t,tag_link AS tl WHERE t.id=tl.tag_id AND tl.data_type=5 AND tl.data_id=".$data->getId());
+        while ($data_tag = $resulttag->fetchObject()) {
             $tags_txt .= '#'.$data_tag->tag_name . ' ';
         }
         if ($tags_txt) {
