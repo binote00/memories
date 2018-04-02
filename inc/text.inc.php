@@ -70,3 +70,5 @@ define('TXT_TAG_TR_FAIL', 'Eléménts non transférés!');
 define('TXT_TAG_DEL_DONE', TXT_TAG . ' supprimé avec succès!');
 define('TXT_TAG_DEL_FAIL', TXT_ERROR . ' dans la suppression du ' . TXT_TAG . '!');
 define('TXT_TAG_EXIST', 'Ce ' . TXT_TAG . ' existe déjà!');
+
+define('TXT_TIMELINE', 'ligne du temps');

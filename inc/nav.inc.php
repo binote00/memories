@@ -18,7 +18,7 @@
                 <a class="nav-link" href="index.php?view=profile"><?= TXT_PROFILE ?></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="# id=" nav-drop-tools" data-toggle="dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="nav-drop-tools" data-toggle="dropdown">
                 Journal
                 </a>
                 <div class="dropdown-menu">
@@ -27,6 +27,7 @@
                     <a class="dropdown-item text-capitalize" href="index.php?view=message"><?= TXT_MESSAGE ?></a>
                     <a class="dropdown-item text-capitalize" href="index.php?view=people"><?= TXT_PEOPLE ?></a>
                     <a class="dropdown-item text-capitalize" href="index.php?view=tag"><?= TXT_TAG ?></a>
+                    <a class="dropdown-item text-capitalize" href="index.php?view=timeline"><?= TXT_TIMELINE ?></a>
                 </div>
             </li>
             <?= $nav_extends ?>

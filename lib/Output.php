@@ -375,7 +375,7 @@ Trait Output
         return '<div class="timeline__item">
                     <div class="timeline__content">
                         <h2>' . $data->time . '</h2>
-                        <h2>' . ucfirst($event_type_q->event_name) . '</h2><p>' . $emotion_q->em_name . '</p><p>' . $tags_txt . '</p>
+                        <h2 style="color: #009688">' . ucfirst($event_type_q->event_name) . '</h2><p>' . $emotion_q->em_name . '</p><p>' . $tags_txt . '</p>
                     </div>
                 </div>';
     }
