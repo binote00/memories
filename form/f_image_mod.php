@@ -9,9 +9,10 @@
 if($_SESSION){
     if($_SESSION['id']){
         $form = new Form();
-        $form_txt = $form->CreateForm('./app/a_images_mod.php','POST', 'Modifier votre image')
+        $form_txt = $form->CreateForm('./app/a_image_mod.php','POST', 'Modifier votre image')
             ->AddInput('title', 'Titre')
             ->AddInput('id', '', 'hidden', $_POST['id'])
+            ->AddSelect('event_id', 'Evènement', 'event', ['id', 'moment'], 'moment', 'id', 'user_id', $_SESSION['id'], 'moment', 'DESC', true)
             ->EndForm('Modifier');
         echo $form_txt;
     }else{

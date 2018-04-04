@@ -269,18 +269,12 @@ Trait Output
     /**
      * Générateur de card bootstrap pour l'affichage des images de la DB
      *
-     * @param int $user
-     * @param int $id
-     * @param int $type
-     * @param string $mod_script
-     * @param mixed $data
-     * @param string $label
-     * @param string $img
-     * @param string $text
+     * @param mixed $data [id, img_link, mod_script, events, title, title_label, type, user_id]
      * @param bool $chk_data_del
      * @return string
      */
-    public static function viewCard($user, $id, $type, $mod_script, $data, $label, $img = '', $text = '', $chk_data_del = false)
+    //public static function viewCard($user, $id, $type, $mod_script, $data, $label, $img = '', $text = '', $chk_data_del = false)
+    public static function viewCard($data, $chk_data_del = false)
     {
         //            ->AddSelect('tag_id', 'Tag', 'tag', ['id','tag_name'], 'tag_name', 'id', 'user_id', $user, 'tag_name', 'ASC', true)
         /*$query = "SELECT DISTINCT t.id,t.tag_name FROM tag as t
@@ -292,41 +286,43 @@ Trait Output
         $result->execute();*/
 
         $o_user = new User();
-        $result = $o_user->getTagsByType($user, $type, $id);
+        $result = $o_user->getTagsByType($data['user_id'], $data['type'], $data['id']);
 
         $form = new Form();
 
-        if ($type == DATA_TYPE_IMAGE) {
+        if ($data['type'] == DATA_TYPE_IMAGE) {
             if ($chk_data_del) {
                 $form_del = '' . $form->CreateForm('./app/a_image_restore.php', 'POST', '')
-                        ->AddInput('id', '', 'hidden', $id)
-                        ->AddInput('user_id', '', 'hidden', $user)
+                        ->AddInput('id', '', 'hidden', $data['id'])
+                        ->AddInput('user_id', '', 'hidden', $data['user_id'])
                         ->EndForm('fa fa-undo fa-2x', 'primary');
                 $img_popup = 'Cette image a été supprimée. Si vous voulez la récupérer, veuillez cliquer sur <i class="fa fa-undo"></i>';
                 $bg_class = ' bg-del';
             } else {
-                $form_txt = $form->CreateForm($mod_script, 'POST', '')
-                    ->AddInput('title', $label, 'text', $data)
+                $form_txt = $form->CreateForm($data['mod_script'], 'POST', '')
+                    ->AddInput('title', $data['title_label'], 'text', $data['title'])
+                    ->AddSelect('event_id', 'Evènement', 'event', ['id', DBManager::SQLDateFormat('moment', 'BIRTH')], 'moment', 'id', 'user_id', $data['user_id'], 'moment')
+                    //->AddSelectData('event_id', 'Evènement', $data['events'], 'moment', 'id', true)
                     ->AddSelectData('tag_id', '#Tag', $result, 'tag_name', 'id', true)
-                    ->AddInput('id', '', 'hidden', $id)
-                    ->AddInput('user_id', '', 'hidden', $user)
+                    ->AddInput('id', '', 'hidden', $data['id'])
+                    ->AddInput('user_id', '', 'hidden', $data['user_id'])
                     ->EndForm('Modifier', 'primary');
                 $form_del = '' . $form->CreateForm('./app/a_image_del.php', 'POST', '')
-                        ->AddInput('id', '', 'hidden', $id)
-                        ->AddInput('user_id', '', 'hidden', $user)
+                        ->AddInput('id', '', 'hidden', $data['id'])
+                        ->AddInput('user_id', '', 'hidden', $data['user_id'])
                         ->EndForm('fa fa-trash-o fa-2x', 'danger');
-                list($width, $height) = getimagesize("img/" . $img);
+                list($width, $height) = getimagesize("img/" . $data['img_link']);
                 if ($width > $height) {
-                    $img_popup = '<img src="img/' . $img . '" class="mx-auto d-block img-popup-l">';
+                    $img_popup = '<img src="img/' . $data['img_link'] . '" class="mx-auto d-block img-popup-l">';
                 } else {
-                    $img_popup = '<img src="img/' . $img . '" class="img-fluid mx-auto d-block img-popup-h">';
+                    $img_popup = '<img src="img/' . $data['img_link'] . '" class="img-fluid mx-auto d-block img-popup-h">';
                 }
-                $btn_edit = '<div class="col-6 d-flex justify-content-center align-items-center"><i class="fa fa-pencil-square-o fa-2x text-primary" data-toggle="collapse" data-target="#f-image-mod-collapse-' . $id . '"></i></div>';
+                $btn_edit = '<div class="col-6 d-flex justify-content-center align-items-center"><i class="fa fa-pencil-square-o fa-2x text-primary" data-toggle="collapse" data-target="#f-image-mod-collapse-' . $data['id'] . '"></i></div>';
             }
             $top_card = '
                     <div class="' . $bg_class . '" style="padding: 5px;">
                         <a href="#" class="popup-light">
-                            <img src="img/' . $img . '" alt="' . $data . '" class="img-fluid mx-auto d-block img-card" style="max-height: 200px;">
+                            <img src="img/' . $data['img_link'] . '" alt="' . $data['title'] . '" class="img-fluid mx-auto d-block img-card" style="max-height: 200px;">
                             <span>' . $img_popup . '</span>
                         </a>          
                     </div>';
@@ -336,13 +332,13 @@ Trait Output
                     ' . $top_card . '
                     <div class="card-block' . $bg_class . '">
                         <h4 class="card-title"></h4>
-                        <p class="card-text">' . $text . '</p>    
+                        <p class="card-text">' . $data['card_text'] . '</p>    
                         <div class="row">
                             ' . $btn_edit . '
                             <div class="col-6 d-flex justify-content-center align-items-center">' . $form_del . '</div>
                         </div>
                     </div>
-                    <div class="card-footer collapse" id="f-image-mod-collapse-' . $id . '">
+                    <div class="card-footer collapse" id="f-image-mod-collapse-' . $data['id'] . '">
                     ' . $form_txt . '
                     </div>
                 </div>';

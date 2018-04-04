@@ -437,6 +437,7 @@ class User
                     }
                     $content = Output::TableHead(['Image', 'Titre'], $tbody, 'Images');
                 } elseif ($show == 'card') {
+                    //$events = DBManager::getData('event', ['id', DBManager::SQLDateFormat('moment', 'BIRTH'), 'note', 'emotion', 'event_type'], 'user_id', $user, 'moment', 'DESC', '','OBJECT');
                     $content = '<div class="row">';
                     $dbh = DB::connect();
                     foreach ($results as $data) {
@@ -446,7 +447,18 @@ class User
                         while($data_tag = $result->fetchObject()){
                             $text .= '#'.$data_tag->tag_name.' ';
                         }*/
-                        $content .= Output::viewCard($user, $data->getId(), 2, './app/a_image_mod.php', $data->getTitle(), 'Titre', 'users/' . $user . '/' . $data->getLink(), $text, $data->getStatus());
+                        $data_img = [
+                            'id' => $data->getId(),
+                            'img_link' => 'users/' . $user . '/' . $data->getLink(),
+                            'card_text' => $text,
+                            'mod_script' => './app/a_image_mod.php',
+                            'user_id' => $user,
+                            'title' => $data->getTitle(),
+                            'title_label' => 'Titre',
+                            'type' => 2,
+                            //'events' => $events
+                        ];
+                        $content .= Output::viewCard($data_img, $data->getStatus());
                     }
                     $content .= '</div>';
                 }
@@ -616,7 +628,17 @@ class User
                 $dbh = DB::connect();
                 $result = $dbh->query($query);
                 while ($data = $result->fetchObject()) {
-                    $content .= Output::viewCard($user, $data->id, 2, './app/a_image_mod.php', $data->title, 'Titre', 'users/' . $user . '/' . $data->link, '');
+                    $data_img = [
+                        'id' => $data->id,
+                        'img_link' => 'users/' . $user . '/' . $data->link,
+                        'card_text' => '',
+                        'mod_script' => './app/a_image_mod.php',
+                        'user_id' => $user,
+                        'title' => $data->title,
+                        'title_label' => 'Titre',
+                        'type' => 2,
+                    ];
+                    $content .= Output::viewCard($data_img);
                 }
                 if ($content) {
                     $content = '<div class="row">' . $content . '</div>';
