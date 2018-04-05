@@ -28,7 +28,7 @@ define('TXT_PASSWORD_CHECK', 'Le mot de passe doit contenir au moins 8 charactè
 define('TXT_UPLOAD_ERROR', 'Taille maximale du fichier dépassée!');
 
 define('TXT_OPTIONS', 'paramètres');
-define('TXT_OPTIONS_MOD_DONE', TXT_OPTIONS . ' modifié avec succès!');
+define('TXT_OPTIONS_MOD_DONE', TXT_OPTIONS . ' modifiés avec succès!');
 define('TXT_OPTIONS_MOD_FAIL', TXT_ERROR . ' dans la modification des' . TXT_OPTIONS . '!');
 
 define('TXT_EVENT', 'évènement');

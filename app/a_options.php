@@ -8,15 +8,16 @@
 
 require_once '../inc/actions.inc.php';
 
+$ok1 = false;
 if (isset($_POST) and isset($_SESSION['id'])) {
-    $user = new Param();
-    if (in_array('cards_per_page', $_POST)) {
-        $ok1 = $user->modParam($_SESSION['id'], 1, $_POST['cards_per_page']);
+    $param = new Param();
+    if (array_key_exists('cards_per_page', $_POST)) {
+        $ok1 = $param->modParam($_SESSION['id'], 1, $_POST['cards_per_page']);
     } else {
         $ok1 = true;
     }
-    if (in_array('event_auto_tag', $_POST)) {
-        $ok2 = $user->modParam($_SESSION['id'], 3, $_POST['event_auto_tag']);
+    if (array_key_exists('event_auto_tag', $_POST)) {
+        $ok2 = $param->modParam($_SESSION['id'], 3, $_POST['event_auto_tag']);
     } else {
         $ok2 = true;
     }

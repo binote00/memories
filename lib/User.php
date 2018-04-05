@@ -297,6 +297,7 @@ class User
             $this->setLogin($result->login);
             $this->setPwd($result->pwd);
             $this->setEmail($result->email);
+            $this->setId($result->id);
         }
     }
 
