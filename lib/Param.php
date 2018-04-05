@@ -92,10 +92,6 @@ class Param
         $return = false;
         if ($user_id && $param_id) {
             $query = "INSERT INTO users_params (user_id,param_id,param_value) VALUES (:user_id,:param_id,:param_value) ON DUPLICATE KEY UPDATE param_value=:param_value";
-//            if ($param_id != 1) {
-//                var_dump(get_defined_vars());
-//                die();
-//            }
             $dbh = DB::connect();
             $result = $dbh->prepare($query);
             $result->bindParam('user_id', $user_id, 1);
