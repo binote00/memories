@@ -55,17 +55,17 @@ class Form
      * @param bool $enc_type
      * @return object $this
      */
-    public function CreateForm($action, $method='GET', $title='', $enc_type=false)
+    public function CreateForm($action, $method = 'GET', $title = '', $enc_type = false)
     {
         $this->setId(uniqid());
         $enc_txt = '';
-        if($enc_type){
+        if ($enc_type) {
             $enc_txt = ' enctype="multipart/form-data"';
         }
-        if($title){
-            $title = '<h2>'.$title.'</h2>';
+        if ($title) {
+            $title = '<h2>' . $title . '</h2>';
         }
-        $this->output = $title.'<form action="'.$action.'" method="'.$method.'"'.$enc_txt.'>';
+        $this->output = $title . '<form action="' . $action . '" method="' . $method . '"' . $enc_txt . '>';
         return $this;
     }
 
@@ -76,13 +76,13 @@ class Form
      * @param string $btnClass
      * @return string
      */
-    public function EndForm($btnValue, $btnClass='primary')
+    public function EndForm($btnValue, $btnClass = 'primary')
     {
         //Font-Awesome button
-        if(substr($btnValue,0,2) == 'fa'){
-            $this->output .= '<button type="submit" class="btn btn-'.$btnClass.'"><i class="'.$btnValue.'"></i></button></form>';
-        }else{
-            $this->output .= '<input type="submit" class="btn btn-'.$btnClass.'" value="'.$btnValue.'"></form>';
+        if (substr($btnValue, 0, 2) == 'fa') {
+            $this->output .= '<button type="submit" class="btn btn-' . $btnClass . '"><i class="' . $btnValue . '"></i></button></form>';
+        } else {
+            $this->output .= '<input type="submit" class="btn btn-' . $btnClass . '" value="' . $btnValue . '"></form>';
         }
         return $this->output;
     }
@@ -99,25 +99,25 @@ class Form
      * @param string $attr
      * @return object $this
      */
-    public function AddInput($name, $label, $type='text', $value='', $placeholder='', $class='', $attr='')
+    public function AddInput($name, $label, $type = 'text', $value = '', $placeholder = '', $class = '', $attr = '')
     {
         $return = false;
-        if($type != 'hidden'){
-            $return = '<label for="'.$name.'">'.$label.'</label>';
+        if ($type != 'hidden') {
+            $return = '<label for="' . $name . '">' . $label . '</label>';
         }
-        if($value && $type != 'password'){
-            $value = ' value="'.$value.'"';
+        if ($value && $type != 'password') {
+            $value = ' value="' . $value . '"';
         }
-        if($placeholder && $type != 'password'){
-            $placeholder = ' placeholder="'.$placeholder.'"';
+        if ($placeholder && $type != 'password') {
+            $placeholder = ' placeholder="' . $placeholder . '"';
         }
-        if($class){
-            $class = ' '.$class;
+        if ($class) {
+            $class = ' ' . $class;
         }
-        if($attr){
-            $attr=' '.$attr;
+        if ($attr) {
+            $attr = ' ' . $attr;
         }
-        $return.='<input type="'.$type.'" class="form-control'.$class.'" name="'.$name.'" id="'.$this->getId().'-'.$name.'"'.$placeholder.$value.$attr.'>';
+        $return .= '<input type="' . $type . '" class="form-control' . $class . '" name="' . $name . '" id="' . $this->getId() . '-' . $name . '"' . $placeholder . $value . $attr . '>';
         $this->output .= $return;
         return $this;
     }
@@ -133,13 +133,13 @@ class Form
      * @param bool $required
      * @return object $this
      */
-    public function AddCKEditor($name, $rows=10, $cols=80, $value='', $placeholder='', $required=true)
+    public function AddCKEditor($name, $rows = 10, $cols = 80, $value = '', $placeholder = '', $required = true)
     {
-        if($required){
+        if ($required) {
             $required = ' required';
         }
-        $return = '<textarea name="'.$name.'" id="ckeditor" rows="'.$rows.'" cols="'.$cols.'" placeholder="'.$placeholder.'"'.$required.'>'.$value.'</textarea>';
-        $this->output.=$return;
+        $return = '<textarea name="' . $name . '" id="ckeditor" rows="' . $rows . '" cols="' . $cols . '" placeholder="' . $placeholder . '"' . $required . '>' . $value . '</textarea>';
+        $this->output .= $return;
         return $this;
     }
 
@@ -160,24 +160,24 @@ class Form
      * @param bool $default [true si la première valeur est la valeur par défaut]
      * @return $this
      */
-    public function AddSelect($name, $label, $table, $fields, $caption, $value, $whereField, $whereValue, $order, $orderBy='ASC', $add_btn=false, $default=false)
+    public function AddSelect($name, $label, $table, $fields, $caption, $value, $whereField, $whereValue, $order, $orderBy = 'ASC', $add_btn = false, $default = false)
     {
-        if($default){
+        if ($default) {
             $default_txt = '';
-        }else{
+        } else {
             $default_txt = '<option value="">Choisissez...</option>';
         }
         $options = false;
         $btn_add = '';
-        $result = DBManager::getDatas($table,$fields,$whereField,$whereValue,$order,$orderBy);
-        while($data = $result->fetchObject()){
-            $options.='<option value="'.$data->$value.'">'.$data->$caption.'</option>';
+        $result = DBManager::getDatas($table, $fields, $whereField, $whereValue, $order, $orderBy);
+        while ($data = $result->fetchObject()) {
+            $options .= '<option value="' . $data->$value . '">' . $data->$caption . '</option>';
         }
-        if($add_btn){
+        if ($add_btn) {
             $btn_add = Output::btnModal('modal-add-btn', '+', 'primary');
         }
-        if($options){
-            $this->output .= '<label for="'.$name.'">'.$label.'</label>'.$btn_add.'<select name="'.$name.'" id="'.$this->getId().'-'.$name.'" class="form-control">'.$default_txt.$options.'</select>';
+        if ($options) {
+            $this->output .= '<label for="' . $name . '">' . $label . '</label>' . $btn_add . '<select name="' . $name . '" id="' . $this->getId() . '-' . $name . '" class="form-control">' . $default_txt . $options . '</select>';
         }
         return $this;
     }
@@ -194,23 +194,23 @@ class Form
      * @param bool $default
      * @return $this
      */
-    public function AddSelectData($name, $label, $result, $caption, $value, $add_btn=false, $default=false)
+    public function AddSelectData($name, $label, $result, $caption, $value, $add_btn = false, $default = false)
     {
-        if($default){
+        if ($default) {
             $default_txt = '';
-        }else{
+        } else {
             $default_txt = '<option value="">Choisissez...</option>';
         }
         $options = false;
         $btn_add = '';
-        while($data = $result->fetchObject()){
-            $options.='<option value="'.$data->$value.'">'.$data->$caption.'</option>';
+        while ($data = $result->fetchObject()) {
+            $options .= '<option value="' . $data->$value . '">' . $data->$caption . '</option>';
         }
-        if($add_btn){
+        if ($add_btn) {
             $btn_add = Output::btnModal('modal-add-btn', '+', 'primary');
         }
-        if($options){
-            $this->output .= '<label for="'.$name.'">'.$label.'</label>'.$btn_add.'<select name="'.$name.'" id="'.$this->getId().'-'.$name.'" class="form-control">'.$default_txt.$options.'</select>';
+        if ($options) {
+            $this->output .= '<label for="' . $name . '">' . $label . '</label>' . $btn_add . '<select name="' . $name . '" id="' . $this->getId() . '-' . $name . '" class="form-control">' . $default_txt . $options . '</select>';
         }
         return $this;
     }
@@ -227,10 +227,31 @@ class Form
     public function AddSelectNumber($name, $label, $start, $end)
     {
         $options = false;
-        for($i = $start; $i <= $end; $i++){
-            $options.='<option value="'.$i.'">'.$i.'</option>';
+        for ($i = $start; $i <= $end; $i++) {
+            $options .= '<option value="' . $i . '">' . $i . '</option>';
         }
-        $this->output .= '<label for="'.$name.'">'.$label.'</label><select name="'.$name.'" id="'.$this->getId().'-'.$name.'" class="form-control">'.$options.'</select>';
+        $this->output .= '<label for="' . $name . '">' . $label . '</label><select name="' . $name . '" id="' . $this->getId() . '-' . $name . '" class="form-control">' . $options . '</select>';
+        return $this;
+    }
+
+    /**
+     * Création de formulaire HTML générique avec classes Bootstrap : Ajout d'un ou plusieurs checkbox
+     *
+     * @param string $name
+     * @param array $values [associative array where key = value and value = label]
+     * @param bool $inline
+     * @return $this
+     */
+    public function AddCheckbox($name, $values, $inline = false)
+    {
+        if ($inline) {
+            $inline_class = ' form-check-inline';
+        }
+        $checkboxes = false;
+        foreach ($values as $key => $value) {
+            $checkboxes .= '<div class="form-check'.$inline_class.'"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="' . $name . '" value="' . $key . '">' . $value . '</label></div>';
+        }
+        $this->output .= $checkboxes;
         return $this;
     }
 }

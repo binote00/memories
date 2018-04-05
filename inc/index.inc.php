@@ -25,6 +25,9 @@ if ($_SESSION) {
     if ($_SESSION['id']) {
         $nav_extends = '            
             <li class="nav-item">
+                <a class="nav-link" href="index.php?view=options">' . TXT_OPTIONS . '</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="index.php?view=delog">' . TXT_DELOG . '</a>
             </li>';
     }
