@@ -29,7 +29,7 @@ define('TXT_UPLOAD_ERROR', 'Taille maximale du fichier dépassée!');
 
 define('TXT_OPTIONS', 'paramètres');
 define('TXT_OPTIONS_MOD_DONE', TXT_OPTIONS . ' modifiés avec succès!');
-define('TXT_OPTIONS_MOD_FAIL', TXT_ERROR . ' dans la modification des' . TXT_OPTIONS . '!');
+define('TXT_OPTIONS_MOD_FAIL', TXT_ERROR . ' dans la modification des ' . TXT_OPTIONS . '!');
 
 define('TXT_EVENT', 'évènement');
 define('TXT_EVENT_ADD_DONE', TXT_EVENT . ' ajouté avec succès!');

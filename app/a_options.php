@@ -11,12 +11,12 @@ require_once '../inc/actions.inc.php';
 $ok1 = false;
 if (isset($_POST) and isset($_SESSION['id'])) {
     $param = new Param();
-    if (array_key_exists('cards_per_page', $_POST)) {
+    if (array_key_exists('cards_per_page', $_POST) && $_POST['cards_per_page_ori'] != $_POST['cards_per_page']) {
         $ok1 = $param->modParam($_SESSION['id'], 1, $_POST['cards_per_page']);
     } else {
         $ok1 = true;
     }
-    if (array_key_exists('event_auto_tag', $_POST)) {
+    if (array_key_exists('event_auto_tag', $_POST) && $_POST['event_auto_tag_ori'] != $_POST['event_auto_tag']) {
         $ok2 = $param->modParam($_SESSION['id'], 3, $_POST['event_auto_tag']);
     } else {
         $ok2 = true;
