@@ -6,7 +6,7 @@
  * Time: 14:00
  */
 
-class Exception
+class JFException extends Exception
 {
     private $codes = [
         'GENERIC_ERROR' => 'Erreur.',
