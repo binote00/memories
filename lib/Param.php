@@ -72,20 +72,31 @@ class Param
 
     /**
      * @param int $user_id
-     * @param array $vars
+     * @param int $param_id
+     * @return int
+     */
+    public function getParamValue($user_id, $param_id)
+    {
+        $return = DBManager::getData('users_params', 'param_value', ['user_id', 'param_id'], [$user_id, $param_id]);
+        return $return[0][0];
+    }
+
+    /**
+     * @param int $user_id
+     * @param int $param_id
+     * @param int $param_value
      * @return bool|int
      */
-    public function modParam($user_id, $vars)
+    public function modParam($user_id, $param_id, $param_value)
     {
         $return = false;
-        if ($user_id and is_array($vars)) {
-            $param_id = $this->getParamId(strtoupper($vars['param_id']));
-            $query = "INSERT INTO users_param (user_id,param_id,param_value) VALUES (:user_id,:param_id,:param_value) ON DUPLICATE KEY UPDATE param_value=:param_value";
+        if ($user_id && $param_id && $param_value) {
+            $query = "INSERT INTO users_params (user_id,param_id,param_value) VALUES (:user_id,:param_id,:param_value) ON DUPLICATE KEY UPDATE param_value=:param_value";
             $dbh = DB::connect();
             $result = $dbh->prepare($query);
             $result->bindParam('user_id', $user_id, 1);
             $result->bindParam('param_id', $param_id, 1);
-            $result->bindParam('param_value', $vars['param_value'], 1);
+            $result->bindParam('param_value', $param_value, 1);
             $result->execute();
             $return = $result->rowCount();
         }

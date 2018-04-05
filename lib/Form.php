@@ -222,13 +222,23 @@ class Form
      * @param string $label
      * @param integer $start
      * @param integer $end
+     * @param integer|bool $selected
      * @return $this
      */
-    public function AddSelectNumber($name, $label, $start, $end)
+    public function AddSelectNumber($name, $label, $start, $end, $selected = false)
     {
+        if ($selected) {
+            if ($selected > $end && $selected < $start) {
+                $selected = $start;
+            }
+        }
         $options = false;
         for ($i = $start; $i <= $end; $i++) {
-            $options .= '<option value="' . $i . '">' . $i . '</option>';
+            if ($selected == $i) {
+                $options .= '<option value="' . $i . '" selected>' . $i . '</option>';
+            } else {
+                $options .= '<option value="' . $i . '">' . $i . '</option>';
+            }
         }
         $this->output .= '<label for="' . $name . '">' . $label . '</label><select name="' . $name . '" id="' . $this->getId() . '-' . $name . '" class="form-control">' . $options . '</select>';
         return $this;
@@ -240,16 +250,21 @@ class Form
      * @param string $name
      * @param array $values [associative array where key = value and value = label]
      * @param bool $inline
+     * @param integer|bool $checked
      * @return $this
      */
-    public function AddCheckbox($name, $values, $inline = false)
+    public function AddCheckbox($name, $values, $inline = false, $checked = false)
     {
         if ($inline) {
             $inline_class = ' form-check-inline';
         }
         $checkboxes = false;
         foreach ($values as $key => $value) {
-            $checkboxes .= '<div class="form-check'.$inline_class.'"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="' . $name . '" value="' . $key . '">' . $value . '</label></div>';
+            if ($checked == $key) {
+                $checkboxes .= '<div class="form-check'.$inline_class.'"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="' . $name . '" value="' . $key . '" checked>' . $value . '</label></div>';
+            } else {
+                $checkboxes .= '<div class="form-check'.$inline_class.'"><label class="form-check-label"><input class="form-check-input" type="checkbox" name="' . $name . '" value="' . $key . '">' . $value . '</label></div>';
+            }
         }
         $this->output .= $checkboxes;
         return $this;

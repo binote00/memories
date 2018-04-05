@@ -14,8 +14,6 @@ define('TXT_DELOG', 'Deconnexion');
 define('TXT_SEARCH', 'Recherche');
 define('TXT_PREV', 'Précédent');
 define('TXT_NEXT', 'Suivant');
-define('TXT_PASSWORD_CHECK', 'Le mot de passe doit contenir au moins 8 charactères et au moins une lettre majuscule, une lettre minuscule, un chiffre et un charactère spécial');
-define('TXT_EVENT_AUTO_TAG', 'Ajout automatique des tags de l\'event à un élément lorsqu\'il est lié à cet event');
 
 define('TXT_PROFILE', 'profil');
 define('TXT_PROFILE_MOD_DONE', TXT_PROFILE . ' modifié avec succès!');
@@ -26,6 +24,7 @@ define('TXT_LOGIN_ERROR', 'Utilisateur inconnu!');
 define('TXT_PWD_RECOVER', 'Récupération de mot de passe');
 define('TXT_PWD_NEW_SEND_DONE', 'Nouveau mot de passe envoyé!');
 define('TXT_PWD_NEW_SEND_FAIL', 'La génération d\'un nouveau mot de passe a échoué!');
+define('TXT_PASSWORD_CHECK', 'Le mot de passe doit contenir au moins 8 charactères et au moins une lettre majuscule, une lettre minuscule, un chiffre et un charactère spécial');
 define('TXT_UPLOAD_ERROR', 'Taille maximale du fichier dépassée!');
 
 define('TXT_OPTIONS', 'paramètres');
@@ -39,6 +38,7 @@ define('TXT_EVENT_MOD_DONE', TXT_EVENT . ' modifié avec succès!');
 define('TXT_EVENT_MOD_FAIL', TXT_ERROR . ' dans la modification de l\'' . TXT_EVENT . '!');
 define('TXT_EVENT_NOTE_DONE', TXT_EVENT . ' notifié avec succès!');
 define('TXT_EVENT_NOTE_FAIL', TXT_ERROR . ' dans la notification de l\'' . TXT_EVENT . '!');
+define('TXT_EVENT_AUTO_TAG', 'Ajout automatique des tags d\' un ' . TXT_EVENT . ' à un élément lorsque l\'élément est lié à cet ' . TXT_EVENT);
 
 define('TXT_IMAGE', 'image');
 define('TXT_IMAGE_ADD_DONE', TXT_IMAGE . ' ajoutée avec succès!');

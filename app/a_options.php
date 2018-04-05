@@ -8,13 +8,22 @@
 
 require_once '../inc/actions.inc.php';
 
-if(isset($_POST) and isset($_SESSION['id'])){
+if (isset($_POST) and isset($_SESSION['id'])) {
     $user = new Param();
-    $ok = $user->modParam($_SESSION['id'], $_POST);
+    if (in_array('cards_per_page', $_POST)) {
+        $ok1 = $user->modParam($_SESSION['id'], 1, $_POST['cards_per_page']);
+    } else {
+        $ok1 = true;
+    }
+    if (in_array('event_auto_tag', $_POST)) {
+        $ok2 = $user->modParam($_SESSION['id'], 3, $_POST['event_auto_tag']);
+    } else {
+        $ok2 = true;
+    }
 }
-if($ok){
-    Output::ShowAlert(TXT_OPTIONS_MOD_DONE, 'success');
-}else{
+if (!$ok1 || !$ok2) {
     Output::ShowAlert(TXT_OPTIONS_MOD_FAIL, 'danger');
+} else {
+    Output::ShowAlert(TXT_OPTIONS_MOD_DONE, 'success');
 }
 header('Location: ../index.php?view=options');
