@@ -748,17 +748,24 @@ class User
         return $str;
     }
 
+    /**
+     * @param $user
+     * @return array
+     */
     public function getTimelineEventsFromUser($user)
     {
         $events = '';
+        $modal = '';
         if ($user) {
             $results = DBManager::getData('event', ['id', DBManager::SQLDateFormat('moment', 'BIRTH', 'time'), 'moment', 'note', 'emotion', 'event_type'], 'user_id', $user, 'moment', 'DESC', 20, 'CLASS');
             if ($results) {
                 foreach ($results as $data) {
-                    $events .= Output::viewTimelineData($data);
+                    $event = Output::viewTimelineData($data);
+                    $events .= $event[0];
+                    $modal .= $event[1];
                 }
             }
         }
-        return $events;
+        return [$events, $modal];
     }
 }

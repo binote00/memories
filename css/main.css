@@ -1,6 +1,11 @@
 .header-wrap{
     margin-top: 80px;
 }
+
+.navbar{
+    z-index: 99;
+}
+
 form .btn{
     margin-top: 10px;
 }
@@ -59,6 +64,7 @@ a.popup-light span{
 .img-popup-l, .img-popup-h{
     width: 100%;
 }
+
 @media (min-width: 1199px){
     .img-popup-l{
         width: 200%;

@@ -346,11 +346,14 @@ Trait Output
 
     /**
      * @param $data
-     * @return string
+     * @return array
      */
     public static function viewTimelineData($data)
     {
         $tags_txt = '';
+        $img_txt = '';
+        $modal_txt = '';
+        $img_count = 0;
 /*        $msg = '';*/
         $emotion_q = DBManager::getData('emotion', 'em_name', 'id', $data->getEmotion(), '', '', '', 'OBJECT');
         $event_type_q = DBManager::getData('events_type', 'event_name', 'id', $data->getEventType(), '', '', '', 'OBJECT');
@@ -367,13 +370,39 @@ Trait Output
         if ($tags_txt) {
             $tags_txt = '<hr>'.$tags_txt;
         }
+        $resultimg = $dbh->query("SELECT i.id,i.link,i.uploader,i.title FROM image AS i, event_link AS el WHERE i.id=el.data_id AND el.data_type=2 AND el.event_id=" . $data->getId());
+        while ($data_img = $resultimg->fetchObject()) {
+            if (!$data_img->title) {
+                $data_img->title = 'image';
+            }
+            $img_count++;
+            $img_txt .= Output::btnModal('img-modal-'.$data_img->id, $data_img->title);
+            $modal_txt .= Output::viewModal('img-modal-'.$data_img->id, $data_img->title,Output::ShowImage($data_img->link, $data_img->title, '/users/' . $data_img->uploader . '/'));
+        }
+        if ($img_txt) {
+            $img_txt = '<hr>' . $img_txt;
+            if ($img_count > 6) {
+                $img_txt = '<i class="fa fa-chevron-down" data-toggle="collapse" data-target="#f-image-show-collapse-' . $data->getId() . '" style="color: #009688" title="Images"></i>
+                        <div class="collapse" id="f-image-show-collapse-' . $data->getId() . '">
+                        ' . $img_txt . '
+                        </div>';
+            }
+        }
 
-        return '<div class="timeline__item">
+        return ['<div class="timeline__item">
                     <div class="timeline__content">
                         <h2>' . $data->time . '</h2>
-                        <h2 style="color: #009688">' . ucfirst($event_type_q->event_name) . '</h2><p>' . $emotion_q->em_name . '</p><p>' . $tags_txt . '</p>
+                        <h2 style="color: #009688">' . ucfirst($event_type_q->event_name) . '</h2>
+                        <p>' . $emotion_q->em_name . '</p>
+                        ' . $img_txt . '
+                        <div class="collapse" id="f-image-show-collapse-' . $data->getId() . '">
+                        ' . $img_txt . '
+                        </div>
+                        <p>' . $tags_txt . '</p>
                     </div>
-                </div>';
+                </div>',
+            $modal_txt
+        ];
     }
 }
 

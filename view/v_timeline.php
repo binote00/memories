@@ -11,7 +11,7 @@ $events = $user->getTimelineEventsFromUser($_SESSION['id']);
 $content = '<div class="timeline">
     <div class="timeline__wrap">
         <div class="timeline__items">
-        '.$events.'
+        '.$events[0].'
         </div>
     </div>
-</div>';
+</div>'.$events[1];
