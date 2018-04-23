@@ -294,9 +294,9 @@ class People
                     $date = DateTime::createFromFormat('Y-m-d', $data->birth_date);
                     $birth_date = $date->format('d-m-Y');
 
-                    $tbody.='<tr><td>'.$detail.'</td><td>'.$data->first_name.'</td><td>'.$data->last_name.'</td><td>'.$data->nickname.'</td><td>'.$birth_date.'</td><td><a href="mailto:'.$data->email.'">'.$data->email.'</a></td><td><div style="max-height: 200px;">'.$photo.'</div></td></tr>';
+                    $tbody.='<tr><td>'.$detail.'</td><td>'.$data->first_name.'</td><td>'.$data->last_name.'</td><td>'.$data->nickname.'</td><td>'.$birth_date.'</td><td><a href="mailto:'.$data->email.'">'.$data->email.'</a></td><td>'.$photo.'</td></tr>';
                 }
-                $content = Output::TableHead(['Détail', 'Prénom', 'Nom', 'Surnom', 'Naissance', 'Email', 'Photo'], $tbody, 'Personnes <button type="button" class="btn btn-primary" data-toggle="collapse" href="#f-people-add-collapse">+</button>').$footer; //.Output::viewModalJS('modal-people', 'lg');
+                $content = Output::TableHead(['Détail', 'Prénom', 'Nom', 'Surnom', 'Naissance', 'Email', 'Photo'], $tbody, 'Personnes <button type="button" class="btn btn-primary" data-toggle="collapse" href="#f-people-add-collapse">+</button>', 'people').$footer; //.Output::viewModalJS('modal-people', 'lg');
             }
         }
         return $content;

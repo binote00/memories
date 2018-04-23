@@ -156,9 +156,10 @@ Trait Output
      * @param array|string $heads
      * @param string $tbody
      * @param string $title
+     * @param string $class
      * @return string
      */
-    public static function TableHead($heads, $tbody, $title = '')
+    public static function TableHead($heads, $tbody, $title = '', $class = '')
     {
         $thead = '';
         if (is_array($heads)) {
@@ -168,7 +169,10 @@ Trait Output
         } else {
             $thead = '<th>' . $heads . '</th>';
         }
-        return '<h2>' . $title . '</h2><table class="table table-responsive table-striped"><thead class="thead-inverse"><tr>' . $thead . '</tr></thead><tbody>' . $tbody . '</tbody></table>';
+        if ($class) {
+            $class = ' '.$class;
+        }
+        return '<h2>' . $title . '</h2><table class="table table-responsive table-striped' . $class . '"><thead class="thead-inverse"><tr>' . $thead . '</tr></thead><tbody>' . $tbody . '</tbody></table>';
     }
 
     /**
