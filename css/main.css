@@ -16,8 +16,8 @@ hr .style {
     box-shadow: 0 10px 10px -10px #8c8b8b inset;
 }
 
-table.people td {
-    max-height: 200px;
+.img-people {
+    max-height: 100px;
 }
 
 .card{

@@ -107,12 +107,16 @@ Trait Output
      * @param string $src
      * @param string $alt
      * @param string $sub
+     * @param string $class
      * @param int $scale
      * @return string
      */
-    public static function ShowImage($src, $alt, $sub = '', $scale = 100)
+    public static function ShowImage($src, $alt, $sub = '', $class = 'img-fluid mx-auto d-block', $scale = 100)
     {
-        return '<img src="img/' . $sub . $src . '" alt="' . $alt . '" class="img-fluid mx-auto d-block" width="' . $scale . '%">';
+        if ($scale > 0) {
+            $scale = ' width="' . $scale . '%"';
+        }
+        return '<img src="img/' . $sub . $src . '" alt="' . $alt . '" class="' . $class . '"' . $scale . '>';
     }
 
     /**

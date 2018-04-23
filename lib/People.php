@@ -272,10 +272,11 @@ class People
                     $title = $data->first_name.' '.$data->last_name;
                     if($data->photo){
                         $photo_id = DBManager::getData('image', 'link', 'id', $data->photo);
-                        $photo = Output::ShowImage($photo_id[0][0], $title, 'users/'.$user.'/');
+                        $photo = Output::ShowImage($photo_id[0][0], $title, 'users/'.$user.'/', 'img-people d-block mx-auto', 0);
+                        $photo_modal = Output::ShowImage($photo_id[0][0], $title, 'users/'.$user.'/', 'img-fluid mx-auto d-block', 50);
                     }
                     $form = new Form();
-                    $body = $photo;
+                    $body = $photo_modal;
                     $body .= $form->CreateForm('./app/a_people_mod.php', 'POST', 'Profil de la personne', true)
                         ->AddInput('first_name', 'Prénom', 'text', $data->first_name, $data->first_name, true)
                         ->AddInput('last_name', 'Nom', 'text', $data->last_name, $data->last_name, true)
