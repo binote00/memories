@@ -729,7 +729,7 @@ class User
             }
         }
         $btn_add = Output::btnModal('modal-add-btn', '+', 'primary');
-        return Output::TableHead(['Tag', 'Supprimer', 'Transférer'], $tbody, 'Tags ' . $btn_add);
+        return Output::TableHead(['Nom du Tag', 'Références', 'Transférer'], $tbody, 'Tags ' . $btn_add);
     }
 
     /**
