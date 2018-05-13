@@ -14,4 +14,4 @@ if($ok){
 }else{
     Output::ShowAlert(TXT_IMAGE_ADD_FAIL, 'danger');
 }
-header('Location: ../index.php?view=journal_add');
+header('Location: ../index.php?view=images');

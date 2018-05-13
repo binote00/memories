@@ -14,4 +14,4 @@ if($ok){
 }else{
     Output::ShowAlert('Erreur dans l\'ajout des images!', 'danger');
 }
-header('Location: ../index.php');
+header('Location: ../index.php?view=images');
