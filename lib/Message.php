@@ -220,4 +220,20 @@ class Message
     {
         return DBManager::setData('message', 'note', $note,'id', $id);
     }
+
+    /**
+     * @param int $id
+     * @param int $eventid
+     * @return mixed
+     */
+    public function updateMessageEvent($id, $eventid)
+    {
+        $return = false;
+        if ($id && $eventid) {
+            $return = DBManager::setData('event_link', ['event_id', 'data_type', 'data_id'], [$eventid, 1, $id]);
+        }
+        return $return;
+    }
+
+
 }

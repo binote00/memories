@@ -220,7 +220,9 @@ class People
             $return = $result->rowCount();
             /*$return = DBManager::setData('people', ['first_name', 'last_name', 'nickname', 'email', 'photo'],
                 [$vars['first_name'], $vars['last_name'], $vars['nickname'], $vars['email'], $photo], 'id', $vars['id']);*/
-
+            if ($return && $vars['event_id']) {
+                DBManager::setData('event_link', ['event_id', 'data_type', 'data_id'], [$vars['event_id'], 4, $vars['id']]);
+            }
         }
         return $return;
     }

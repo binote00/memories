@@ -360,8 +360,10 @@ Trait Output
     {
         $tags_txt = '';
         $img_txt = '';
+        $msg_txt = '';
         $modal_txt = '';
         $img_count = 0;
+        $txt_count = 0;
 /*        $msg = '';*/
         $emotion_q = DBManager::getData('emotion', 'em_name', 'id', $data->getEmotion(), '', '', '', 'OBJECT');
         $event_type_q = DBManager::getData('events_type', 'event_name', 'id', $data->getEventType(), '', '', '', 'OBJECT');
@@ -385,7 +387,7 @@ Trait Output
             }
             $img_count++;
             $img_txt .= Output::btnModal('img-modal-'.$data_img->id, $data_img->title);
-            $modal_txt .= Output::viewModal('img-modal-'.$data_img->id, $data_img->title,Output::ShowImage($data_img->link, $data_img->title, '/users/' . $data_img->uploader . '/'));
+            $modal_txt .= Output::viewModal('img-modal-'.$data_img->id, $data_img->title, Output::ShowImage($data_img->link, $data_img->title, '/users/' . $data_img->uploader . '/'));
         }
         if ($img_txt) {
             $img_txt = '<hr>' . $img_txt;
@@ -393,6 +395,24 @@ Trait Output
                 $img_txt = '<i class="fa fa-chevron-down" data-toggle="collapse" data-target="#f-image-show-collapse-' . $data->getId() . '" style="color: #009688" title="Images"></i>
                         <div class="collapse" id="f-image-show-collapse-' . $data->getId() . '">
                         ' . $img_txt . '
+                        </div>';
+            }
+        }
+        $resulttxt = $dbh->query("SELECT i.id,i.moment,i.message FROM message AS i, event_link AS el WHERE i.id=el.data_id AND el.data_type=1 AND el.event_id=" . $data->getId());
+        while ($data_txt = $resulttxt->fetchObject()) {
+            if (!$data_txt->title) {
+                $data_txt->title = 'message';
+            }
+            $txt_count++;
+            $msg_txt .= Output::btnModal('txt-modal-'.$data_txt->id, $data_txt->moment);
+            $modal_txt .= Output::viewModal('txt-modal-'.$data_txt->id, $data_txt->moment, $data_txt->message);
+        }
+        if ($msg_txt) {
+            $msg_txt = '<hr>' . $msg_txt;
+            if ($txt_count > 6) {
+                $msg_txt = '<i class="fa fa-chevron-down" data-toggle="collapse" data-target="#f-msg-show-collapse-' . $data->getId() . '" style="color: #009688" title="Images"></i>
+                        <div class="collapse" id="f-msg-show-collapse-' . $data->getId() . '">
+                        ' . $msg_txt . '
                         </div>';
             }
         }
@@ -418,6 +438,10 @@ Trait Output
                         ' . $img_txt . '
                         <div class="collapse" id="f-image-show-collapse-' . $data->getId() . '">
                         ' . $img_txt . '
+                        </div>
+                        ' . $msg_txt . '
+                        <div class="collapse" id="f-msg-show-collapse-' . $data->getId() . '">
+                        ' . $msg_txt . '
                         </div>
                         <p>' . $tags_txt . '</p>
                     </div>

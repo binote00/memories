@@ -398,14 +398,22 @@ class User
                 $tbody = '';
                 $dbh = DB::connect();
                 foreach ($results as $data) {
+                    if ($data->getEmotion()) {
+                        $emotion_q = DBManager::getData('emotion', 'em_name', 'id', $data->getEmotion(), '', '', '', 'OBJECT');
+                        $emotion_txt = $emotion_q->em_name;
+                    }
                     $text = $this->listTagsFromElement(1, $data, $dbh);
                     $text .= $this->AddTagOnElement($user, $data->getId(), './app/a_message_tag_add.php', $tags, $text);
                     $tbody .= '<tr><td>' . $data->getMoment() . '<br><span class="text-hide">' . $data->getId() . '</span>
                         <button type="button" class="btn-modif btn btn-sm btn-danger">Modifier</button>
                         </td>
-                        <td><div class="ck-inline" contenteditable="true">' . $data->getMessage() . '</div></td><td>' . $text . '</td><td>' . $data->getNote() . $this->AddNoteOnElement($data->getId(), './app/a_message_note.php') . '</td></tr>';
+                        <td><div class="ck-inline" contenteditable="true">' . $data->getMessage() . '</div></td><td>' . $text . '</td>
+                        <td>' . $emotion_txt . $this->AddEmotionOnElement($data->getId(), './app/a_message_emo.php') . '</td>
+                        <td>' . $data->getNote() . $this->AddNoteOnElement($data->getId(), './app/a_message_note.php') . '</td>
+                        <td>texte à ajouter' . $this->AddEventOnElement($data->getId(), './app/a_message_event.php') . '</td>
+                        </tr>';
                 }
-                $content = Output::TableHead(['Date', 'Message', 'Tags', 'Note'], $tbody, 'Messages <button type="button" class="btn btn-primary" data-toggle="collapse" href="#f-message-add-collapse">+</button>');
+                $content = Output::TableHead(['Date', 'Message', 'Tags', 'Emotion', 'Note', 'Event'], $tbody, 'Messages <button type="button" class="btn btn-primary" data-toggle="collapse" href="#f-message-add-collapse">+</button>');
             }
         }
         return $content;
