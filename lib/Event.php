@@ -14,7 +14,7 @@ class Event
     private $id;
     private $user_id;
     private $event_type;
-    private $title;
+    public $title;
     private $moment;
     private $emotion;
     private $note;

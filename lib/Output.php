@@ -399,9 +399,22 @@ Trait Output
 
         return ['<div class="timeline__item">
                     <div class="timeline__content">
-                        <h2>' . $data->time . '</h2>
-                        <h2 style="color: #009688">' . ucfirst($event_type_q->event_name) . '</h2>
-                        <p>' . $emotion_q->em_name . '</p>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <h2>' . $data->time . '</h2>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <h2>' . $data->title . '</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <p style="color: #009688">' . ucfirst($event_type_q->event_name) . '</p>                        
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <p>' . $emotion_q->em_name . '</p>                            
+                            </div>
+                        </div>
                         ' . $img_txt . '
                         <div class="collapse" id="f-image-show-collapse-' . $data->getId() . '">
                         ' . $img_txt . '

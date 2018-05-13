@@ -174,8 +174,12 @@ class People
     {
         $return = false;
         if(is_array($vars)){
-            $date = DateTime::createFromFormat('Y-m-d', $vars['birth_date']);
-            $birth_date = $date->format('Y-m-d');
+            if (isset($vars['birth_date']) && !empty($vars['birth_date'])) {
+                $date = DateTime::createFromFormat('Y-m-d', $vars['birth_date']);
+                $birth_date = $date->format('Y-m-d');
+            } else {
+                $birth_date = null;
+            }
             $dbh = DB::connect();
             $result = $dbh->prepare("INSERT INTO people (first_name, last_name, nickname, birth_date, email, photo, user_id) VALUES (:first_name, :last_name, :nickname, :birth_date, :email, :photo, :user_id)");
             $result->bindParam(':first_name', $vars['first_name'],2);
@@ -292,8 +296,12 @@ class People
                     data-body="<form method=\"POST\"><input type=\"text\" id=\"first_name\" value="Patrick"><input type=\"text\" id=\"user_id\" value="1"></form></button>';*/
                     $footer .= Output::viewModal('ppl-modal-'.$data->id, $title, $body);
                     $detail = Output::btnModal('ppl-modal-'.$data->id,'+');
-                    $date = DateTime::createFromFormat('Y-m-d', $data->birth_date);
-                    $birth_date = $date->format('d-m-Y');
+                    if (isset($data->birth_date) && !empty($data->birth_date)) {
+                        $date = DateTime::createFromFormat('Y-m-d', $data->birth_date);
+                        $birth_date = $date->format('d-m-Y');
+                    } else {
+                        $birth_date = '';
+                    }
 
                     $tbody.='<tr><td>'.$detail.'</td><td>'.$data->first_name.'</td><td>'.$data->last_name.'</td><td>'.$data->nickname.'</td><td>'.$birth_date.'</td><td><a href="mailto:'.$data->email.'">'.$data->email.'</a></td><td>'.$photo.'</td></tr>';
                 }
