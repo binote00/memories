@@ -309,7 +309,7 @@ Trait Output
             } else {
                 $form_txt = $form->CreateForm($data['mod_script'], 'POST', '')
                     ->AddInput('title', $data['title_label'], 'text', $data['title'])
-                    ->AddSelect('event_id', 'Evènement', 'event', ['id', DBManager::SQLDateFormat('moment', 'BIRTH')], 'moment', 'id', 'user_id', $data['user_id'], 'moment')
+                    ->AddSelect('event_id', 'Evénement', 'event', ['id', DBManager::SQLDateFormat('moment', 'BIRTH'), 'title'], ['moment', 'title'], 'id', 'user_id', $data['user_id'], 'moment')
                     //->AddSelectData('event_id', 'Evènement', $data['events'], 'moment', 'id', true)
                     ->AddSelectData('tag_id', '#Tag', $result, 'tag_name', 'id', true)
                     ->AddInput('id', '', 'hidden', $data['id'])

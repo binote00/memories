@@ -168,14 +168,14 @@ class Form
             $default_txt = '<option value="">Choisissez...</option>';
         }
         $options = false;
-        $caption_txt = '';
-        $caption_link= '';
         $btn_add = '';
         $result = DBManager::getDatas($table, $fields, $whereField, $whereValue, $order, $orderBy);
         while ($data = $result->fetchObject()) {
+            $caption_txt = '';
+            $caption_link= '';
             if (is_array($caption)) {
-                foreach ($caption as $txt) {
-                    $caption_txt .= $caption_link.$txt;
+                foreach ($caption as $key => $val) {
+                    $caption_txt .= $caption_link.$data->$val;
                     $caption_link = ' ';
                 }
             } else {
