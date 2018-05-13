@@ -16,7 +16,6 @@ if($_POST){
             $photo = $image->addImage($_POST, $_FILES);
         }
     }
-    var_dump(get_defined_vars());
     $user = new People();
     $ok = $user->modPeople($_POST, $photo);
     if($ok){

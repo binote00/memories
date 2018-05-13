@@ -178,7 +178,7 @@ class Image
                     }
                 }
             } else {
-                var_dump($files);
+                //var_dump($files);
             }
             if ($values_query) {
                 $dbh = DB::connect();
