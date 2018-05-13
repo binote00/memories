@@ -329,6 +329,18 @@ class User
         return $return;
     }
 
+    /**
+     * @param int $user
+     * @return bool|mixed
+     */
+    public function deleteUser($user)
+    {
+        $return = false;
+        if ($user) {
+            $return = DBManager::setData('user', 'status', '1', 'id', $user);
+        }
+        return $return;
+    }
 
     /**
      * @param mixed $user
@@ -564,6 +576,24 @@ class User
             ->AddSelectNumber('note', '', 1, 10)
             ->AddInput('id', '', 'hidden', $id)
             ->EndForm('Noter', 'primary');
+        return $return;
+    }
+
+    /**
+     * @param int $id
+     * @param string $action
+     * @param string $text
+     * @return bool|string
+     */
+    private function AddEventOnElement($id, $action, $text = '')
+    {
+        $return = false;
+        if ($text) $return = '<hr>';
+        $form = new Form();
+        $return .= $form->CreateForm($action, 'POST', '')
+            ->AddSelect('event_id', 'Evénement', 'event', ['id', 'moment', 'title'], ['moment', 'title'], 'id', 'user_id', $_SESSION['id'], 'moment', 'DESC')
+            ->AddInput('id', '', 'hidden', $id)
+            ->EndForm('Modifier', 'primary');
         return $return;
     }
 

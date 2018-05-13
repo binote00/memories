@@ -6,3 +6,5 @@
  * Time: 13:22
  */
 include_once __DIR__.'/../form/f_profile.php';
+echo '<hr>';
+include_once __DIR__.'/../form/f_account_disable.php';
