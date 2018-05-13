@@ -410,7 +410,7 @@ Trait Output
         if ($msg_txt) {
             $msg_txt = '<hr>' . $msg_txt;
             if ($txt_count > 6) {
-                $msg_txt = '<i class="fa fa-chevron-down" data-toggle="collapse" data-target="#f-msg-show-collapse-' . $data->getId() . '" style="color: #009688" title="Images"></i>
+                $msg_txt = '<i class="fa fa-chevron-down" data-toggle="collapse" data-target="#f-msg-show-collapse-' . $data->getId() . '" style="color: #009688" title="Messages"></i>
                         <div class="collapse" id="f-msg-show-collapse-' . $data->getId() . '">
                         ' . $msg_txt . '
                         </div>';
