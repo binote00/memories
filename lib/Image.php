@@ -126,7 +126,7 @@ class Image
         $move = false;
         if (is_array($vars) && is_array($files)) {
             if (is_dir('../img/users/' . $vars['user_id']) == false) {
-                mkdir('../img/users/' . $vars['user_id'], 0700);
+                mkdir('../img/users/' . $vars['user_id'], 0755);
             }
             if ($files['img']['type'] == 'image/png' || $files['img']['type'] == 'image/jpg' || $files['img']['type'] == 'image/jpeg') {
                 $basename = basename($files['img']['name']);
