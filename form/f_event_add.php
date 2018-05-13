@@ -11,6 +11,7 @@ if($_SESSION){
         $form = new Form();
         $content .= $form->CreateForm('./app/a_event_add.php', 'POST', 'Ajouter un évènement')
             ->AddInput('moment', 'Date', 'date', '', '', '', 'required')
+            ->AddInput('title', 'Titre', 'text', '', '', '', 'required')
             ->AddSelect('event_type', 'Catégorie', 'events_type', ['id', 'event_name'], 'event_name', 'id', '', '', 'event_name', 'ASC', false, true)
             ->AddSelect('emotion', 'Emotion', 'emotion', ['id', 'em_name'], 'em_name', 'id', '', '', 'em_name', 'ASC')
             ->AddSelectNumber('note', 'Evaluation', 0, 10)

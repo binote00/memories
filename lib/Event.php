@@ -14,6 +14,7 @@ class Event
     private $id;
     private $user_id;
     private $event_type;
+    private $title;
     private $moment;
     private $emotion;
     private $note;
@@ -65,6 +66,22 @@ class Event
     public function setEventType($event_type): void
     {
         $this->event_type = $event_type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title): void
+    {
+        $this->title = $title;
     }
 
     /**
@@ -123,7 +140,7 @@ class Event
     {
         $return = false;
         if(is_array($vars)){
-            $return = DBManager::setData('event', ['user_id', 'event_type', 'moment', 'emotion', 'note'], [$vars['user_id'], $vars['event_type'], $vars['moment'], $vars['emotion'], $vars['note']]);
+            $return = DBManager::setData('event', ['user_id', 'event_type', 'title', 'moment', 'emotion', 'note'], [$vars['user_id'], $vars['event_type'], $vars['title'], $vars['moment'], $vars['emotion'], $vars['note']]);
         }
         return $return;
     }

@@ -340,12 +340,12 @@ class User
         $content = false;
         if ($user) {
             if ($event_type) {
-                $results = DBManager::getData('event', ['id', DBManager::SQLDateFormat('moment', 'BIRTH'), 'note', 'emotion', 'event_type'], ['user_id', 'event_type'], [$user, $event_type], 'moment', 'DESC', 20, 'CLASS');
+                $results = DBManager::getData('event', ['id', DBManager::SQLDateFormat('moment', 'BIRTH'), 'title', 'note', 'emotion', 'event_type'], ['user_id', 'event_type'], [$user, $event_type], 'moment', 'DESC', 20, 'CLASS');
                 $event_type_q = DBManager::getData('events_type', 'event_name', 'id', $event_type, '', '', '', 'OBJECT');
                 $event_type_txt = $event_type_q->event_name;
             } else {
                 $event_type_txt = '';
-                $results = DBManager::getData('event', ['id', DBManager::SQLDateFormat('moment', 'BIRTH'), 'note', 'emotion', 'event_type'], 'user_id', $user, 'moment', 'DESC', 20, 'CLASS');
+                $results = DBManager::getData('event', ['id', DBManager::SQLDateFormat('moment', 'BIRTH'), 'title', 'note', 'emotion', 'event_type'], 'user_id', $user, 'moment', 'DESC', 20, 'CLASS');
             }
             if ($results) {
                 $tbody = '';
@@ -360,11 +360,12 @@ class User
                     $emotion_txt = $emotion_q->em_name;
                     $text .= $this->AddTagOnElement($user, $data->getId(), './app/a_event_tag_add.php', 0, $text);
                     $tbody .= '<tr><td class="event-time">' . $data->getMoment() . Event::updateEventDate($data->getId(), './app/a_event_date.php', $data->getMoment()) . '</td>
+                        <td>' . $data->getTitle() . '</td>
                         <td>' . $event_type_txt . $this->AddCatOnElement($data->getId(), './app/a_event_type.php', $event_type_txt) . '</td>
                         <td>' . $emotion_txt . $this->AddEmotionOnElement($data->getId(), './app/a_event_emo.php', $emotion_txt) . '</td>
                         <td>' . $data->getNote() . $this->AddNoteOnElement($data->getId(), './app/a_event_note.php', $data->getNote()) . '</td><td>' . $text . '</td></tr>';
                 }
-                $content = Output::TableHead(['Date', 'Catégorie', 'Emotion', 'Note', 'Tags'], $tbody, 'Evènements <button type="button" class="btn btn-primary" data-toggle="collapse" href="#f-event-add-collapse">+</button>');
+                $content = Output::TableHead(['Date', 'Titre', 'Catégorie', 'Emotion', 'Note', 'Tags'], $tbody, 'Evènements <button type="button" class="btn btn-primary" data-toggle="collapse" href="#f-event-add-collapse">+</button>');
             }
         }
         return $content;
