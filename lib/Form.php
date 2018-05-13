@@ -150,7 +150,7 @@ class Form
      * @param string $label
      * @param string $table
      * @param array $fields [by example : id,name]
-     * @param string $caption [by example : name]
+     * @param array|string $caption [by example : name]
      * @param string $value [by example : id]
      * @param array|string $whereField
      * @param array|mixed $whereValue
@@ -168,10 +168,20 @@ class Form
             $default_txt = '<option value="">Choisissez...</option>';
         }
         $options = false;
+        $caption_txt = '';
+        $caption_link= '';
         $btn_add = '';
         $result = DBManager::getDatas($table, $fields, $whereField, $whereValue, $order, $orderBy);
         while ($data = $result->fetchObject()) {
-            $options .= '<option value="' . $data->$value . '">' . $data->$caption . '</option>';
+            if (is_array($caption)) {
+                foreach ($caption as $txt) {
+                    $caption_txt .= $caption_link.$txt;
+                    $caption_link = ' ';
+                }
+            } else {
+                $caption_txt = $data->$caption;
+            }
+            $options .= '<option value="' . $data->$value . '">' . $caption_txt . '</option>';
         }
         if ($add_btn) {
             $btn_add = Output::btnModal('modal-add-btn', '+', 'primary');

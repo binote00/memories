@@ -12,7 +12,7 @@ if($_SESSION){
         $form_txt = $form->CreateForm('./app/a_image_mod.php','POST', 'Modifier votre image')
             ->AddInput('title', 'Titre')
             ->AddInput('id', '', 'hidden', $_POST['id'])
-            ->AddSelect('event_id', 'Evènement', 'event', ['id', 'moment'], 'moment', 'id', 'user_id', $_SESSION['id'], 'moment', 'DESC', true)
+            ->AddSelect('event_id', 'Evénement', 'event', ['id', 'moment', 'title'], ['moment', 'title'], 'id', 'user_id', $_SESSION['id'], 'moment', 'DESC', true)
             ->EndForm('Modifier');
         echo $form_txt;
     }else{
