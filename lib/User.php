@@ -497,11 +497,15 @@ class User
     public function getTagsByType($user, $type, $id)
     {
         $query = "SELECT DISTINCT t.id,t.tag_name FROM tag as t
-        LEFT JOIN tag_link as tl ON t.id=tl.tag_id AND tl.data_type=$type
+        LEFT JOIN tag_link as tl ON t.id=tl.tag_id AND tl.data_type=:typeid
         LEFT JOIN image as i ON i.id=tl.data_id
-        WHERE user_id=$user AND t.id NOT IN (SELECT tag_id FROM tag_link WHERE data_type=$type AND data_id=$id)";
+        WHERE user_id=:userid AND t.id NOT IN (SELECT tag_id FROM tag_link WHERE data_type=$type AND data_id=:dataid)
+        ORDER BY t.tag_name";
         $dbh = DB::connect();
         $result = $dbh->prepare($query);
+        $result->bindParam('typeid', $type, 1);
+        $result->bindParam('userid', $user, 1);
+        $result->bindParam('dataid', $id, 1);
         $result->execute();
         return $result;
     }
