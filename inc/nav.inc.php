@@ -36,7 +36,7 @@
             <input name="text" class="form-control mr-sm-2" type="text" placeholder="Recherche par #tag" id="nav-search"
                    list="search-tags" aria-label="Recherche">
             <datalist id="search-tags"></datalist>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><?= TXT_SEARCH ?></button>
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><?= TXT_SEARCH ?></button>
         </form>
     </div>
 </nav>

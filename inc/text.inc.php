@@ -14,6 +14,8 @@ define('TXT_DELOG', 'Deconnexion');
 define('TXT_SEARCH', 'Recherche');
 define('TXT_PREV', 'Précédent');
 define('TXT_NEXT', 'Suivant');
+define('TXT_CONFIRM', 'Valider');
+define('TXT_MODIFY', 'Modifier');
 
 define('TXT_PROFILE', 'profil');
 define('TXT_PROFILE_MOD_DONE', TXT_PROFILE . ' modifié avec succès!');
@@ -31,7 +33,7 @@ define('TXT_OPTIONS', 'paramètres');
 define('TXT_OPTIONS_MOD_DONE', TXT_OPTIONS . ' modifiés avec succès!');
 define('TXT_OPTIONS_MOD_FAIL', TXT_ERROR . ' dans la modification des ' . TXT_OPTIONS . '!');
 
-define('TXT_EVENT', 'évènement');
+define('TXT_EVENT', 'événement');
 define('TXT_EVENT_ADD_DONE', TXT_EVENT . ' ajouté avec succès!');
 define('TXT_EVENT_ADD_FAIL', TXT_ERROR . ' dans l\'ajout de l\'' . TXT_EVENT . '!');
 define('TXT_EVENT_MOD_DONE', TXT_EVENT . ' modifié avec succès!');
@@ -58,6 +60,8 @@ define('TXT_MESSAGE_MOD_DONE', TXT_MESSAGE . ' modifié avec succès!');
 define('TXT_MESSAGE_MOD_FAIL', TXT_ERROR . ' dans la modification du ' . TXT_MESSAGE . '!');
 define('TXT_MESSAGE_NOTE_DONE', TXT_MESSAGE . ' notifié avec succès!');
 define('TXT_MESSAGE_NOTE_FAIL', TXT_ERROR . ' dans la notification du ' . TXT_MESSAGE . '!');
+define('TXT_MESSAGE_ADD', 'Ajouter un message');
+define('TXT_WRITE_HERE', 'Ecrivez votre message ici');
 
 define('TXT_PEOPLE', 'personne');
 define('TXT_PEOPLE_ADD_DONE', TXT_PEOPLE . ' ajoutée avec succès!');
@@ -75,5 +79,8 @@ define('TXT_TAG_TR_FAIL', 'Eléménts non transférés!');
 define('TXT_TAG_DEL_DONE', TXT_TAG . ' supprimé avec succès!');
 define('TXT_TAG_DEL_FAIL', TXT_ERROR . ' dans la suppression du ' . TXT_TAG . '!');
 define('TXT_TAG_EXIST', 'Ce ' . TXT_TAG . ' existe déjà!');
+
+define('TXT_EMOTION', 'Emotion');
+define('TXT_NOTE', 'Intensité de l\'émotion');
 
 define('TXT_TIMELINE', 'ligne du temps');

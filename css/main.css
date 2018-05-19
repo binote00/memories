@@ -1,3 +1,31 @@
+.color-primary-0 { color: #015366 }
+.color-primary-1 { color: #308296 }
+.color-primary-2 { color: #036D86 }
+.color-primary-3 { color: #003440 }
+.color-primary-4 { color: #000506 }
+
+.color-complement-0 { color: #A55200 }
+.color-complement-1 { color: #F29D49 }
+.color-complement-2 { color: #D96C00 }
+.color-complement-3 { color: #673300 }
+.color-complement-4 { color: #0A0500 }
+
+body {
+    background-color: #fff;
+}
+
+h2 {
+    color: #015366;
+}
+
+label {
+    margin: 25px 0 0 0;
+}
+
+img {
+    border-radius: 2px;
+}
+
 .header-wrap{
     margin-top: 80px;
 }
@@ -67,6 +95,17 @@ a.popup-light span{
 
 .img-popup-l, .img-popup-h{
     width: 100%;
+}
+
+/* override bootstrap */
+.bg-dark {
+    background-color: #003440 !important;
+}
+.thead-inverse th {
+    background-color: #003440;
+}
+.modal-title {
+    color: #015366;
 }
 
 @media (min-width: 1199px){

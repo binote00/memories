@@ -369,7 +369,7 @@ class User
                     }
                     if (!$event_type) {
                         $event_type_q = DBManager::getData('events_type', 'event_name', 'id', $data->getEventType(), '', '', '', 'OBJECT');
-                        $event_type_txt = $event_type_q->event_name;
+                        $event_type_txt = ucfirst($event_type_q->event_name);
                     }
                     $emotion_q = DBManager::getData('emotion', 'em_name', 'id', $data->getEmotion(), '', '', '', 'OBJECT');
                     $emotion_txt = $emotion_q->em_name;
@@ -383,6 +383,8 @@ class User
                     $note_txt = $data->getNote();
                     if (!$note_txt) {
                         $note_txt = '<i>&lt;Note manquante&gt;</i>';
+                    } else {
+                        $note_txt .= '/10';
                     }
                     $tag_txt .= $this->AddTagOnElement($user, $data->getId(), './app/a_event_tag_add.php', 0, $tag_txt);
                     $tbody .= '<tr><td class="event-time">' . $data->getMoment() . Event::updateEventDate($data->getId(), './app/a_event_date.php', $data->getMoment()) . '</td>
@@ -392,7 +394,7 @@ class User
                         <td>' . $note_txt . $this->AddNoteOnElement($data->getId(), './app/a_event_note.php') . '</td>
                         <td>' . $tag_txt . '</td></tr>';
                 }
-                $content = Output::TableHead(['Date', 'Titre', 'Catégorie', 'Emotion', 'Note', 'Tags'], $tbody, 'Evènements <button type="button" class="btn btn-primary" data-toggle="collapse" href="#f-event-add-collapse">+</button>');
+                $content = Output::TableHead(['Date', 'Titre', 'Catégorie', 'Emotion', 'Intensité', 'Tags'], $tbody, 'Evénements <button type="button" class="btn btn-primary btn-lg" data-toggle="collapse" href="#f-event-add-collapse">+</button>');
             }
         }
         return $content;
@@ -423,6 +425,8 @@ class User
                     $note_txt = $data->getNote();
                     if (!$note_txt) {
                         $note_txt = '<i>&lt;Note manquante&gt;</i>';
+                    } else {
+                        $note_txt .= '/10';
                     }
                     $tag_txt = $this->listTagsFromElement(1, $data, $dbh);
                     if (!$tag_txt) {
@@ -438,7 +442,7 @@ class User
                         <td>' . $event_txt . $this->AddEventOnElement($data->getId(), './app/a_message_event.php') . '</td>
                         </tr>';
                 }
-                $content = Output::TableHead(['Date', 'Message', 'Tags', 'Emotion', 'Note', 'Event'], $tbody, 'Messages <button type="button" class="btn btn-primary" data-toggle="collapse" href="#f-message-add-collapse">+</button>');
+                $content = Output::TableHead(['Date', 'Message', 'Tags', 'Emotion', 'Intensité', 'Event'], $tbody, 'Messages <button type="button" class="btn btn-primary btn-lg" data-toggle="collapse" href="#f-message-add-collapse">+</button>');
             }
         }
         return $content;

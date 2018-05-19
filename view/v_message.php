@@ -8,9 +8,9 @@
 if(!isset($_SESSION['id'])){
     header('Location: index.php');
 }else{
-    $content .= Output::ShowToDo([
-        'Afficher les émotions',
-    ], 'warning', true);
+//    $content .= Output::ShowToDo([
+//        'Afficher les émotions',
+//    ], 'warning', true);
     $user = new User();
     $messages = $user->getMessagesFromUser($_SESSION['id'], 1);
     if($messages){

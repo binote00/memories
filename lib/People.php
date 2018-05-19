@@ -280,12 +280,12 @@ class People
                     if ($data->photo) {
                         $photo_id = DBManager::getData('image', 'link', 'id', $data->photo);
                         $photo = Output::ShowImage($photo_id[0][0], $title, 'users/' . $user . '/', 'img-people d-block mx-auto', 0);
-                        $photo_modal = Output::ShowImage($photo_id[0][0], $title, 'users/' . $user . '/', 'img-fluid mx-auto d-block', 50);
+                        $photo_modal = Output::ShowImage($photo_id[0][0], $title, 'users/' . $user . '/', 'img-fluid mx-auto d-block mb-2', 50);
                     }
 //                    require_once __DIR__.'/../form/f_people_mod.php';
                     $form = new Form();
                     $body = $photo_modal;
-                    $body .= $form->CreateForm('./app/a_people_mod.php', 'POST', 'Profil de la personne', true)
+                    $body .= $form->CreateForm('./app/a_people_mod.php', 'POST', '', true)
                         ->AddInput('first_name', 'Prénom', 'text', $data->first_name, $data->first_name, true)
                         ->AddInput('last_name', 'Nom', 'text', $data->last_name, $data->last_name, true)
                         ->AddInput('nickname', 'Surnom', 'text', $data->nickname)
@@ -295,6 +295,7 @@ class People
                         ->AddInput('img', 'Photo importée depuis votre ordinateur', 'file')
                         ->AddInput('photo', '', 'hidden', $data->photo)
                         ->AddInput('id', '', 'hidden', $data->id)
+                        ->AddInput('user_id', '', 'hidden', $user)
                         ->EndForm('Valider');
                     //$detail = Output::btnModalJS('modal-people', 'Détail', $title, addslashes($body), 'footer');
                     /*$detail = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-people"
@@ -310,7 +311,7 @@ class People
 
                     $tbody .= '<tr><td>' . $detail . '</td><td>' . $data->first_name . '</td><td>' . $data->last_name . '</td><td>' . $data->nickname . '</td><td>' . $birth_date . '</td><td><a href="mailto:' . $data->email . '">' . $data->email . '</a></td><td>' . $photo . '</td></tr>';
                 }
-                $content = Output::TableHead(['Détail', 'Prénom', 'Nom', 'Surnom', 'Naissance', 'Email', 'Photo'], $tbody, 'Personnes <button type="button" class="btn btn-primary" data-toggle="collapse" href="#f-people-add-collapse">+</button>', 'people') . $footer; //.Output::viewModalJS('modal-people', 'lg');
+                $content = Output::TableHead(['Détail', 'Prénom', 'Nom', 'Surnom', 'Naissance', 'Email', 'Photo'], $tbody, 'Personnes <button type="button" class="btn btn-primary btn-lg" data-toggle="collapse" href="#f-people-add-collapse">+</button>', 'people') . $footer; //.Output::viewModalJS('modal-people', 'lg');
             }
         }
         return $content;

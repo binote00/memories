@@ -11,7 +11,7 @@ if ($_SESSION) {
         $form = new Form();
         $user = new User();
         $user->getUser($_SESSION['id']);
-        $content = $form->CreateForm('./app/a_profile_mod.php', 'POST', 'Profil utilisateur')
+        $content .= $form->CreateForm('./app/a_profile_mod.php', 'POST', 'Profil utilisateur')
             ->AddInput('first_name', 'Prénom', 'text', $user->getFirstName())
             ->AddInput('last_name', 'Nom', 'text', $user->getLastName())
             ->AddInput('birth_date', 'Date de Naissance', 'date', $user->getBirthDate())
