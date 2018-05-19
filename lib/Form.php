@@ -107,6 +107,8 @@ class Form
         }
         if ($value && $type != 'password') {
             $value = ' value="' . $value . '"';
+        } else {
+            $value = '';
         }
         if ($placeholder && $type != 'password') {
             $placeholder = ' placeholder="' . $placeholder . '"';
@@ -119,6 +121,23 @@ class Form
         }
         $return .= '<input type="' . $type . '" class="form-control' . $class . '" name="' . $name . '" id="' . $this->getId() . '-' . $name . '"' . $placeholder . $value . $attr . '>';
         $this->output .= $return;
+        return $this;
+    }
+
+    /**
+     * @param int $user
+     * @param int $photo
+     * @return $this
+     */
+    public function AddInputPhoto($user, $photo)
+    {
+//        $user = new User;
+//        $photolist = $user->getImageListFromUser($_SESSION['user']);
+        if (isset($user) && is_int($user)) {
+            $this->AddSelect('photolist', 'Images existantes', 'image', ['id', 'link', 'title', 'status'], ['title', 'link'], 'id', ['uploader', 'status'], [$user, '0'], 'ASC', 'title');
+        }
+        $this->AddInput('img', 'Photo', 'file', $photo);
+        $this->AddInput('photo', '', 'hidden', $photo);
         return $this;
     }
 
@@ -149,9 +168,9 @@ class Form
      * @param string $name
      * @param string $label
      * @param string $table
-     * @param array $fields [by example : id,name]
-     * @param array|string $caption [by example : name]
-     * @param string $value [by example : id]
+     * @param array $fields [example : id,name]
+     * @param array|string $caption [example : name | concaténation si plusieurs éléments, séparés par le premier élément du tableau : [' : ', 'id', 'name'] Si le premier élément du tableau est 'OR', alors le caption prendra la première valeur non nulle du tableau à partir de l'index 1]
+     * @param string $value [example : id]
      * @param array|string $whereField
      * @param array|mixed $whereValue
      * @param string $order [ASC, DESC]
@@ -172,11 +191,20 @@ class Form
         $result = DBManager::getDatas($table, $fields, $whereField, $whereValue, $order, $orderBy);
         while ($data = $result->fetchObject()) {
             $caption_txt = '';
-            $caption_link= '';
             if (is_array($caption)) {
+                $caption_link = $caption[0];
                 foreach ($caption as $key => $val) {
-                    $caption_txt .= $caption_link.$data->$val;
-                    $caption_link = ' ';
+                    if ($key > 0) {
+                        if ($caption_link == 'OR') {
+                            if (!empty($data->$val)) {
+                                $caption_txt = $data->$val;
+                                break;
+                            }
+                        } else {
+                            $caption_txt .= $caption_link.$data->$val;
+                            $caption_link = ' ';
+                        }
+                    }
                 }
             } else {
                 $caption_txt = $data->$caption;

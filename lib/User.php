@@ -420,6 +420,15 @@ class User
     }
 
     /**
+     * @param int $user
+     * @return mixed
+     */
+    public function getImageListFromUser($user)
+    {
+        return DBManager::getData('image', ['id', 'link', 'title', 'status'], ['uploader', 'status'], [$user, '0'], 'title', 'ASC', '', 'CLASS');
+    }
+
+    /**
      * @param mixed $user
      * @param string $show
      * @param array|int $limit
@@ -603,7 +612,7 @@ class User
         if ($text) $return = '<hr>';
         $form = new Form();
         $return .= $form->CreateForm($action, 'POST', '')
-            ->AddSelect('event_id', 'Evénement', 'event', ['id', 'moment', 'title'], ['moment', 'title'], 'id', 'user_id', $_SESSION['id'], 'moment', 'DESC')
+            ->AddSelect('event_id', 'Evénement', 'event', ['id', 'moment', 'title'], [' : ', 'moment', 'title'], 'id', 'user_id', $_SESSION['id'], 'moment', 'DESC')
             ->AddInput('id', '', 'hidden', $id)
             ->EndForm('Modifier', 'primary');
         return $return;

@@ -124,7 +124,7 @@ class Image
     {
         $return = false;
         $move = false;
-        if (is_array($vars) && is_array($files)) {
+        if (is_array($vars) && is_array($files) && isset($vars['user_id'])) {
             if (is_dir('../img/users/' . $vars['user_id']) == false) {
                 mkdir('../img/users/' . $vars['user_id'], 0755);
             }

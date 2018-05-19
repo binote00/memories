@@ -170,10 +170,10 @@ class People
      * @param int $photo
      * @return bool|int
      */
-    public function addPeople($vars, $photo=0)
+    public function addPeople($vars, $photo = 0)
     {
         $return = false;
-        if(is_array($vars)){
+        if (is_array($vars)) {
             if (isset($vars['birth_date']) && !empty($vars['birth_date'])) {
                 $date = DateTime::createFromFormat('Y-m-d', $vars['birth_date']);
                 $birth_date = $date->format('Y-m-d');
@@ -182,10 +182,10 @@ class People
             }
             $dbh = DB::connect();
             $result = $dbh->prepare("INSERT INTO people (first_name, last_name, nickname, birth_date, email, photo, user_id) VALUES (:first_name, :last_name, :nickname, :birth_date, :email, :photo, :user_id)");
-            $result->bindParam(':first_name', $vars['first_name'],2);
-            $result->bindParam(':last_name', $vars['last_name'],2);
+            $result->bindParam(':first_name', $vars['first_name'], 2);
+            $result->bindParam(':last_name', $vars['last_name'], 2);
             $result->bindParam(':nickname', $vars['nickname'], 2);
-            $result->bindParam(':birth_date', $birth_date,2);
+            $result->bindParam(':birth_date', $birth_date, 2);
             $result->bindParam(':email', $vars['email'], 2);
             $result->bindParam(':photo', $photo, 1);
             $result->bindParam(':user_id', $vars['user_id'], 1);
@@ -203,16 +203,16 @@ class People
      * @param int $photo
      * @return bool|mixed
      */
-    public function modPeople($vars, $photo=0)
+    public function modPeople($vars, $photo = 0)
     {
         $return = false;
-        if(is_array($vars) && $vars['id']){
+        if (is_array($vars) && $vars['id']) {
             $dbh = DB::connect();
             $result = $dbh->prepare("UPDATE people SET first_name=:first_name, last_name=:last_name, nickname=:nickname, birth_date=:birth_date, email=:email, photo=:photo WHERE id=:id");
-            $result->bindParam(':first_name', $vars['first_name'],2);
-            $result->bindParam(':last_name', $vars['last_name'],2);
+            $result->bindParam(':first_name', $vars['first_name'], 2);
+            $result->bindParam(':last_name', $vars['last_name'], 2);
             $result->bindParam(':nickname', $vars['nickname'], 2);
-            $result->bindParam(':birth_date', $vars['birth_date'],2);
+            $result->bindParam(':birth_date', $vars['birth_date'], 2);
             $result->bindParam(':email', $vars['email'], 2);
             $result->bindParam(':photo', $photo, 1);
             $result->bindParam(':id', $vars['id'], 1);
@@ -232,7 +232,7 @@ class People
      */
     public function getPeople($id)
     {
-        if($id){
+        if ($id) {
             $result = DBManager::getData('people', ['id', 'first_name', 'last_name', 'nickname', 'email', 'photo'], 'id', $id);
             $this->setFirstName($result->first_name);
             $this->setLastName($result->last_name);
@@ -256,7 +256,7 @@ class People
             ->AddInput('birth_date', 'Date de Naissance', 'date', $this->birth_date)
             ->AddInput('email', 'Email', 'email', $this->email)
             ->AddInput('img', 'Photo', 'file', $this->photo)
-            ->AddInput('title', '', 'hidden', 'people-'.$this->id)
+            ->AddInput('title', '', 'hidden', 'people-' . $this->id)
             ->AddInput('user_id', '', 'hidden', $_SESSION['id'])
             ->EndForm('Valider');
     }
@@ -268,18 +268,19 @@ class People
     public function viewPeople($user)
     {
         $content = false;
-        if($user){
+        if ($user) {
             $results = DBManager::getData('people', ['id', 'first_name', 'last_name', 'nickname', 'birth_date', 'email', 'photo', 'status', 'user_id'], 'user_id', $user, 'id', 'ASC', 20, 'CLASS');
-            if($results){
-                $tbody='';
+            if ($results) {
+                $tbody = '';
                 $footer = '';
-                foreach($results as $data){
+                foreach ($results as $data) {
                     $photo = '';
-                    $title = $data->first_name.' '.$data->last_name;
-                    if($data->photo){
+                    $photo_modal = '';
+                    $title = $data->first_name . ' ' . $data->last_name;
+                    if ($data->photo) {
                         $photo_id = DBManager::getData('image', 'link', 'id', $data->photo);
-                        $photo = Output::ShowImage($photo_id[0][0], $title, 'users/'.$user.'/', 'img-people d-block mx-auto', 0);
-                        $photo_modal = Output::ShowImage($photo_id[0][0], $title, 'users/'.$user.'/', 'img-fluid mx-auto d-block', 50);
+                        $photo = Output::ShowImage($photo_id[0][0], $title, 'users/' . $user . '/', 'img-people d-block mx-auto', 0);
+                        $photo_modal = Output::ShowImage($photo_id[0][0], $title, 'users/' . $user . '/', 'img-fluid mx-auto d-block', 50);
                     }
                     $form = new Form();
                     $body = $photo_modal;
@@ -289,15 +290,16 @@ class People
                         ->AddInput('nickname', 'Surnom', 'text', $data->nickname)
                         ->AddInput('birth_date', 'Date de Naissance', 'date', $data->birth_date)
                         ->AddInput('email', 'Email', 'email', $data->email)
-                        ->AddInput('img', 'Photo', 'file', $data->photo)
+                        ->AddSelect('photolist', 'Photo depuis votre collection d\'Images', 'image', ['id', 'link', 'title', 'status'], ['OR', 'title', 'link'], 'id', ['uploader', 'status'], [$user, '0'], 'title', 'ASC')
+                        ->AddInput('img', 'Photo', 'file')
                         ->AddInput('photo', '', 'hidden', $data->photo)
                         ->AddInput('id', '', 'hidden', $data->id)
                         ->EndForm('Valider');
                     //$detail = Output::btnModalJS('modal-people', 'Détail', $title, addslashes($body), 'footer');
                     /*$detail = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-people"
                     data-body="<form method=\"POST\"><input type=\"text\" id=\"first_name\" value="Patrick"><input type=\"text\" id=\"user_id\" value="1"></form></button>';*/
-                    $footer .= Output::viewModal('ppl-modal-'.$data->id, $title, $body);
-                    $detail = Output::btnModal('ppl-modal-'.$data->id,'+');
+                    $footer .= Output::viewModal('ppl-modal-' . $data->id, $title, $body);
+                    $detail = Output::btnModal('ppl-modal-' . $data->id, '+');
                     if (isset($data->birth_date) && !empty($data->birth_date)) {
                         $date = DateTime::createFromFormat('Y-m-d', $data->birth_date);
                         $birth_date = $date->format('d-m-Y');
@@ -305,9 +307,9 @@ class People
                         $birth_date = '';
                     }
 
-                    $tbody.='<tr><td>'.$detail.'</td><td>'.$data->first_name.'</td><td>'.$data->last_name.'</td><td>'.$data->nickname.'</td><td>'.$birth_date.'</td><td><a href="mailto:'.$data->email.'">'.$data->email.'</a></td><td>'.$photo.'</td></tr>';
+                    $tbody .= '<tr><td>' . $detail . '</td><td>' . $data->first_name . '</td><td>' . $data->last_name . '</td><td>' . $data->nickname . '</td><td>' . $birth_date . '</td><td><a href="mailto:' . $data->email . '">' . $data->email . '</a></td><td>' . $photo . '</td></tr>';
                 }
-                $content = Output::TableHead(['Détail', 'Prénom', 'Nom', 'Surnom', 'Naissance', 'Email', 'Photo'], $tbody, 'Personnes <button type="button" class="btn btn-primary" data-toggle="collapse" href="#f-people-add-collapse">+</button>', 'people').$footer; //.Output::viewModalJS('modal-people', 'lg');
+                $content = Output::TableHead(['Détail', 'Prénom', 'Nom', 'Surnom', 'Naissance', 'Email', 'Photo'], $tbody, 'Personnes <button type="button" class="btn btn-primary" data-toggle="collapse" href="#f-people-add-collapse">+</button>', 'people') . $footer; //.Output::viewModalJS('modal-people', 'lg');
             }
         }
         return $content;
