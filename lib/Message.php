@@ -223,6 +223,16 @@ class Message
 
     /**
      * @param int $id
+     * @param int $emotion
+     * @return mixed
+     */
+    public function updateMessageEmotion($id, $emotion)
+    {
+        return DBManager::setData('message', 'emotion', $emotion,'id', $id);
+    }
+
+    /**
+     * @param int $id
      * @param int $eventid
      * @return mixed
      */

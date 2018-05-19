@@ -282,8 +282,20 @@ class People
                         $photo = Output::ShowImage($photo_id[0][0], $title, 'users/' . $user . '/', 'img-people d-block mx-auto', 0);
                         $photo_modal = Output::ShowImage($photo_id[0][0], $title, 'users/' . $user . '/', 'img-fluid mx-auto d-block', 50);
                     }
+//                    require_once __DIR__.'/../form/f_people_mod.php';
+                    $form = new Form();
                     $body = $photo_modal;
-                    require_once __DIR__.'../form/f_people_mod.php';
+                    $body .= $form->CreateForm('./app/a_people_mod.php', 'POST', 'Profil de la personne', true)
+                        ->AddInput('first_name', 'Prénom', 'text', $data->first_name, $data->first_name, true)
+                        ->AddInput('last_name', 'Nom', 'text', $data->last_name, $data->last_name, true)
+                        ->AddInput('nickname', 'Surnom', 'text', $data->nickname)
+                        ->AddInput('birth_date', 'Date de Naissance', 'date', $data->birth_date)
+                        ->AddInput('email', 'Email', 'email', $data->email)
+                        ->AddSelect('photolist', 'Photo depuis votre collection d\'Images', 'image', ['id', 'link', 'title', 'status'], ['OR', 'title', 'link'], 'id', ['uploader', 'status'], [$user, '0'], 'title', 'ASC')
+                        ->AddInput('img', 'Photo importée depuis votre ordinateur', 'file')
+                        ->AddInput('photo', '', 'hidden', $data->photo)
+                        ->AddInput('id', '', 'hidden', $data->id)
+                        ->EndForm('Valider');
                     //$detail = Output::btnModalJS('modal-people', 'Détail', $title, addslashes($body), 'footer');
                     /*$detail = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-people"
                     data-body="<form method=\"POST\"><input type=\"text\" id=\"first_name\" value="Patrick"><input type=\"text\" id=\"user_id\" value="1"></form></button>';*/
