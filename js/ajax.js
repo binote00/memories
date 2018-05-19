@@ -172,9 +172,9 @@ $(document).ready(function($)
 
     $('#img-prec').on('click', function(){
         $.ajax({url: '../memories/app/a_move_offset.php?move=-1',
-            success: function()
+            success: function(data)
             {
-                console.log('offset');
+                console.log('offset : ' + data);
             },
             error: function (xhr,ajaxOptions,thrownError) {
                 console.log(xhr.status + " "+ thrownError);
@@ -183,9 +183,9 @@ $(document).ready(function($)
 
     $('#img-next').on('click', function(){
         $.ajax({url: '../memories/app/a_move_offset.php?move=1',
-            success: function()
+            success: function(data)
             {
-                console.log('offset');
+                console.log('offset : ' + data);
             },
             error: function (xhr,ajaxOptions,thrownError) {
                 console.log(xhr.status + " "+ thrownError);

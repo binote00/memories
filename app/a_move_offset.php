@@ -8,9 +8,10 @@
 
 require_once '../inc/actions.inc.php';
 
-if(isset($_GET['move'])){
+if (isset($_GET['move'])) {
     $_SESSION['offset'] += intval($_GET['move']);
-    if(intval($_SESSION['offset'] <0)){
-        $_SESSION['offset'] = 0;
+    if (intval($_SESSION['offset'] < 1)) {
+        $_SESSION['offset'] = 1;
     }
+    return $_SESSION['offset'];
 }
