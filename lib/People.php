@@ -283,7 +283,7 @@ class People
                         $photo_modal = Output::ShowImage($photo_id[0][0], $title, 'users/' . $user . '/', 'img-fluid mx-auto d-block', 50);
                     }
                     $body = $photo_modal;
-                    require_once '../form/f_people_mod.php';
+                    require_once __DIR__.'../form/f_people_mod.php';
                     //$detail = Output::btnModalJS('modal-people', 'Détail', $title, addslashes($body), 'footer');
                     /*$detail = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-people"
                     data-body="<form method=\"POST\"><input type=\"text\" id=\"first_name\" value="Patrick"><input type=\"text\" id=\"user_id\" value="1"></form></button>';*/
