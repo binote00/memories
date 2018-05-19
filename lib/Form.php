@@ -192,17 +192,17 @@ class Form
         while ($data = $result->fetchObject()) {
             $caption_txt = '';
             if (is_array($caption)) {
-                $caption_link = $caption[0];
+                $caption_link = '';
                 foreach ($caption as $key => $val) {
                     if ($key > 0) {
-                        if ($caption_link == 'OR') {
+                        if ($caption[0] == 'OR') {
                             if (!empty($data->$val)) {
                                 $caption_txt = $data->$val;
                                 break;
                             }
                         } else {
                             $caption_txt .= $caption_link.$data->$val;
-                            $caption_link = ' ';
+                            $caption_link = $caption[0];
                         }
                     }
                 }

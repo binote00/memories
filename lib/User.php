@@ -363,19 +363,34 @@ class User
                 $tbody = '';
                 $dbh = DB::connect();
                 foreach ($results as $data) {
-                    $text = $this->listTagsFromElement(5, $data, $dbh);
+                    $tag_txt = $this->listTagsFromElement(5, $data, $dbh);
+                    if (!$tag_txt) {
+                        $tag_txt = '<i>&lt;Aucun Tag&gt;</i>';
+                    }
                     if (!$event_type) {
                         $event_type_q = DBManager::getData('events_type', 'event_name', 'id', $data->getEventType(), '', '', '', 'OBJECT');
                         $event_type_txt = $event_type_q->event_name;
                     }
                     $emotion_q = DBManager::getData('emotion', 'em_name', 'id', $data->getEmotion(), '', '', '', 'OBJECT');
                     $emotion_txt = $emotion_q->em_name;
-                    $text .= $this->AddTagOnElement($user, $data->getId(), './app/a_event_tag_add.php', 0, $text);
+                    if (!$emotion_txt) {
+                        $emotion_txt = '<i>&lt;Aucune Emotion&gt;</i>';
+                    }
+                    $title_txt = $data->getTitle();
+                    if (!$title_txt) {
+                        $title_txt = '<i>&lt;Titre manquant&gt;</i>';
+                    }
+                    $note_txt = $data->getNote();
+                    if (!$note_txt) {
+                        $note_txt = '<i>&lt;Note manquante&gt;</i>';
+                    }
+                    $tag_txt .= $this->AddTagOnElement($user, $data->getId(), './app/a_event_tag_add.php', 0, $tag_txt);
                     $tbody .= '<tr><td class="event-time">' . $data->getMoment() . Event::updateEventDate($data->getId(), './app/a_event_date.php', $data->getMoment()) . '</td>
-                        <td>' . $data->getTitle() . '</td>
+                        <td>' . $title_txt . Event::updateEventTitle($data->getId(), './app/a_event_title.php') . '</td>
                         <td>' . $event_type_txt . $this->AddCatOnElement($data->getId(), './app/a_event_type.php', $event_type_txt) . '</td>
-                        <td>' . $emotion_txt . $this->AddEmotionOnElement($data->getId(), './app/a_event_emo.php', $emotion_txt) . '</td>
-                        <td>' . $data->getNote() . $this->AddNoteOnElement($data->getId(), './app/a_event_note.php', $data->getNote()) . '</td><td>' . $text . '</td></tr>';
+                        <td>' . $emotion_txt . $this->AddEmotionOnElement($data->getId(), './app/a_event_emo.php') . '</td>
+                        <td>' . $note_txt . $this->AddNoteOnElement($data->getId(), './app/a_event_note.php') . '</td>
+                        <td>' . $tag_txt . '</td></tr>';
                 }
                 $content = Output::TableHead(['Date', 'Titre', 'Catégorie', 'Emotion', 'Note', 'Tags'], $tbody, 'Evènements <button type="button" class="btn btn-primary" data-toggle="collapse" href="#f-event-add-collapse">+</button>');
             }
@@ -401,16 +416,26 @@ class User
                     if ($data->getEmotion()) {
                         $emotion_q = DBManager::getData('emotion', 'em_name', 'id', $data->getEmotion(), '', '', '', 'OBJECT');
                         $emotion_txt = $emotion_q->em_name;
+                    } else {
+                        $emotion_txt = '<i>&lt;Aucune Emotion&gt;</i>';
                     }
-                    $text = $this->listTagsFromElement(1, $data, $dbh);
-                    $text .= $this->AddTagOnElement($user, $data->getId(), './app/a_message_tag_add.php', $tags, $text);
+                    $event_txt = $data->getMessageEvent($data->id);
+                    $note_txt = $data->getNote();
+                    if (!$note_txt) {
+                        $note_txt = '<i>&lt;Note manquante&gt;</i>';
+                    }
+                    $tag_txt = $this->listTagsFromElement(1, $data, $dbh);
+                    if (!$tag_txt) {
+                        $tag_txt = '<i>&lt;Aucun Tag&gt;</i>';
+                    }
+                    $tag_txt .= $this->AddTagOnElement($user, $data->getId(), './app/a_message_tag_add.php', $tags, $tag_txt);
                     $tbody .= '<tr><td>' . $data->getMoment() . '<br><span class="text-hide">' . $data->getId() . '</span>
                         <button type="button" class="btn-modif btn btn-sm btn-danger">Modifier</button>
                         </td>
-                        <td><div class="ck-inline" contenteditable="true">' . $data->getMessage() . '</div></td><td>' . $text . '</td>
+                        <td><div class="ck-inline" contenteditable="true">' . $data->getMessage() . '</div></td><td>' . $tag_txt . '</td>
                         <td>' . $emotion_txt . $this->AddEmotionOnElement($data->getId(), './app/a_message_emo.php') . '</td>
-                        <td>' . $data->getNote() . $this->AddNoteOnElement($data->getId(), './app/a_message_note.php') . '</td>
-                        <td>texte à ajouter' . $this->AddEventOnElement($data->getId(), './app/a_message_event.php') . '</td>
+                        <td>' . $note_txt . $this->AddNoteOnElement($data->getId(), './app/a_message_note.php') . '</td>
+                        <td>' . $event_txt . $this->AddEventOnElement($data->getId(), './app/a_message_event.php') . '</td>
                         </tr>';
                 }
                 $content = Output::TableHead(['Date', 'Message', 'Tags', 'Emotion', 'Note', 'Event'], $tbody, 'Messages <button type="button" class="btn btn-primary" data-toggle="collapse" href="#f-message-add-collapse">+</button>');
@@ -529,12 +554,11 @@ class User
      */
     public function AddTagOnElement($user, $element_id, $action, $tags = 0, $text = '')
     {
-        $return = false;
         if (!$tags) {
             $tags = DBManager::getData('tag', 'id', 'user_id', $user, '', '', '', 'COUNT');
         }
         if ($tags) {
-            if ($text) $return = '<hr>';
+            $return = '<hr>';
             $form = new Form();
             $return .= $form->CreateForm($action, 'POST', '')
                 ->AddSelect('tag_id', '', 'tag', ['id', 'tag_name'], 'tag_name', 'id', 'user_id', $user, 'tag_name', 'ASC')
@@ -549,13 +573,11 @@ class User
     /**
      * @param int $id
      * @param string $action
-     * @param string $text
      * @return bool|string
      */
-    private function AddEmotionOnElement($id, $action, $text = '')
+    private function AddEmotionOnElement($id, $action)
     {
-        $return = false;
-        if ($text) $return = '<hr>';
+        $return = '<hr>';
         $form = new Form();
         $return .= $form->CreateForm($action, 'POST', '')
             ->AddSelect('emotion', '', 'emotion', ['id', 'em_name'], 'em_name', 'id', '', '', 'em_name', 'ASC')
@@ -585,13 +607,11 @@ class User
     /**
      * @param int $id
      * @param string $action
-     * @param string $text
      * @return bool|string
      */
-    private function AddNoteOnElement($id, $action, $text = '')
+    private function AddNoteOnElement($id, $action)
     {
-        $return = false;
-        if ($text) $return = '<hr>';
+        $return = '<hr>';
         $form = new Form();
         $return .= $form->CreateForm($action, 'POST', '')
             ->AddSelectNumber('note', '', 1, 10)
@@ -603,16 +623,14 @@ class User
     /**
      * @param int $id
      * @param string $action
-     * @param string $text
      * @return bool|string
      */
-    private function AddEventOnElement($id, $action, $text = '')
+    private function AddEventOnElement($id, $action)
     {
-        $return = false;
-        if ($text) $return = '<hr>';
+        $return = '<hr>';
         $form = new Form();
         $return .= $form->CreateForm($action, 'POST', '')
-            ->AddSelect('event_id', 'Evénement', 'event', ['id', 'moment', 'title'], [' : ', 'moment', 'title'], 'id', 'user_id', $_SESSION['id'], 'moment', 'DESC')
+            ->AddSelect('event_id', '', 'event', ['id', DBManager::SQLDateFormat('moment', 'BIRTH'), 'title'], [' : ', 'moment', 'title'], 'id', 'user_id', $_SESSION['id'], 'title', 'DESC')
             ->AddInput('id', '', 'hidden', $id)
             ->EndForm('Modifier', 'primary');
         return $return;

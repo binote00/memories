@@ -139,8 +139,11 @@ class Event
     public function addEvent($vars)
     {
         $return = false;
-        if(is_array($vars)){
+        if (is_array($vars)) {
             $return = DBManager::setData('event', ['user_id', 'event_type', 'title', 'moment', 'emotion', 'note'], [$vars['user_id'], $vars['event_type'], $vars['title'], $vars['moment'], $vars['emotion'], $vars['note']]);
+        }
+        if ($return && $vars['tag']) {
+            $return = DBManager::setData('tag_link', ['tag_id', 'data_type', 'data_id'], [$vars['tag'], DATA_TYPE_EVENT, $return]);
         }
         return $return;
     }
@@ -184,6 +187,22 @@ class Event
         $form = new Form();
         $return .= $form->CreateForm($action, 'POST', '')
             ->AddInput('moment', '', 'date', '', '', '', 'required')
+            ->AddInput('id', '', 'hidden', $id)
+            ->EndForm('Modifier', 'primary');
+        return $return;
+    }
+
+    /**
+     * @param int $id
+     * @param string $action
+     * @return bool|string
+     */
+    public static function updateEventTitle($id, $action)
+    {
+        $return = '<hr>';
+        $form = new Form();
+        $return .= $form->CreateForm($action, 'POST', '')
+            ->AddInput('title', '', 'text', '', '', '', 'required')
             ->AddInput('id', '', 'hidden', $id)
             ->EndForm('Modifier', 'primary');
         return $return;

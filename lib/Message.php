@@ -12,7 +12,7 @@
 class Message
 {
 
-    private $id;
+    public $id;
     private $user_id;
     private $event_type;
     private $moment;
@@ -235,5 +235,23 @@ class Message
         return $return;
     }
 
-
+    /**
+     * @param int $id
+     * @return string
+     */
+    public function getMessageEvent($id)
+    {
+        $dbh = DB::connect();
+        $resulttxt = $dbh->prepare("SELECT e.title 
+          FROM event AS e, event_link AS el
+          WHERE e.id=el.event_id AND el.data_type=1 AND el.data_id=:message_id");
+        $resulttxt->bindParam('message_id', $id, 1);
+        $resulttxt->execute();
+        $data_txt = $resulttxt->fetchObject();
+        if (!$data_txt->title) {
+            return '<i>&lt;Aucun Evénement&gt;</i>';
+        } else {
+            return $data_txt->title;
+        }
+    }
 }
