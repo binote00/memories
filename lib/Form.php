@@ -254,6 +254,52 @@ class Form
     }
 
     /**
+     * Création de formulaire HTML générique avec classes Bootstrap : Ajout d'un select depuis un array
+     *
+     * @param string $name
+     * @param string $label
+     * @param array $array
+     * @param mixed $class
+     * @param mixed $attr
+     * @param bool $add_btn
+     * @param bool $default
+     * @return $this
+     */
+    public function AddSelectArray($name, $label, $array, $class = false, $attr =false, $add_btn = false, $default = false)
+    {
+        if ($default) {
+            $default_txt = '';
+        } else {
+            $default_txt = '<option value="">Choisissez...</option>';
+        }
+        $options = false;
+        $btn_add = '';
+        $class_final = '';
+        foreach ($array as $key => $value) {
+            $options .= '<option value="' . $key . '">' . $value . '</option>';
+        }
+        if ($add_btn) {
+            $btn_add = Output::btnModal('modal-add-btn', '+', 'primary');
+        }
+        if ($class) {
+            if (is_array($class)) {
+                foreach ($class as $val) {
+                    $class_final .= ' '.$val;
+                }
+            } else {
+                $class_final = $class;
+            }
+        }
+        if ($attr) {
+            $attr = ' '.$attr;
+        }
+        if ($options) {
+            $this->output .= '<label for="' . $name . '">' . $label . '</label>' . $btn_add . '<select name="' . $name . '" id="' . $this->getId() . '-' . $name . '" class="form-control' . $class_final . '"'. $attr .'>' . $default_txt . $options . '</select>';
+        }
+        return $this;
+    }
+
+    /**
      * Création de formulaire HTML générique avec classes Bootstrap : Ajout d'un select numérique
      *
      * @param string $name

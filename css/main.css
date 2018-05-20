@@ -98,7 +98,7 @@ a.popup-light span{
 }
 
 /* override bootstrap */
-.bg-dark {
+.bg-navbar {
     background-color: #003440 !important;
 }
 .thead-inverse th {
