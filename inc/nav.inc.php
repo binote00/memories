@@ -27,6 +27,13 @@
                     <a class="dropdown-item text-capitalize" href="index.php?view=message"><?= TXT_MESSAGE ?></a>
                     <a class="dropdown-item text-capitalize" href="index.php?view=people"><?= TXT_PEOPLE ?></a>
                     <a class="dropdown-item text-capitalize" href="index.php?view=tag"><?= TXT_TAG ?></a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="nav-drop-tools" data-toggle="dropdown">
+                    Outils
+                </a>
+                <div class="dropdown-menu">
                     <a class="dropdown-item text-capitalize" href="index.php?view=timeline"><?= TXT_TIMELINE ?></a>
                 </div>
             </li>
