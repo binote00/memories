@@ -28,6 +28,7 @@ define('TXT_PWD_NEW_SEND_DONE', 'Nouveau mot de passe envoyé!');
 define('TXT_PWD_NEW_SEND_FAIL', 'La génération d\'un nouveau mot de passe a échoué!');
 define('TXT_PASSWORD_CHECK', 'Le mot de passe doit contenir au moins 8 charactères et au moins une lettre majuscule, une lettre minuscule, un chiffre et un charactère spécial');
 define('TXT_UPLOAD_ERROR', 'Taille maximale du fichier dépassée!');
+define('TXT_ACCOUNT_DISABLE', 'Désactiver le compte');
 
 define('TXT_OPTIONS', 'paramètres');
 define('TXT_OPTIONS_MOD_DONE', TXT_OPTIONS . ' modifiés avec succès!');
