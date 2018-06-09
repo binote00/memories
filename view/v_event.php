@@ -9,9 +9,9 @@
 if(!isset($_SESSION['id'])){
     header('Location: index.php');
 }else{
-    $content .= Output::ShowToDo([
-        'Ajouter un lieu via API Google',
-    ], 'warning', true);
+//    $content .= Output::ShowToDo([
+//        'Ajouter un lieu via API Google',
+//    ], 'warning', true);
     $user = new User();
     $events = $user->getEventsFromUser($_SESSION['id']);
     if($events){
