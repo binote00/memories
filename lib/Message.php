@@ -239,7 +239,9 @@ class Message
     public function updateMessageEvent($id, $eventid)
     {
         $return = false;
-        if ($id && $eventid) {
+        if (DBManager::getData('event_link', 'id', ['data_type', 'data_id'], [1, $id], '', 'DESC', '', 'COUNT') > 0) {
+            $return = DBManager::setData('event_link','event_id', $eventid, ['data_type', 'data_id'], [1, $id]);
+        } elseif ($id && $eventid) {
             $return = DBManager::setData('event_link', ['event_id', 'data_type', 'data_id'], [$eventid, 1, $id]);
         }
         return $return;
