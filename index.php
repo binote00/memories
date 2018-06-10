@@ -38,7 +38,15 @@ require_once 'inc/index.inc.php';
 </header>
 <div class="container header-wrap">
     <span class="text-hide" id="sess-id"><?php if (isset($_SESSION['id'])) echo $_SESSION['id']; ?></span>
-    <?php if ($view) require_once 'view/v_' . $view . '.php'; ?>
+    <?php
+    $file = 'view/v_' . $view . '.php';
+    if (file_exists($file)) {
+        require_once 'view/v_' . $view . '.php';
+    } else {
+        header('Location : index.php');
+        die;
+    }
+    ?>
     <div id="alerts"><?= $alerts ?></div>
     <div id="content"><?= $content ?></div>
 </div>
