@@ -12,8 +12,8 @@ if($_SESSION){
         $user = new User();
         $user->getUser($_SESSION['id']);
 
-        $content = $form->CreateForm('./app/a_images_add.php','POST', 'Ajouter des images', true)
-            ->AddInput('img[]', 'Images', 'file', '', '', '', 'required multiple')
+        $content = $form->CreateForm('./app/a_images_add.php','POST', 'Images', true)
+            ->AddInput('img[]', 'Ajouter', 'file', '', '', '', 'required multiple')
             ->AddInput('user_id', '', 'hidden', $_SESSION['id'])
             ->EndForm('Valider');
     }else{

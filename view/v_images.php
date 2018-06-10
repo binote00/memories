@@ -62,7 +62,8 @@ if (!isset($_SESSION['id'])) {
     } else {
         $img_del = '<div><input type="checkbox" id="chk-img-del" name="chk-img-del"> Afficher les images supprimées</div>';
     }
-    $img_head = '<div class="row"><div class="col-6"><h2>Vos Images [' . $offset . '/' . $offset_max . ']</h2></div><div class="col-6">' . $img_del . '</div></div>';
+    $img_head = '<div class="row"><div class="col-6"></div><div class="col-6">' . $img_del . '</div></div>';
+    $img_paginate = '<h2>[' . $offset . '/' . $offset_max . ']</h2>';
     if ($offset > 1) {
         $img_btn .= '<a href="./index.php?view=' . $redirect . '" class="btn btn-primary" id="img-prec">' . TXT_PREV . '</a>';
     }
@@ -71,7 +72,7 @@ if (!isset($_SESSION['id'])) {
     }
     $images = $user->getImagesFromUser($_SESSION['id'], 'card', $limit, $chk_img_del);
     if ($images) {
-        $content .= $img_head . $img_btn . $images . $img_btn;
+        $content .= $img_head . $img_btn . $images . $img_paginate. $img_btn;
     }
 
     //Modal Tag

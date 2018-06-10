@@ -40,8 +40,10 @@
             <?= $nav_extends ?>
         </ul>
         <form class="form-inline mt-2 mt-md-0" action="index.php?view=search" method="post">
-            <input name="text" class="form-control mr-sm-2" type="text" placeholder="Recherche par #tag" id="nav-search"
+            <div class="bl-memories">
+                <input name="text" class="form-control mr-sm-2" type="text" placeholder="Recherche par #tag" id="nav-search"
                    list="search-tags" aria-label="Recherche">
+            </div>
             <datalist id="search-tags"></datalist>
             <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><?= TXT_SEARCH ?></button>
         </form>

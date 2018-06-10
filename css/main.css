@@ -23,7 +23,7 @@ label {
 }
 
 img {
-    border-radius: 10px;
+    border-radius: 2px;
 }
 
 .header-wrap{
@@ -46,14 +46,33 @@ hr .style {
 
 .img-people {
     max-height: 100px;
+    border-radius: 10px;
+}
+
+.img-card {
+    border-radius: 10px;
 }
 
 .card{
     margin-top: 10px;
+    border-radius: 10px;
+}
+
+.bl-memories {
+    border-left: 2px solid #308296;
+    padding-left: 10px;
 }
 
 .bg-del{
     background-color: #BDBDBD;
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    background-color: #003440;
+    border-radius: 50%;
+    display: inline-block;
 }
 
 a.popup{
@@ -66,10 +85,10 @@ a.popup span
     margin-top:25px;
     margin-left:-50px;
     color:#fff;
-    background:rgba(65,113,172,.9);
+    background:rgba(48,130,150,.9);
     padding:15px;
     border-radius:3px;
-    box-shadow:0 0 2px rgba(65,113,172,.5);
+    box-shadow:0 0 2px rgba(1,83,102,.5);
     opacity:0;
     transform:scale(0) rotate(-12deg);
     transition:all .25s;
@@ -97,6 +116,61 @@ a.popup-light span{
     width: 100%;
 }
 
+/* table-rounded */
+.table-rounded thead th:first-child {
+    border-radius: 10px 0 0 0;
+}
+.table-rounded thead th:last-child {
+    border-radius: 0 10px 0 0;
+}
+.table-rounded tbody tr:last-child td:first-child {
+    border-radius: 0 0 0 10px;
+}
+.table-rounded tbody tr:last-child td:last-child {
+    border-radius: 0 0 10px 0;
+}
+
+/* callout */
+.bd-callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #eee;
+    border-left-width: .25rem;
+    border-radius: .25rem
+}
+.bd-callout h4 {
+    margin-top: 0;
+    margin-bottom: .25rem
+}
+.bd-callout p:last-child {
+    margin-bottom: 0
+}
+.bd-callout code {
+    border-radius: .25rem
+}
+.bd-callout+.bd-callout {
+    margin-top: -.25rem
+}
+.bd-callout-info {
+    border-left-color: #5bc0de
+}
+.bd-callout-info h4 {
+    color: #5bc0de
+}
+.bd-callout-warning {
+    border-left-color: #f0ad4e
+}
+.bd-callout-warning h4 {
+    color: #f0ad4e
+}
+.bd-callout-danger {
+    border-left-color: #d9534f
+}
+.bd-callout-danger h4 {
+    color: #d9534f
+}
+
 /* override bootstrap */
 .bg-navbar {
     background-color: #003440 !important;
@@ -115,6 +189,10 @@ a.popup-light span{
 }
 .modal-hg {
     max-height: 100%;
+}
+.page-item.active .page-link {
+    background-color: #308296;
+    border-color: #308296;
 }
 
 @media (min-width: 1199px){

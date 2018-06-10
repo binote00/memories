@@ -151,7 +151,7 @@ Trait Output
         } else {
             $tbody .= '<tr><td>' . $data . '</td></tr>';
         }
-        return '<h2>' . $title . '</h2><table class="table table-responsive table-striped"><thead class="thead-inverse"><tr>' . $thead . '</tr></thead><tbody>' . $tbody . '</tbody></table>';
+        return '<h2>' . $title . '</h2><table class="table table-responsive table-rounded table-striped"><thead class="thead-inverse"><tr>' . $thead . '</tr></thead><tbody>' . $tbody . '</tbody></table>';
     }
 
     /**
@@ -176,7 +176,7 @@ Trait Output
         if ($class) {
             $class = ' '.$class;
         }
-        return '<h2>' . $title . '</h2><table class="table table-responsive table-striped' . $class . '"><thead class="thead-inverse"><tr>' . $thead . '</tr></thead><tbody>' . $tbody . '</tbody></table>';
+        return '<h2>' . $title . '</h2><table class="table table-responsive table-rounded table-striped' . $class . '"><thead class="thead-inverse"><tr>' . $thead . '</tr></thead><tbody>' . $tbody . '</tbody></table>';
     }
 
     /**
