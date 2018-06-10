@@ -253,6 +253,8 @@ Trait Output
     {
         if ($modal_size == 'lg') {
             $modal_size = ' modal-lg';
+        } elseif ($modal_size == 'hg') {
+            $modal_size = ' modal-hg';
         }
         return '<div class="modal fade" tabindex="-1" id="' . $modal_id . '">
           <div class="modal-dialog' . $modal_size . '">
@@ -306,6 +308,7 @@ Trait Output
                         ->EndForm('fa fa-undo fa-2x', 'primary');
                 $img_popup = 'Cette image a été supprimée. Si vous voulez la récupérer, veuillez cliquer sur <i class="fa fa-undo"></i>';
                 $bg_class = ' bg-del';
+                $img_class = 'lg';
             } else {
                 $form_txt = $form->CreateForm($data['mod_script'], 'POST', '')
                     ->AddInput('title', $data['title_label'], 'text', $data['title'])
@@ -319,21 +322,31 @@ Trait Output
                         ->AddInput('id', '', 'hidden', $data['id'])
                         ->AddInput('user_id', '', 'hidden', $data['user_id'])
                         ->EndForm('fa fa-trash-o fa-2x', 'danger');
-                list($width, $height) = getimagesize("img/" . $data['img_link']);
+                list ($width, $height) = getimagesize("img/" . $data['img_link']);
                 if ($width > $height) {
-                    $img_popup = '<img src="img/' . $data['img_link'] . '" class="mx-auto d-block img-popup-l">';
+//                    $img_popup = '<img src="img/' . $data['img_link'] . '" class="mx-auto d-block img-popup-l">';
+                    $img_class = 'lg';
                 } else {
-                    $img_popup = '<img src="img/' . $data['img_link'] . '" class="img-fluid mx-auto d-block img-popup-h">';
+//                    $img_popup = '<img src="img/' . $data['img_link'] . '" class="img-fluid mx-auto d-block img-popup-h">';
+                    $img_class = 'hg';
                 }
                 $btn_edit = '<div class="col-6 d-flex justify-content-center align-items-center"><i class="fa fa-pencil-square-o fa-2x text-primary" data-toggle="collapse" data-target="#f-image-mod-collapse-' . $data['id'] . '"></i></div>';
             }
+//            $top_card = '
+//                    <div class="' . $bg_class . '" style="padding: 5px;">
+//                        <a href="#" class="popup-light">
+//                            <img src="img/' . $data['img_link'] . '" alt="' . $data['title'] . '" class="img-fluid mx-auto d-block img-card" style="max-height: 200px;">
+//                            <span>' . $img_popup . '</span>
+//                        </a>
+//                    </div>';
             $top_card = '
                     <div class="' . $bg_class . '" style="padding: 5px;">
-                        <a href="#" class="popup-light">
+                        <a href="#" data-toggle="modal" data-target="#img-modal-' . $data['id'] . '">
                             <img src="img/' . $data['img_link'] . '" alt="' . $data['title'] . '" class="img-fluid mx-auto d-block img-card" style="max-height: 200px;">
-                            <span>' . $img_popup . '</span>
-                        </a>          
+                        </a>
                     </div>';
+            $modal_txt = Output::viewModal('img-modal-'.$data['id'], $data['title'], Output::ShowImage($data['img_link'], $data['title']), '', $img_class);
+
         }
 
         return '<div class="card col-xs-12 col-md-6 col-lg-4">
@@ -349,7 +362,7 @@ Trait Output
                     <div class="card-footer collapse" id="f-image-mod-collapse-' . $data['id'] . '">
                     ' . $form_txt . '
                     </div>
-                </div>';
+                </div>'.$modal_txt;
     }
 
     /**
@@ -373,7 +386,7 @@ Trait Output
             $msg.=''.$data_msg->id;
         }*/
         $dbh = DB::connect();
-        $resulttag = $dbh->query("SELECT tl.id,tag_name FROM tag AS t,tag_link AS tl WHERE t.id=tl.tag_id AND tl.data_type=5 AND tl.data_id=".$data->getId());
+        $resulttag = $dbh->query("SELECT tl.id,tag_name FROM tag AS t,tag_link AS tl WHERE t.id=tl.tag_id AND tl.data_type=5 AND tl.data_id=" . $data->getId());
         while ($data_tag = $resulttag->fetchObject()) {
             $tags_txt .= '#'.$data_tag->tag_name . ' ';
         }
