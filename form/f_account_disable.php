@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
+ *
  * User: Binote
  * Date: 13-05-18
  * Time: 18:32

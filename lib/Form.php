@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
+ *
  * User: Binote
  * Date: 09-11-17
  * Time: 10:25
@@ -103,7 +103,7 @@ class Form
     {
         $return = false;
         if ($type != 'hidden') {
-            $return = '<label for="' . $name . '">' . $label . '</label>';
+            $return = '<label for="' . $this->getId() . '-' . $name . '">' . $label . '</label>';
         }
         if ($value && $type != 'password') {
             $value = ' value="' . $value . '"';

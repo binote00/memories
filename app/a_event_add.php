@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
+ *
  * User: JF
  * Date: 12-01-18
  * Time: 11:58

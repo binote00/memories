@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
+ *
  * User: Binote
  * Date: 06-11-17
  * Time: 08:38
@@ -8,17 +8,17 @@
 ?>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-navbar">
     <a class="navbar-brand" href="index.php">Memories</a>
-    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbar-memories"
+            aria-controls="navbar-memories" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <div class="collapse navbar-collapse" id="navbar-memories">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link" href="index.php?view=profile"><?= TXT_PROFILE ?></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="nav-drop-tools" data-toggle="dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="nav-drop-diary" data-toggle="dropdown">
                 Journal
                 </a>
                 <div class="dropdown-menu">
