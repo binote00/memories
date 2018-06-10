@@ -8,11 +8,11 @@
 
 define('TXT_WELCOME', 'Bienvenue');
 define('TXT_ERROR', 'Erreur');
-define('TXT_INTRO', 'Memories est un espace personnel privé où vous pourrez :');
+define('TXT_INTRO', 'Memories est un espace personnel privé où vous pourrez');
 define('TXT_INTRO_NBR', 4);
-$txt_intro_1 = 'Laisser une trace de votre vécu en enregistrant des évènements, des messages, des images et des personnes.';
+$txt_intro_1 = 'Laisser une trace de votre vécu en enregistrant des évènements, des messages, des images et des personnes';
 $txt_intro_2 = 'Lier ces différents contenus';
-$txt_intro_3 = 'Effectuer une recherche par mot-clés (tags)';
+$txt_intro_3 = 'Effectuer une recherche par mots-clés (tags)';
 $txt_intro_4 = 'Visualiser les événements sur une ligne du temps';
 
 define('TXT_SIGNIN', 'S\'inscrire');

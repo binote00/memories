@@ -8,7 +8,7 @@
 
 $form = new Form();
 
-$content = $form->CreateForm('./app/a_login.php','POST', 'Identification')
+$content .= $form->CreateForm('./app/a_login.php','POST', 'Se connecter')
     ->AddInput('login', 'Identifiant', 'text', '', '', '', 'required')
     ->AddInput('pwd', 'Mot de passe', 'password', '', '', '', 'required')
     ->EndForm('Valider');
