@@ -65,7 +65,7 @@ class Form
             $enc_txt = ' enctype="multipart/form-data"';
         }
         if ($title) {
-            $title = '<h2>' . $title . '</h2>';
+            $title = '<h2 class="h2-bl">' . $title . '</h2>';
         }
         $this->output = $title . '<form action="' . $action . '" method="' . $method . '"' . $enc_txt . '>';
         return $this;

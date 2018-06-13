@@ -176,7 +176,7 @@ Trait Output
         if ($class) {
             $class = ' '.$class;
         }
-        return '<h2>' . $title . '</h2><table class="table table-responsive table-rounded table-striped' . $class . '"><thead class="thead-inverse"><tr>' . $thead . '</tr></thead><tbody>' . $tbody . '</tbody></table>';
+        return '<h2 class="h2-bl">' . $title . '</h2><table class="table table-responsive table-rounded table-striped' . $class . '"><thead class="thead-inverse"><tr>' . $thead . '</tr></thead><tbody>' . $tbody . '</tbody></table>';
     }
 
     /**

@@ -18,6 +18,12 @@ h2 {
     color: #015366;
 }
 
+.h2-bl {
+    color: #015366;
+    border-left: 4px solid #D96C00;
+    padding-left: 10px;
+}
+
 label {
     margin: 25px 0 0 0;
 }
@@ -26,15 +32,15 @@ img {
     border-radius: 2px;
 }
 
-.header-wrap{
+.header-wrap {
     margin-top: 80px;
 }
 
-.navbar{
+.navbar {
     z-index: 99;
 }
 
-form .btn{
+form .btn {
     margin-top: 10px;
 }
 
@@ -56,6 +62,14 @@ hr .style {
 .card{
     margin-top: 10px;
     border-radius: 10px;
+}
+
+select:disabled, input:disabled {
+    border-radius: 5px;
+}
+
+input:disabled {
+    padding-left: 5px;
 }
 
 .bl-memories {
@@ -189,6 +203,9 @@ a.popup-light span{
 }
 .modal-hg {
     max-height: 100%;
+}
+.alert {
+    border-radius: 5px !important;
 }
 .page-item.active .page-link {
     background-color: #308296;
