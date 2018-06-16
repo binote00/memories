@@ -220,6 +220,11 @@ $(document).ready(function($)
         var tr = $(this).closest('tr');
         var btn = tr.find('.btn-modif');
         btn.show();
+        $('.td-ck').css({
+            minWidth: "25%",
+        });
+        $(this).removeClass('ck-inline-min');
+        $(this).addClass('ck-inline-max');
         /*tr.on('blur', function(){
             $(this).css('background-color', 'red');
             alert('tata');
@@ -253,6 +258,22 @@ $(document).ready(function($)
 
     $('select').on('click', function(){
         $('.btn-modif').hide();
+        $('.td-ck').css({
+            minWidth: "5%",
+        });
+        let ckinline = $('.ck-inline');
+        ckinline.removeClass('ck-inline-max');
+        ckinline.addClass('ck-inline-min');
+    });
+
+    $('button').on('click', function(){
+        $('.btn-modif').hide();
+        $('.td-ck').css({
+            minWidth: "5%",
+        });
+        let ckinline = $('.ck-inline');
+        ckinline.removeClass('ck-inline-max');
+        ckinline.addClass('ck-inline-min');
     });
 
     /**
@@ -270,7 +291,13 @@ $(document).ready(function($)
             btn_del.hide();
             btn_cancel.hide();
             div.removeClass('bg-edit');
-        })
+        });
+        $('.td-ck').css({
+            minWidth: "5%",
+        });
+        let ckinline = $('.ck-inline');
+        ckinline.removeClass('ck-inline-max');
+        ckinline.addClass('ck-inline-min');
     });
 
     $('.tag-del').on('click', function(){

@@ -242,6 +242,14 @@ a.popup-light span{
     .table td {
         min-width: 5%;
     }
+    .ck-inline-min {
+        max-height: 200px !important;
+        overflow: hidden  !important;
+    }
+    .ck-inline-max {
+        max-height: 2000px !important;
+        overflow: visible !important;
+    }
 }
 
 @media (max-width: 799px){
