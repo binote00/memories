@@ -203,7 +203,7 @@ $(document).ready(function($)
         $.ajax({url: '../memories/app/a_chk_img_del.php?chk=' + check_value,
             success: function()
             {
-                console.log(window.location.pathname);
+                console.log('PATH' + window.location.pathname);
                 window.location.replace("https://www.aubedesaigles.net/memories/index.php?view=images");
             },
             error: function (xhr,ajaxOptions,thrownError) {

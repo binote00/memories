@@ -22,6 +22,7 @@ if (isset($_POST['login'])) {
         if (password_verify($_POST['pwd'], $pwd)) {
             $_SESSION['id'] = $id;
             $_SESSION['level'] = $level;
+            $_SESSION['chk_img_del'] = 0;
             Output::ShowAlert(TXT_WELCOME . ' ' . $login);
             header('Location: ../index.php?view=timeline');
             die;
