@@ -264,11 +264,11 @@ $(document).ready(function($)
         var btn_del = div.find('.tag-del').show();
         var btn_cancel = div.find('.tag-cancel').show();
         //var border = tr.find('.mem-tag-border').addClass('border border-danger');
-        div.addClass('border border-danger');
+        div.addClass('bg-edit');
         btn_cancel.click(function(){
             btn_del.hide();
             btn_cancel.hide();
-            div.removeClass('border border-danger');
+            div.removeClass('bg-edit');
         })
     });
 

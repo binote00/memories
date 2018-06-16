@@ -50,10 +50,6 @@ hr .style {
     box-shadow: 0 10px 10px -10px #8c8b8b inset;
 }
 
-td div.row div.col-md-2 form button.btn {
-    padding : .45rem .5rem;
-}
-
 .img-people {
     max-height: 100px;
     border-radius: 10px;
@@ -91,11 +87,6 @@ input:disabled {
     background-color: #003440;
     border-radius: 50%;
     display: inline-block;
-}
-
-.bg-edit {
-    border-radius: 25%;
-    border: 1px solid #ffdddd;
 }
 
 a.popup{
@@ -235,20 +226,8 @@ a.popup-light span{
     }
 }
 
-@media (min-width: 1599px){
-    .container {
-        max-width: 1400px;
-    }
-    .table td {
-        min-width: 5%;
-    }
-}
-
 @media (max-width: 799px){
     footer {
         display: none;
-    }
-    .table td, .table th {
-        padding : .5rem;
     }
 }
