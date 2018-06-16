@@ -81,9 +81,9 @@ input:disabled {
     background-color: #BDBDBD;
 }
 
-.dot {
-    height: 10px;
-    width: 10px;
+.dot-memories {
+    height: 2px;
+    width: 2px;
     background-color: #003440;
     border-radius: 50%;
     display: inline-block;
@@ -207,6 +207,11 @@ a.popup-light span{
 .alert {
     border-radius: 5px !important;
 }
+.alert-info {
+    background-color: #c0d9df;
+    border-color: #308296;
+    color: #003440;
+}
 .page-item.active .page-link {
     background-color: #308296;
     border-color: #308296;
@@ -218,5 +223,11 @@ a.popup-light span{
     }
     .modal-lg {
         max-width: 1200px;
+    }
+}
+
+@media (max-width: 799px){
+    footer {
+        display: none;
     }
 }

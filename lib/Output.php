@@ -330,7 +330,7 @@ Trait Output
 //                    $img_popup = '<img src="img/' . $data['img_link'] . '" class="img-fluid mx-auto d-block img-popup-h">';
                     $img_class = 'hg';
                 }
-                $btn_edit = '<div class="col-6 d-flex justify-content-center align-items-center"><i class="fa fa-pencil-square-o fa-2x text-primary" data-toggle="collapse" data-target="#f-image-mod-collapse-' . $data['id'] . '"></i></div>';
+                $btn_edit = '<div class="col-6 d-flex justify-content-center align-items-center"><i class="fa fa-pencil-square-o fa-2x color-primary-1" data-toggle="collapse" data-target="#f-image-mod-collapse-' . $data['id'] . '"></i></div>';
             }
 //            $top_card = '
 //                    <div class="' . $bg_class . '" style="padding: 5px;">

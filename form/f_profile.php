@@ -21,8 +21,8 @@ if ($_SESSION) {
             ->AddInput('id', '', 'hidden', $user->getId())
             ->EndForm('Modifier', 'danger');
     } else {
-        header('Location: index.php?view=login');
+        header('Location: index.php');
     }
 } else {
-    header('Location: index.php?view=login');
+    header('Location: index.php');
 }

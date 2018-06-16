@@ -8,7 +8,7 @@
 
 $form = new Form();
 
-$content = $form->CreateForm('./app/a_register.php', 'POST', 'S\'enregistrer')
+$content = $form->CreateForm('./app/a_register.php', 'POST', TXT_SIGNIN)
     ->AddInput('first_name', 'Prénom')
     ->AddInput('last_name', 'Nom')
     ->AddInput('birth_date', 'Date de Naissance', 'date')

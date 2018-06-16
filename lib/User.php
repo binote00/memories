@@ -787,13 +787,23 @@ class User
             $form = new Form();
             if ($tag_nbr) {
                 $form_tr = $form->CreateForm('./app/a_tag_tr.php', 'POST', '')
-                    ->AddSelect('tag_id', 'Nouveau Tag', 'tag', ['id', 'tag_name'], 'tag_name', 'id', 'user_id', $user, 'tag_name', 'ASC')
+                    ->AddSelect('tag_id', 'Vers ce Tag', 'tag', ['id', 'tag_name'], 'tag_name', 'id', 'user_id', $user, 'tag_name', 'ASC')
                     ->AddInput('id', '', 'hidden', $data[0])
+                    ->EndForm('Transférer', 'primary');
+                $form_mod = $form->CreateForm('./app/a_tag_mod.php', 'POST', '')
+                    ->AddInput('tag_name', '', 'text', $data[1])
+                    ->AddInput('id', '', 'hidden', $data[0])
+                    ->AddInput('user_id', '', 'hidden', $user)
                     ->EndForm('Modifier', 'primary');
                 $tbody .= '<tr>
-                            <td>' . $data[1] . '</td>
+                            <td class="tag-editable">
+                            <div class="row">
+                                <div class="col-md-6">' . $data[1] . '</div>
+                                <div class="col-md-6"><form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-tag-mod-' . $data[0] . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form><div class="collapse" id="clp-tag-mod-' . $data[0] . '">' . $form_mod . '</div></div>
+                            </div>
+                            </td>
                             <td>' . Output::Popup($tag_nbr . ' ' . Output::Plural('référence', $tag_nbr), $help_txt) . '</td>
-                            <td><form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-tag-tr-' . $data[0] . '"><i class="fa fa-exchange"></i></button></form><div class="collapse" id="clp-tag-tr-' . $data[0] . '">' . $form_tr . '</div></td>
+                            <td><form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-tag-tr-' . $data[0] . '"><i class="fa fa-exchange color-primary-1"></i></button></form><div class="collapse" id="clp-tag-tr-' . $data[0] . '">' . $form_tr . '</div></td>
                         </tr>';
             } else {
                 $form_delete = $form->CreateForm('./app/a_tag_del.php', 'POST', '')

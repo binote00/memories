@@ -50,7 +50,7 @@ require_once 'inc/index.inc.php';
     <div id="alerts"><?= $alerts ?></div>
     <div id="content"><?= $content ?></div>
 </div>
-<!--<footer class="text-center text-success fixed-bottom">&copy;JF-2017 <p><?php //var_dump($_SESSION);?></p></footer>-->
+<footer class="text-center color-primary-1 fixed-bottom">&copy;JF-2017</footer>
 <script src="./js/jquery-3.2.1.min.js"></script>
 <script src="./js/jquery-ui.min.js"></script>
 <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"

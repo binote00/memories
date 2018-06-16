@@ -70,24 +70,43 @@ class Tag
     public function addTag($vars)
     {
         $return = false;
-        if(is_array($vars)){
+        if (is_array($vars) && isset($vars['user_id']) && isset($vars['tag_name'])) {
             $dbh = DB::connect();
             $result = $dbh->prepare("SELECT COUNT(*) FROM tag WHERE user_id=:user_id AND tag_name=:tag_name");
             $result->bindParam('user_id', $vars['user_id'], 1);
             $result->bindParam('tag_name', $vars['tag_name'], 2);
             $result->execute();
             $data = $result->fetchAll();
-            if($data[0][0]){
+            if ($data[0][0]) {
                 $return = false;
-            }else{
+            } else {
                 $result = $dbh->prepare("INSERT INTO tag (tag_name, user_id) VALUES (:tag_name, :user_id)");
-                $result->bindParam(':tag_name', $vars['tag_name'],2);
-                $result->bindParam(':user_id', $vars['user_id'],1);
+                $result->bindParam(':tag_name', $vars['tag_name'], 2);
+                $result->bindParam(':user_id', $vars['user_id'], 1);
                 $result->execute();
-                if($result->rowCount()){
+                if ($result->rowCount()) {
                     $this->setId($dbh->lastInsertId());
                     $return = $this->id;
                 }
+            }
+        }
+        return $return;
+    }
+
+    public function modTag($vars)
+    {
+        $return = false;
+        if (is_array($vars) && isset($vars['user_id']) && isset($vars['tag_name']) && isset($vars['id'])) {
+            $dbh = DB::connect();
+            $result = $dbh->prepare("SELECT COUNT(*) FROM tag WHERE user_id=:user_id AND tag_name=:tag_name");
+            $result->bindParam('user_id', $vars['user_id'], 1);
+            $result->bindParam('tag_name', $vars['tag_name'], 2);
+            $result->execute();
+            $data = $result->fetchAll();
+            if ($data[0][0]) {
+                $return = false;
+            } else {
+                $return = DBManager::setData('tag', 'tag_name', $vars['tag_name'], 'id', $vars['id']);
             }
         }
         return $return;

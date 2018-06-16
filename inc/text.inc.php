@@ -6,11 +6,12 @@
  * Time: 13:32
  */
 
+define('TXT_TITLE', 'Memories');
 define('TXT_WELCOME', 'Bienvenue');
 define('TXT_ERROR', 'Erreur');
 define('TXT_INTRO', 'Memories est un espace personnel privé où vous pourrez');
 define('TXT_INTRO_NBR', 4);
-$txt_intro_1 = 'Laisser une trace de votre vécu en enregistrant des évènements, des messages, des images et des personnes';
+$txt_intro_1 = 'Laisser une trace de votre vécu en enregistrant des événements, des messages, des images et des profils de personnes';
 $txt_intro_2 = 'Lier ces différents contenus';
 $txt_intro_3 = 'Effectuer une recherche par mots-clés (tags)';
 $txt_intro_4 = 'Visualiser les événements sur une ligne du temps';
@@ -85,6 +86,8 @@ define('TXT_TAG_TR_DONE', 'Eléments transférés vers le nouveau ' . TXT_TAG . 
 define('TXT_TAG_TR_FAIL', 'Eléménts non transférés!');
 define('TXT_TAG_DEL_DONE', TXT_TAG . ' supprimé avec succès!');
 define('TXT_TAG_DEL_FAIL', TXT_ERROR . ' dans la suppression du ' . TXT_TAG . '!');
+define('TXT_TAG_MOD_DONE', TXT_TAG . ' modifié avec succès!');
+define('TXT_TAG_MOD_FAIL', TXT_ERROR . ' dans la modification du ' . TXT_TAG . '!');
 define('TXT_TAG_EXIST', 'Ce ' . TXT_TAG . ' existe déjà!');
 
 define('TXT_EMOTION', 'Emotion');

@@ -218,7 +218,7 @@ class Form
         }
         if ($options) {
             $this->output .= '<label for="' . $name . '">' . $label . '</label>' . $btn_add .
-                '<select name="' . $name . '" id="' . $this->getId() . '-' . $name . '" class="form-control">' . $default_txt . $options . '</select>';
+                '<select name="' . $name . '" id="' . $this->getId() . '-' . $name . '" class="form-control bl-memories">' . $default_txt . $options . '</select>';
         }
         return $this;
     }
@@ -252,7 +252,7 @@ class Form
         }
         if ($options) {
             $this->output .= '<label for="' . $name . '">' . $label . '</label>' . $btn_add .
-                '<select name="' . $name . '" id="' . $this->getId() . '-' . $name . '" class="form-control">' . $default_txt . $options . '</select>';
+                '<select name="' . $name . '" id="' . $this->getId() . '-' . $name . '" class="form-control bl-memories">' . $default_txt . $options . '</select>';
         }
         return $this;
     }
@@ -330,7 +330,7 @@ class Form
             }
         }
         $this->output .= '<label for="' . $name . '">' . $label . '</label>' .
-            '<select name="' . $name . '" id="' . $this->getId() . '-' . $name . '" class="form-control">' . $options . '</select>';
+            '<select name="' . $name . '" id="' . $this->getId() . '-' . $name . '" class="form-control bl-memories">' . $options . '</select>';
         return $this;
     }
 

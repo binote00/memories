@@ -8,14 +8,14 @@
 
 $txt_intro = '';
 $intro_nbr = TXT_INTRO_NBR + 1;
-for ($i=1; $i < $intro_nbr; $i++) {
-    $var = 'txt_intro_'.$i;
-    $txt_intro .= '<li>'.$$var.'</li>';
+for ($i = 1; $i < $intro_nbr; $i++) {
+    $var = 'txt_intro_' . $i;
+    $txt_intro .= '<li>' . $$var . '</li>';
 }
-if(!isset($_SESSION['id'])){
-    $register = '<p><a href="?view=register" class="btn btn-primary">'.TXT_SIGNIN.'</a></p>';
+if (!isset($_SESSION['id'])) {
+    $register = '<p><a href="?view=register" class="btn btn-primary">' . TXT_SIGNIN . '</a></p>';
     $recover = '<p><a href="index.php?view=password_recover" class="btn btn-primary">Mot de passe oublié</a></p>';
-    include_once __DIR__.'/../form/f_login.php';
+    include_once __DIR__ . '/../form/f_login.php';
     $alerts = '
     <div class="row">
         <div class="col-12 text-center color-primary-0">
@@ -33,22 +33,22 @@ if(!isset($_SESSION['id'])){
         <div class="col-md-7">
             <div class="card">
                 <div class="card-block">
-                    <div class="card-text color-primary-2"><p class="font-weight-bold" style="font-size: 1rem;">'.TXT_INTRO.'</p><ul>'.$txt_intro.'</ul></div>    
+                    <div class="card-text color-primary-2"><p class="font-weight-bold" style="font-size: 1rem;">' . TXT_INTRO . '</p><ul>' . $txt_intro . '</ul></div>    
                 </div>
             </div>    
             <div class="card">
                 <div class="card-block">
                     <div class="row">
-                        <div class="col-6">'.$register.'</div>
-                        <div class="col-6">'.$recover.'</div>
+                        <div class="col-6">' . $register . '</div>
+                        <div class="col-6">' . $recover . '</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>';
-    $img_demo = Output::ShowImage('memories.jpg', 'Memories');
+    $img_demo = Output::ShowImage('memories.jpg', TXT_TITLE);
     $content = Output::Popup($img_demo, 'Image de présentation');
 } else {
-    $content = Output::ShowAdvert('<p>'.TXT_INTRO.'</p><ul>'.$txt_intro.'</ul>', 'info', true);
-    $content .= Output::ShowImage('memories.jpg', 'Memories');
+    $content = Output::ShowAdvert('<p>' . TXT_INTRO . '</p><ul>' . $txt_intro . '</ul>', 'info', true);
+    $content .= Output::ShowImage('memories.jpg', TXT_TITLE);
 }

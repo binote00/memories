@@ -6,19 +6,19 @@
  * Time: 14:45
  */
 
-if($_SESSION){
-    if($_SESSION['id']){
+if ($_SESSION) {
+    if ($_SESSION['id']) {
         $form = new Form();
         $user = new User();
         $user->getUser($_SESSION['id']);
 
-        $content = $form->CreateForm('./app/a_images_add.php','POST', 'Images', true)
+        $content = $form->CreateForm('./app/a_images_add.php', 'POST', 'Images', true)
             ->AddInput('img[]', 'Ajouter', 'file', '', '', '', 'required multiple')
             ->AddInput('user_id', '', 'hidden', $_SESSION['id'])
             ->EndForm('Valider');
-    }else{
+    } else {
         header('Location: index.php');
     }
-}else{
+} else {
     header('Location: index.php');
 }
