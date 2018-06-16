@@ -168,7 +168,7 @@ trait DBManager
             $whereFields = "WHERE " . self::getSelectFields($whereField, ' AND ', '=:field', true);
         }
         $query = "SELECT $selectFields FROM $table " . $whereFields . $order;
-        // echo $query.' / '.$whereValue.' /';
+        //echo '[GETDATA-QUERY]'.$query.' / '.$whereValue.' /';
         $result = $dbh->prepare($query);
         if ($whereValue) {
             self::bindParams($result, $whereValue);
@@ -250,12 +250,17 @@ trait DBManager
             $result->execute();
             $return = $result->rowCount();
         } else {
-            $setFields = self::getInsertFields($setField);
-            $query = "INSERT INTO " . $table . $setFields;
-            //echo $query;
-            $result = $dbh->prepare($query);
-            $result->execute($values);
-            $return = $dbh->lastInsertId();
+            $exist = self::getData($table, 'id', $setField, $values, '', 'DESC', '', 'COUNT');
+            if (!$exist) {
+                $setFields = self::getInsertFields($setField);
+                $query = "INSERT INTO " . $table . $setFields;
+                //echo $query;
+                $result = $dbh->prepare($query);
+                $result->execute($values);
+                $return = $dbh->lastInsertId();
+            } else {
+                $return = false;
+            }
         }
         return $return;
     }

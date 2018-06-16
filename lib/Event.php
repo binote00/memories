@@ -155,12 +155,7 @@ class Event
      */
     public function setEventTag($id, $tag_id)
     {
-        $dbh = DB::connect();
-        $result2 = $dbh->prepare("INSERT INTO tag_link (tag_id, data_type, data_id) VALUES (:tag_id, 5, :data_id)");
-        $result2->bindParam(':tag_id', $tag_id,1);
-        $result2->bindParam(':data_id', $id,1);
-        $result2->execute();
-        return $result2->rowCount();
+        return DBManager::setData('tag_link', ['tag_id', 'data_type', 'data_id'], [$tag_id, 5, $id]);
     }
 
     /**

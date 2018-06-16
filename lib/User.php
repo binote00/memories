@@ -386,13 +386,62 @@ class User
                     } else {
                         $note_txt .= '/10';
                     }
-                    $tag_txt .= $this->AddTagOnElement($user, $data->getId(), './app/a_event_tag_add.php', 0, $tag_txt);
-                    $tbody .= '<tr><td class="event-time">' . $data->getMoment() . Event::updateEventDate($data->getId(), './app/a_event_date.php', $data->getMoment()) . '</td>
-                        <td>' . $title_txt . Event::updateEventTitle($data->getId(), './app/a_event_title.php') . '</td>
-                        <td>' . $event_type_txt . $this->AddCatOnElement($data->getId(), './app/a_event_type.php', $event_type_txt) . '</td>
-                        <td>' . $emotion_txt . $this->AddEmotionOnElement($data->getId(), './app/a_event_emo.php') . '</td>
-                        <td>' . $note_txt . $this->AddNoteOnElement($data->getId(), './app/a_event_note.php') . '</td>
-                        <td>' . $tag_txt . '</td></tr>';
+                    $tbody .= '<tr>
+                        <td class="event-time">
+                            <div class="row">
+                                <div class="col-md-8">' . $data->getMoment() . '</div>
+                                <div class="col-md-2">
+                                    <form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-event-time-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                                </div>
+                            </div>
+                            <div class="collapse" id="clp-event-time-mod-' . $data->getId() . '">' . Event::updateEventDate($data->getId(), './app/a_event_date.php', $data->getMoment()) . '</div>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-8">' . $title_txt . '</div>
+                                <div class="col-md-2">
+                                    <form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-event-title-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                                </div>
+                            </div>
+                            <div class="collapse" id="clp-event-title-mod-' . $data->getId() . '">' . Event::updateEventTitle($data->getId(), './app/a_event_title.php') . '</div>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-8">' . $event_type_txt . '</div>
+                                <div class="col-md-2">
+                                    <form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-event-type-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                                </div>
+                            </div>
+                            <div class="collapse" id="clp-event-type-mod-' . $data->getId() . '">' . $this->AddCatOnElement($data->getId(), './app/a_event_type.php', $event_type_txt) . '</div>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-8">' . $emotion_txt . '</div>
+                                <div class="col-md-2">
+                                    <form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-event-emo-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                                </div>
+                            </div>
+                            <div class="collapse" id="clp-event-emo-mod-' . $data->getId() . '">' . $this->AddEmotionOnElement($data->getId(), './app/a_event_emo.php') . '</div>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-8">' . $note_txt . '</div>
+                                <div class="col-md-2">
+                                    <form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-event-note-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                                </div>
+                            </div>
+                            <div class="collapse" id="clp-event-note-mod-' . $data->getId() . '">' . $this->AddNoteOnElement($data->getId(), './app/a_event_note.php') . '</div>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-8">' . $tag_txt . '</div>
+                                <div class="col-md-2">
+                                    <form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-event-tag-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                                </div>
+                            </div>
+                            <div class="collapse" id="clp-event-tag-mod-' . $data->getId() . '">' . $this->AddTagOnElement($user, $data->getId(), './app/a_event_tag_add.php', 0, $tag_txt) . '</div>
+                        </td>
+                        </tr>';
                 }
                 $content = Output::TableHead(['Date', 'Titre', 'Catégorie', 'Emotion', 'Intensité', 'Tags'], $tbody, 'Evénements <button type="button" class="btn btn-primary btn-lg" data-toggle="collapse" href="#f-event-add-collapse">+</button>');
             }
@@ -432,14 +481,29 @@ class User
                     if (!$tag_txt) {
                         $tag_txt = '<i>&lt;Aucun Tag&gt;</i>';
                     }
-                    $tag_txt .= $this->AddTagOnElement($user, $data->getId(), './app/a_message_tag_add.php', $tags, $tag_txt);
                     $tbody .= '<tr><td>' . $data->getMoment() . '<br><span class="text-hide">' . $data->getId() . '</span>
-                        <button type="button" class="btn-modif btn btn-sm btn-danger">Modifier</button>
+                        <button type="button" class="btn-modif btn btn-sm btn-danger">Modifier</button></td>
+                        <td><div class="ck-inline" contenteditable="true">' . $data->getMessage() . '</div></td>
+                        <td>
+                            ' . $tag_txt . '
+                            <form><button type="button" class="btn btn-lg btn-primary" data-toggle="collapse" data-target="#clp-msg-tag-mod-' . $data->getId() . '">+</button></form>
+                            <div class="collapse" id="clp-msg-tag-mod-' . $data->getId() . '">' . $this->AddTagOnElement($user, $data->getId(), './app/a_message_tag_add.php', $tags, $tag_txt) . '</div>
                         </td>
-                        <td><div class="ck-inline" contenteditable="true">' . $data->getMessage() . '</div></td><td>' . $tag_txt . '</td>
-                        <td>' . $emotion_txt . $this->AddEmotionOnElement($data->getId(), './app/a_message_emo.php') . '</td>
-                        <td>' . $note_txt . $this->AddNoteOnElement($data->getId(), './app/a_message_note.php') . '</td>
-                        <td>' . $event_txt . $this->AddEventOnElement($data->getId(), './app/a_message_event.php') . '</td>
+                        <td>
+                            ' . $emotion_txt . '
+                            <form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-msg-emo-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                            <div class="collapse" id="clp-msg-emo-mod-' . $data->getId() . '">' . $this->AddEmotionOnElement($data->getId(), './app/a_message_emo.php') . '</div>
+                        </td>
+                        <td>
+                            ' . $note_txt . '
+                            <form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-msg-note-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                            <div class="collapse" id="clp-msg-note-mod-' . $data->getId() . '">' . $this->AddNoteOnElement($data->getId(), './app/a_message_note.php') . '</div>
+                        </td>
+                        <td>
+                            ' . $event_txt . '
+                            <form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-msg-event-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                            <div class="collapse" id="clp-msg-event-mod-' . $data->getId() . '">' . $this->AddEventOnElement($data->getId(), './app/a_message_event.php') . '</div>
+                        </td>
                         </tr>';
                 }
                 $content = Output::TableHead(['Date', 'Message', 'Tags', 'Emotion', 'Intensité', 'Event'], $tbody, 'Messages <button type="button" class="btn btn-primary btn-lg" data-toggle="collapse" href="#f-message-add-collapse">+</button>');
