@@ -391,7 +391,7 @@ class User
                             <div class="row">
                                 <div class="col-md-8">' . $data->getMoment() . '</div>
                                 <div class="col-md-2">
-                                    <form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-event-time-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                                    <form><button type="button" class="btn btn-primary-1" data-toggle="collapse" data-target="#clp-event-time-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
                                 </div>
                             </div>
                             <div class="collapse" id="clp-event-time-mod-' . $data->getId() . '">' . Event::updateEventDate($data->getId(), './app/a_event_date.php', $data->getMoment()) . '</div>
@@ -400,7 +400,7 @@ class User
                             <div class="row">
                                 <div class="col-md-8">' . $title_txt . '</div>
                                 <div class="col-md-2">
-                                    <form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-event-title-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                                    <form><button type="button" class="btn btn-primary-1" data-toggle="collapse" data-target="#clp-event-title-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
                                 </div>
                             </div>
                             <div class="collapse" id="clp-event-title-mod-' . $data->getId() . '">' . Event::updateEventTitle($data->getId(), './app/a_event_title.php') . '</div>
@@ -409,7 +409,7 @@ class User
                             <div class="row">
                                 <div class="col-md-8">' . $event_type_txt . '</div>
                                 <div class="col-md-2">
-                                    <form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-event-type-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                                    <form><button type="button" class="btn btn-primary-1" data-toggle="collapse" data-target="#clp-event-type-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
                                 </div>
                             </div>
                             <div class="collapse" id="clp-event-type-mod-' . $data->getId() . '">' . $this->AddCatOnElement($data->getId(), './app/a_event_type.php', $event_type_txt) . '</div>
@@ -418,7 +418,7 @@ class User
                             <div class="row">
                                 <div class="col-md-8">' . $emotion_txt . '</div>
                                 <div class="col-md-2">
-                                    <form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-event-emo-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                                    <form><button type="button" class="btn btn-primary-1" data-toggle="collapse" data-target="#clp-event-emo-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
                                 </div>
                             </div>
                             <div class="collapse" id="clp-event-emo-mod-' . $data->getId() . '">' . $this->AddEmotionOnElement($data->getId(), './app/a_event_emo.php') . '</div>
@@ -427,7 +427,7 @@ class User
                             <div class="row">
                                 <div class="col-md-8">' . $note_txt . '</div>
                                 <div class="col-md-2">
-                                    <form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-event-note-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                                    <form><button type="button" class="btn btn-primary-1" data-toggle="collapse" data-target="#clp-event-note-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
                                 </div>
                             </div>
                             <div class="collapse" id="clp-event-note-mod-' . $data->getId() . '">' . $this->AddNoteOnElement($data->getId(), './app/a_event_note.php') . '</div>
@@ -436,7 +436,7 @@ class User
                             <div class="row">
                                 <div class="col-md-8">' . $tag_txt . '</div>
                                 <div class="col-md-2">
-                                    <form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-event-tag-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                                    <form><button type="button" class="btn btn-lg btn-primary-1" data-toggle="collapse" data-target="#clp-event-tag-mod-' . $data->getId() . '">+</button></form>
                                 </div>
                             </div>
                             <div class="collapse" id="clp-event-tag-mod-' . $data->getId() . '">' . $this->AddTagOnElement($user, $data->getId(), './app/a_event_tag_add.php', 0, $tag_txt) . '</div>
@@ -486,22 +486,22 @@ class User
                         <td><div class="ck-inline" contenteditable="true">' . $data->getMessage() . '</div></td>
                         <td>
                             ' . $tag_txt . '
-                            <form><button type="button" class="btn btn-lg btn-primary" data-toggle="collapse" data-target="#clp-msg-tag-mod-' . $data->getId() . '">+</button></form>
+                            <form><button type="button" class="btn btn-lg btn-primary-1" data-toggle="collapse" data-target="#clp-msg-tag-mod-' . $data->getId() . '">+</button></form>
                             <div class="collapse" id="clp-msg-tag-mod-' . $data->getId() . '">' . $this->AddTagOnElement($user, $data->getId(), './app/a_message_tag_add.php', $tags, $tag_txt) . '</div>
                         </td>
                         <td>
                             ' . $emotion_txt . '
-                            <form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-msg-emo-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                            <form><button type="button" class="btn btn-primary-1" data-toggle="collapse" data-target="#clp-msg-emo-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
                             <div class="collapse" id="clp-msg-emo-mod-' . $data->getId() . '">' . $this->AddEmotionOnElement($data->getId(), './app/a_message_emo.php') . '</div>
                         </td>
                         <td>
                             ' . $note_txt . '
-                            <form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-msg-note-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                            <form><button type="button" class="btn btn-primary-1" data-toggle="collapse" data-target="#clp-msg-note-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
                             <div class="collapse" id="clp-msg-note-mod-' . $data->getId() . '">' . $this->AddNoteOnElement($data->getId(), './app/a_message_note.php') . '</div>
                         </td>
                         <td>
                             ' . $event_txt . '
-                            <form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-msg-event-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                            <form><button type="button" class="btn btn-primary-1" data-toggle="collapse" data-target="#clp-msg-event-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
                             <div class="collapse" id="clp-msg-event-mod-' . $data->getId() . '">' . $this->AddEventOnElement($data->getId(), './app/a_message_event.php') . '</div>
                         </td>
                         </tr>';
@@ -863,11 +863,11 @@ class User
                             <td class="tag-editable">
                             <div class="row">
                                 <div class="col-md-6">' . $data[1] . '</div>
-                                <div class="col-md-6"><form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-tag-mod-' . $data[0] . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form><div class="collapse" id="clp-tag-mod-' . $data[0] . '">' . $form_mod . '</div></div>
+                                <div class="col-md-6"><form><button type="button" class="btn btn-primary-1" data-toggle="collapse" data-target="#clp-tag-mod-' . $data[0] . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form><div class="collapse" id="clp-tag-mod-' . $data[0] . '">' . $form_mod . '</div></div>
                             </div>
                             </td>
                             <td>' . Output::Popup($tag_nbr . ' ' . Output::Plural('référence', $tag_nbr), $help_txt) . '</td>
-                            <td><form><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#clp-tag-tr-' . $data[0] . '"><i class="fa fa-exchange color-primary-1"></i></button></form><div class="collapse" id="clp-tag-tr-' . $data[0] . '">' . $form_tr . '</div></td>
+                            <td><form><button type="button" class="btn btn-primary-1" data-toggle="collapse" data-target="#clp-tag-tr-' . $data[0] . '"><i class="fa fa-exchange color-primary-1"></i></button></form><div class="collapse" id="clp-tag-tr-' . $data[0] . '">' . $form_tr . '</div></td>
                         </tr>';
             } else {
                 $form_delete = $form->CreateForm('./app/a_tag_del.php', 'POST', '')

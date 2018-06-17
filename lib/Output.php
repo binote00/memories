@@ -399,13 +399,13 @@ Trait Output
                 $data_img->title = 'image';
             }
             $img_count++;
-            $img_txt .= Output::btnModal('img-modal-'.$data_img->id, $data_img->title);
+            $img_txt .= Output::btnModal('img-modal-'.$data_img->id, $data_img->title, 'primary-1');
             $modal_txt .= Output::viewModal('img-modal-'.$data_img->id, $data_img->title, Output::ShowImage($data_img->link, $data_img->title, '/users/' . $data_img->uploader . '/'));
         }
         if ($img_txt) {
             $img_txt = '<hr><h6><i class="fa fa-image"></i></h6>' . $img_txt;
             if ($img_count > 6) {
-                $img_txt = '<i class="fa fa-chevron-down" data-toggle="collapse" data-target="#f-image-show-collapse-' . $data->getId() . '" style="color: #009688" title="Images"></i>
+                $img_txt = '<i class="fa fa-chevron-down color-primary-1" data-toggle="collapse" data-target="#f-image-show-collapse-' . $data->getId() . '" title="Images"></i>
                         <div class="collapse" id="f-image-show-collapse-' . $data->getId() . '">
                         ' . $img_txt . '
                         </div>';
@@ -417,13 +417,13 @@ Trait Output
                 $data_txt->title = 'message';
             }
             $txt_count++;
-            $msg_txt .= Output::btnModal('txt-modal-'.$data_txt->id, $data_txt->moment);
+            $msg_txt .= Output::btnModal('txt-modal-'.$data_txt->id, $data_txt->moment, 'primary-1');
             $modal_txt .= Output::viewModal('txt-modal-'.$data_txt->id, $data_txt->moment, $data_txt->message);
         }
         if ($msg_txt) {
             $msg_txt = '<hr><h6><i class="fa fa-sticky-note"></i></h6>' . $msg_txt;
             if ($txt_count > 6) {
-                $msg_txt = '<i class="fa fa-chevron-down" data-toggle="collapse" data-target="#f-msg-show-collapse-' . $data->getId() . '" style="color: #009688" title="Messages"></i>
+                $msg_txt = '<i class="fa fa-chevron-down color-primary-1" data-toggle="collapse" data-target="#f-msg-show-collapse-' . $data->getId() . '" title="Messages"></i>
                         <div class="collapse" id="f-msg-show-collapse-' . $data->getId() . '">
                         ' . $msg_txt . '
                         </div>';
@@ -442,7 +442,7 @@ Trait Output
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
-                                <p style="color: #009688">' . ucfirst($event_type_q->event_name) . '</p>                        
+                                <p class="color-primary-1">' . ucfirst($event_type_q->event_name) . '</p>                        
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <p>' . $emotion_q->em_name . '</p>                            

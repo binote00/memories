@@ -173,15 +173,15 @@ class Form
      * @param array $fields [example : id,name]
      * @param array|string $caption [example : name | concaténation si plusieurs éléments, séparés par le premier élément du tableau : [' : ', 'id', 'name'] Si le premier élément du tableau est 'OR', alors le caption prendra la première valeur non nulle du tableau à partir de l'index 1]
      * @param string $value [example : id]
-     * @param array|string $whereField
+     * @param array|mixed $whereField
      * @param array|mixed $whereValue
-     * @param string $order [ASC, DESC]
-     * @param string $orderBy
+     * @param string $order
+     * @param string $orderBy [ASC, DESC]
      * @param bool $add_btn [true si un input doit remplacer l'absence de select]
      * @param bool $default [true si la première valeur est la valeur par défaut]
      * @return $this
      */
-    public function AddSelect($name, $label, $table, $fields, $caption, $value, $whereField, $whereValue, $order, $orderBy = 'ASC', $add_btn = false, $default = false)
+    public function AddSelect($name, $label, $table, $fields, $caption, $value, $whereField = false, $whereValue = false, $order = '', $orderBy = 'ASC', $add_btn = false, $default = false)
     {
         if ($default) {
             $default_txt = '';
@@ -190,7 +190,11 @@ class Form
         }
         $options = false;
         $btn_add = '';
-        $result = DBManager::getDatas($table, $fields, $whereField, $whereValue, $order, $orderBy);
+        if ($whereField && $whereValue) {
+            $result = DBManager::getDatas($table, $fields, $whereField, $whereValue, $order, $orderBy);
+        } else {
+            $result = DBManager::getAllDatas($table, $fields, $order, $orderBy);
+        }
         while ($data = $result->fetchObject()) {
             $caption_txt = '';
             if (is_array($caption)) {
@@ -357,6 +361,20 @@ class Form
             }
         }
         $this->output .= $checkboxes;
+        return $this;
+    }
+
+    public function AddColors()
+    {
+        $return = '<div class="btn-group btn-group-toggle" data-toggle="buttons">';
+        $result = DBManager::getAllDatas('theme_color', ['id', 'hex', 'css', 'name']);
+        while($data = $result->fetchObject()){
+            $return .= '<label class="btn" style="background-color: '.$data->hex.';">
+                            <input type="radio" name="app_color" id="option1" autocomplete="off" value="'.$data->id.'">'.$data->name.'
+                        </label><br><br>';
+        }
+        $return .= '</div>';
+        $this->output .= $return;
         return $this;
     }
 }
