@@ -179,9 +179,10 @@ class Form
      * @param string $orderBy
      * @param bool $add_btn [true si un input doit remplacer l'absence de select]
      * @param bool $default [true si la première valeur est la valeur par défaut]
+     * @param bool|string $attr
      * @return $this
      */
-    public function AddSelect($name, $label, $table, $fields, $caption, $value, $whereField, $whereValue, $order, $orderBy = 'ASC', $add_btn = false, $default = false)
+    public function AddSelect($name, $label, $table, $fields, $caption, $value, $whereField, $whereValue, $order, $orderBy = 'ASC', $add_btn = false, $default = false, $attr = false)
     {
         if ($default) {
             $default_txt = '';
@@ -216,9 +217,12 @@ class Form
         if ($add_btn) {
             $btn_add = Output::btnModal('modal-add-btn', '+', 'primary');
         }
+        if ($attr) {
+            $attr = ' '.$attr;
+        }
         if ($options) {
             $this->output .= '<label for="' . $name . '">' . $label . '</label>' . $btn_add .
-                '<select name="' . $name . '" id="' . $this->getId() . '-' . $name . '" class="form-control bl-memories">' . $default_txt . $options . '</select>';
+                '<select name="' . $name . '" id="' . $this->getId() . '-' . $name . '" class="form-control bl-memories"' . $attr . '>' . $default_txt . $options . '</select>';
         }
         return $this;
     }

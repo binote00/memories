@@ -297,6 +297,10 @@ class People
                         ->AddInput('id', '', 'hidden', $data->id)
                         ->AddInput('user_id', '', 'hidden', $user)
                         ->EndForm('Valider');
+//                    $user_obj = new User();
+//                    $body_img = $user_obj->getImageListFromUser($_SESSION['id']);
+//                    $body .= Output::btnModal('ppl-modal-img-' . $data->id, 'Liste images');
+//                    $body .= Output::viewModal('ppl-modal-img-' . $data->id, 'Liste images', $body_img, '', 'lg');
                     //$detail = Output::btnModalJS('modal-people', 'Détail', $title, addslashes($body), 'footer');
                     /*$detail = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-people"
                     data-body="<form method=\"POST\"><input type=\"text\" id=\"first_name\" value="Patrick"><input type=\"text\" id=\"user_id\" value="1"></form></button>';*/

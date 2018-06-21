@@ -483,7 +483,7 @@ class User
                     }
                     $tbody .= '<tr><td>' . $data->getMoment() . '<br><span class="text-hide">' . $data->getId() . '</span>
                         <button type="button" class="btn-modif btn btn-sm btn-danger">Modifier</button></td>
-                        <td><div class="ck-inline" contenteditable="true">' . $data->getMessage() . '</div></td>
+                        <td class="td-ck"><div class="ck-inline ck-inline-min" contenteditable="true">' . $data->getMessage() . '</div></td>
                         <td>
                             ' . $tag_txt . '
                             <form><button type="button" class="btn btn-lg btn-primary" data-toggle="collapse" data-target="#clp-msg-tag-mod-' . $data->getId() . '">+</button></form>
@@ -518,7 +518,14 @@ class User
      */
     public function getImageListFromUser($user)
     {
-        return DBManager::getData('image', ['id', 'link', 'title', 'status'], ['uploader', 'status'], [$user, '0'], 'title', 'ASC', '', 'CLASS');
+        $return = '';
+        $results = DBManager::getData('image', ['id', 'link', 'title', 'status'], ['uploader', 'status'], [$user, '0'], 'title', 'ASC', '', 'CLASS');
+        foreach ($results as $data) {
+            $return .= Output::ShowImage($data->getLink(), $data->getTitle(), 'users/' . $user . '/', '', '25');
+        }
+        return $return;
+
+//        return DBManager::getData('image', ['id', 'link', 'title', 'status'], ['uploader', 'status'], [$user, '0'], 'title', 'ASC', '', 'CLASS');
     }
 
     /**
@@ -556,7 +563,7 @@ class User
                     //$content = Output::Table($results, ['Image','Titre'], 'Images');
                     $tbody = '';
                     foreach ($results as $data) {
-                        $tbody .= '<tr><td>' . Output::ShowImage($data->getLink(), $data->getTitle(), 'users/' . $user . '/') . '</td><td>' . $data->getTitle() . '</td></tr>';
+                        $tbody .= '<tr><td>' . Output::ShowImage($data->getLink(), $data->getTitle(), 'users/' . $user . '/', '', '20') . '</td><td>' . $data->getTitle() . '</td></tr>';
                     }
                     $content = Output::TableHead(['Image', 'Titre'], $tbody, 'Images');
                 } elseif ($show == 'card') {
