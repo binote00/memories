@@ -21,6 +21,11 @@ if (isset($_POST) and isset($_SESSION['id'])) {
     } else {
         $ok2 = true;
     }
+    if (array_key_exists('app_color', $_POST) && $_POST['app_color_ori'] != $_POST['app_color']) {
+        $ok2 = $param->modParam($_SESSION['id'], 5, $_POST['app_color']);
+    } else {
+        $ok2 = true;
+    }
 }
 if (!$ok1 || !$ok2) {
     Output::ShowAlert(TXT_OPTIONS_MOD_FAIL, 'danger');

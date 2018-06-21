@@ -1,26 +1,27 @@
-.color-primary-0 { color: #015366 }
-.color-primary-1 { color: #308296 }
-.color-primary-2 { color: #036D86 }
-.color-primary-3 { color: #003440 }
-.color-primary-4 { color: #000506 }
 
-.color-complement-0 { color: #A55200 }
-.color-complement-1 { color: #F29D49 }
-.color-complement-2 { color: #D96C00 }
-.color-complement-3 { color: #673300 }
-.color-complement-4 { color: #0A0500 }
+.color-primary-0 { color: #051C70 }	/* Main Primary color */
+.color-primary-1 { color: #0F2FA4 }
+.color-primary-2 { color: #092488 }
+.color-primary-3 { color: #021455 }
+.color-primary-4 { color: #010C34 }
+
+.color-complement-0 { color: #A57300 }	/* Main Complement color */
+.color-complement-1 { color: #F2A800 }
+.color-complement-2 { color: #C98B00 }
+.color-complement-3 { color: #7E5700 }
+.color-complement-4 { color: #4D3500 }
 
 body {
     background-color: #fff;
 }
 
 h2 {
-    color: #015366;
+    color: #051C70;
 }
 
 .h2-bl {
-    color: #015366;
-    border-left: 4px solid #D96C00;
+    color: #051C70;
+    border-left: 4px solid #C98B00;
     padding-left: 10px;
 }
 
@@ -73,7 +74,7 @@ input:disabled {
 }
 
 .bl-memories {
-    border-left: 2px solid #308296;
+    border-left: 2px solid #0F2FA4;
     padding-left: 10px;
 }
 
@@ -84,7 +85,7 @@ input:disabled {
 .dot-memories {
     height: 2px;
     width: 2px;
-    background-color: #003440;
+    background-color: #021455;
     border-radius: 50%;
     display: inline-block;
 }
@@ -187,13 +188,13 @@ a.popup-light span{
 
 /* override bootstrap */
 .bg-navbar {
-    background-color: #003440 !important;
+    background-color: #021455 !important;
 }
 .thead-inverse th {
-    background-color: #003440;
+    background-color: #021455;
 }
 .modal-title {
-    color: #015366;
+    color: #051C70;
 }
 .modal-dialog {
     max-height: 100%;
@@ -209,12 +210,28 @@ a.popup-light span{
 }
 .alert-info {
     background-color: #c0d9df;
-    border-color: #308296;
-    color: #003440;
+    border-color: #0F2FA4;
+    color: #021455;
 }
 .page-item.active .page-link {
-    background-color: #308296;
-    border-color: #308296;
+    background-color: #0F2FA4;
+    border-color: #0F2FA4;
+}
+
+.btn-primary-1 {
+    color: #0F2FA4;
+}
+
+.btn-primary-1:hover {
+    color: #0F2FA4;
+    background-color: hsla(0,0%,60%,.2);
+    border-color: hsla(0,0%,60%,.2);
+}
+
+.btn-group-toggle > .btn input[type="checkbox"], .btn-group-toggle > .btn input[type="radio"], .btn-group-toggle > .btn-group > .btn input[type="checkbox"], .btn-group-toggle > .btn-group > .btn input[type="radio"] {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+    pointer-events: none;
 }
 
 @media (min-width: 1199px){

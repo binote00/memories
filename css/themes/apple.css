@@ -1,27 +1,27 @@
 
-.color-primary-0 { color: #015366 }
-.color-primary-1 { color: #308296 }
-.color-primary-2 { color: #036D86 }
-.color-primary-3 { color: #003440 }
-.color-primary-4 { color: #000506 }
+.color-primary-0 { color: #AFDA54 }	/* Main Primary color */
+.color-primary-3 { color: #EDFAD1 }
+.color-primary-2 { color: #D2F28E }
+.color-primary-1 { color: #8EC123 }
+.color-primary-4 { color: #628D07 }
 
-.color-complement-0 { color: #A55200 }
-.color-complement-1 { color: #F29D49 }
-.color-complement-2 { color: #D96C00 }
-.color-complement-3 { color: #673300 }
-.color-complement-4 { color: #0A0500 }
+.color-complement-0 { color: #B9478A }	/* Main Complement color */
+.color-complement-1 { color: #EFC8DF }
+.color-complement-2 { color: #D77EB2 }
+.color-complement-3 { color: #A41D6C }
+.color-complement-4 { color: #780649 }
 
 body {
     background-color: #fff;
 }
 
 h2 {
-    color: #015366;
+    color: #AFDA54;
 }
 
 .h2-bl {
-    color: #015366;
-    border-left: 4px solid #D96C00;
+    color: #AFDA54;
+    border-left: 4px solid #D77EB2;
     padding-left: 10px;
 }
 
@@ -78,7 +78,7 @@ input:disabled {
 }
 
 .bl-memories {
-    border-left: 2px solid #308296;
+    border-left: 2px solid #EDFAD1;
     padding-left: 10px;
 }
 
@@ -89,7 +89,7 @@ input:disabled {
 .dot-memories {
     height: 2px;
     width: 2px;
-    background-color: #003440;
+    background-color: #8EC123;
     border-radius: 50%;
     display: inline-block;
 }
@@ -136,7 +136,7 @@ a.popup-light span{
     transition:all .5s;
 }
 
-.img-popup-l, .img-popup-h {
+.img-popup-l, .img-popup-h{
     width: 100%;
 }
 
@@ -197,13 +197,13 @@ a.popup-light span{
 
 /* override bootstrap */
 .bg-navbar {
-    background-color: #003440 !important;
+    background-color: #8EC123 !important;
 }
 .thead-inverse th {
-    background-color: #003440;
+    background-color: #8EC123;
 }
 .modal-title {
-    color: #015366;
+    color: #AFDA54;
 }
 .modal-dialog {
     max-height: 100%;
@@ -219,20 +219,20 @@ a.popup-light span{
 }
 .alert-info {
     background-color: #c0d9df;
-    border-color: #308296;
-    color: #003440;
+    border-color: #EDFAD1;
+    color: #8EC123;
 }
 .page-item.active .page-link {
-    background-color: #308296;
-    border-color: #308296;
+    background-color: #EDFAD1;
+    border-color: #EDFAD1;
 }
 
 .btn-primary-1 {
-    color: #308296;
+    color: #628D07;
 }
 
 .btn-primary-1:hover {
-    color: #308296;
+    color: #628D07;
     background-color: hsla(0,0%,60%,.2);
     border-color: hsla(0,0%,60%,.2);
 }

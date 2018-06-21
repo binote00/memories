@@ -118,7 +118,7 @@ trait DBManager
         if (is_array($limit)) {
             if ($limit[0] < 0) $limit[0] = 0;
             $order .= ' LIMIT ' . $limit[0] . ', ' . $limit[1];
-        } elseif ($limit) {
+        } elseif ($limit > 0) {
             $order .= ' LIMIT ' . $limit;
         }
         $dbh = DB::connect();
@@ -135,6 +135,36 @@ trait DBManager
             $data = $result->fetchAll();
         }
         return $data;
+    }
+
+    /**
+     * Générateur de résultat [SELECT FROM WHERE]
+     *
+     * @param string $table
+     * @param array|string $selectField
+     * @param string $order
+     * @param string $orderBy
+     * @param mixed $limit
+     * @return mixed
+     */
+    public static function getAllDatas($table, $selectField, $order = '', $orderBy = 'DESC', $limit = '')
+    {
+        if ($order) {
+            $order = ' ORDER BY ' . $order . ' ' . $orderBy;
+        }
+        if (is_array($limit)) {
+            if ($limit[0] < 0) $limit[0] = 0;
+            $order .= ' LIMIT ' . $limit[0] . ', ' . $limit[1];
+        } elseif ($limit) {
+            $order .= ' LIMIT ' . $limit;
+        }
+        $dbh = DB::connect();
+        $selectFields = self::getSelectFields($selectField, ',');
+        $query = "SELECT $selectFields FROM $table " . $order;
+        //echo $query;
+        $result = $dbh->prepare($query);
+        $result->execute();
+        return $result;
     }
 
     /**
