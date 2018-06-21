@@ -243,6 +243,14 @@ a.popup-light span{
     pointer-events: none;
 }
 
+.img-index-lg {
+    display: block;
+}
+
+.img-index-sx {
+    display: none;
+}
+
 @media (min-width: 1199px){
     .img-popup-l{
         width: 200%;
@@ -275,5 +283,11 @@ a.popup-light span{
     }
     .table td, .table th {
         padding : .5rem;
+    }
+    .img-index-lg {
+        display: none;
+    }
+    .img-index-sx {
+        display: block;
     }
 }

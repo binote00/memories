@@ -12,6 +12,9 @@ for ($i = 1; $i < $intro_nbr; $i++) {
     $var = 'txt_intro_' . $i;
     $txt_intro .= '<li>' . $$var . '</li>';
 }
+$img_index = '<div class="img-index-lg">' . Output::ShowImage('memories.jpg', TXT_TITLE) . '</div>
+                <div class="img-index-sx">' . Output::ShowImage('memories_sx.jpg', TXT_TITLE) . '</div>';
+
 if (!isset($_SESSION['id'])) {
     $register = '<p><a href="?view=register" class="btn btn-primary">' . TXT_SIGNIN . '</a></p>';
     $recover = '<p><a href="index.php?view=password_recover" class="btn btn-primary">Mot de passe oublié</a></p>';
@@ -46,9 +49,7 @@ if (!isset($_SESSION['id'])) {
             </div>
         </div>
     </div>';
-    $img_demo = Output::ShowImage('memories.jpg', TXT_TITLE);
-    $content = Output::Popup($img_demo, 'Image de présentation');
+    $content = $img_index;
 } else {
-    $content = Output::ShowAdvert('<p>' . TXT_INTRO . '</p><ul>' . $txt_intro . '</ul>', 'info', true);
-    $content .= Output::ShowImage('memories.jpg', TXT_TITLE);
+    $content = Output::ShowAdvert('<p>' . TXT_INTRO . '</p><ul>' . $txt_intro . '</ul>', 'info', true) . $img_index;
 }
