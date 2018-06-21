@@ -234,6 +234,14 @@ a.popup-light span{
     pointer-events: none;
 }
 
+.img-index-lg {
+    display: block;
+}
+
+.img-index-sx {
+    display: none;
+}
+
 @media (min-width: 1199px){
     .img-popup-l{
         width: 200%;
@@ -243,8 +251,34 @@ a.popup-light span{
     }
 }
 
+@media (min-width: 1599px){
+    .container {
+        max-width: 1400px;
+    }
+    .table td {
+        min-width: 5%;
+    }
+    .ck-inline-min {
+        max-height: 200px !important;
+        overflow: hidden  !important;
+    }
+    .ck-inline-max {
+        max-height: 2000px !important;
+        overflow: visible !important;
+    }
+}
+
 @media (max-width: 799px){
     footer {
         display: none;
+    }
+    .table td, .table th {
+        padding : .5rem;
+    }
+    .img-index-lg {
+        display: none;
+    }
+    .img-index-sx {
+        display: block;
     }
 }
