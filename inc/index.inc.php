@@ -25,18 +25,18 @@ if ($_SESSION) {
     if ($_SESSION['id']) {
         $nav_extends = '
             <li class="nav-item">
-                <a class="nav-link" href="index.php?view=profile"><?= TXT_PROFILE ?></a>
+                <a class="nav-link" href="index.php?view=profile">' . TXT_PROFILE . '</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="nav-drop-diary" data-toggle="dropdown">
                 Journal
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item text-capitalize" href="index.php?view=event"><?= TXT_EVENT ?></a>
-                    <a class="dropdown-item text-capitalize" href="index.php?view=images"><?= TXT_IMAGE ?></a>
-                    <a class="dropdown-item text-capitalize" href="index.php?view=message"><?= TXT_MESSAGE ?></a>
-                    <a class="dropdown-item text-capitalize" href="index.php?view=people"><?= TXT_PEOPLE ?></a>
-                    <a class="dropdown-item text-capitalize" href="index.php?view=tag"><?= TXT_TAG ?></a>
+                    <a class="dropdown-item text-capitalize" href="index.php?view=event">' . TXT_EVENT . '</a>
+                    <a class="dropdown-item text-capitalize" href="index.php?view=images">' . TXT_IMAGE  . '</a>
+                    <a class="dropdown-item text-capitalize" href="index.php?view=message">' . TXT_MESSAGE  . '</a>
+                    <a class="dropdown-item text-capitalize" href="index.php?view=people">' . TXT_PEOPLE  . '</a>
+                    <a class="dropdown-item text-capitalize" href="index.php?view=tag">' . TXT_TAG  . '</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -44,7 +44,7 @@ if ($_SESSION) {
                     Outils
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item text-capitalize" href="index.php?view=timeline"><?= TXT_TIMELINE ?></a>
+                    <a class="dropdown-item text-capitalize" href="index.php?view=timeline">' . TXT_TIMELINE . '</a>
                 </div>
             </li>
             <li class="nav-item">
