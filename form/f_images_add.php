@@ -14,7 +14,7 @@ if ($_SESSION) {
 
         $content = $form->CreateForm('./app/a_images_add.php', 'POST', 'Images', true)
             ->AddInput('img[]', 'Ajouter', 'file', '', '', '', 'required multiple')
-            ->AddSelect('tag', 'Tag', 'tag', ['id','tag_name'], 'tag_name', 'id', 'user_id', $_SESSION['id'], 'tag_name', 'ASC', true)
+//            ->AddSelect('tag', 'Tag', 'tag', ['id','tag_name'], 'tag_name', 'id', 'user_id', $_SESSION['id'], 'tag_name', 'ASC', true)
             ->AddInput('user_id', '', 'hidden', $_SESSION['id'])
             ->EndForm('Valider');
     } else {

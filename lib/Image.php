@@ -180,24 +180,18 @@ class Image
             }
             if ($values_query) {
                 $dbh = DB::connect();
-//                $query = "INSERT INTO image (uploader, link, title) VALUES " . $values_query;
-                $query = "
-                START TRANSACTION;
-                INSERT INTO image (uploader, link, title) VALUES " . $values_query . ";
-                INSERT INTO tag_link (tag_id, data_type, data_id) VALUES(" . $vars['tag'] . ", " . DATA_TYPE_IMAGE . ", LAST_INSERT_ID());
-                COMMIT;
-                ";
-//                START TRANSACTION
+                $query = "INSERT INTO image (uploader, link, title) VALUES " . $values_query;
+//                $query = "
+//                START TRANSACTION;
 //                INSERT INTO image (uploader, link, title) VALUES " . $values_query . ";
-//                SET @firstid := LAST_INSERT_ID();
-//                SELECT @id from image WHERE id >= @firstid;
-//                INSERT INTO tag_link (tag_id, data_type, data_id) VALUES
-                if ($return && $vars['tag']) {
-                    $return = DBManager::setData('tag_link', ['tag_id', 'data_type', 'data_id'], [$vars['tag'], DATA_TYPE_EVENT, $return]);
-                }
-//                echo $query;
+//                INSERT INTO tag_link (tag_id, data_type, data_id) VALUES(" . $vars['tag'] . ", " . DATA_TYPE_IMAGE . ", LAST_INSERT_ID());
+//                COMMIT;
+//                ";
                 $result = $dbh->query($query);
                 $return = $result->rowCount();
+//                if ($return && $vars['tag']) {
+//                    $return = DBManager::setData('tag_link', ['tag_id', 'data_type', 'data_id'], [$vars['tag'], DATA_TYPE_IMAGE, $return]);
+//                }
             }
         }
         return $return;
