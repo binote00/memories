@@ -268,6 +268,22 @@ a.popup-light span{
     display: none;
 }
 
+html body header nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-navbar div#navbar-memories.collapse.navbar-collapse ul.navbar-nav.mr-auto li.nav-item.dropdown.show div.dropdown-menu {
+    background-color: #003440 !important;
+    color: hsla(0,0%,100%,.5) !important;
+}
+
+.dropdown-item {
+    color: hsla(0,0%,100%,.5) !important;
+    background-color: #003440;
+}
+
+.dropdown-item:hover {
+    color: #fff !important;
+    text-decoration: none;
+    background-color: hsla(0,0%,60%,.2);
+}
+
 @media (min-width: 1199px){
     .img-popup-l{
         width: 200%;
