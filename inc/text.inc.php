@@ -6,7 +6,7 @@
  * Time: 13:32
  */
 
-define('TXT_TITLE', 'Memories');
+define('TXT_MEMORIES', 'Memories');
 define('TXT_WELCOME', 'Bienvenue');
 define('TXT_ERROR', 'Erreur');
 define('TXT_INTRO', 'Memories est un espace personnel privé où vous pourrez');
@@ -89,8 +89,14 @@ define('TXT_TAG_DEL_FAIL', TXT_ERROR . ' dans la suppression du ' . TXT_TAG . '!
 define('TXT_TAG_MOD_DONE', TXT_TAG . ' modifié avec succès!');
 define('TXT_TAG_MOD_FAIL', TXT_ERROR . ' dans la modification du ' . TXT_TAG . '!');
 define('TXT_TAG_EXIST', 'Ce ' . TXT_TAG . ' existe déjà!');
+define('TXT_TAG_NO_MESSAGE', 'Aucun ' . TXT_MESSAGE . ' lié à ce '. TXT_TAG);
+define('TXT_TAG_NO_EVENT', 'Aucun ' . TXT_EVENT . ' lié à ce '. TXT_TAG);
 
 define('TXT_EMOTION', 'Emotion');
+define('TXT_INTENSITY', 'Intensité');
 define('TXT_NOTE', 'Intensité de l\'émotion');
+define('TXT_DATE', 'Date');
+define('TXT_CATEGORY', 'Catégorie');
+define('TXT_TITLE', 'Titre');
 
 define('TXT_TIMELINE', 'ligne du temps');

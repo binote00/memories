@@ -23,6 +23,7 @@ h2 {
     color: #AFDA54;
     border-left: 4px solid #D77EB2;
     padding-left: 10px;
+    text-transform: capitalize;
 }
 
 label {
@@ -53,6 +54,10 @@ hr .style {
 
 td div.row div.col-md-2 form button.btn {
     padding : .45rem .5rem;
+}
+
+.font-15 {
+    font-size: 1.5rem;
 }
 
 .img-people {
@@ -225,6 +230,18 @@ a.popup-light span{
 .page-item.active .page-link {
     background-color: #EDFAD1;
     border-color: #EDFAD1;
+}
+
+.btn.btn-outline-primary {
+    color: #628D07;
+    background-color: transparent;
+    border-color: #628D07;
+}
+
+.btn.btn-outline-primary:hover {
+    color: #628D07;
+    background-color: hsla(0,0%,60%,.2);
+    border-color: #628D07;
 }
 
 .btn-primary-1 {

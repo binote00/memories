@@ -189,6 +189,9 @@ Trait Output
      */
     public static function btnModal($target_id, $btn_text, $btn_class = 'primary')
     {
+        if ($btn_text == '+') {
+            $btn_class .= ' font-15';
+        }
         return '<button type="button" class="btn btn-' . $btn_class . '" data-toggle="modal" data-target="#' . $target_id . '">' . $btn_text . '</button>';
     }
 

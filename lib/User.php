@@ -441,9 +441,9 @@ class User
                             </div>
                             <div class="collapse" id="clp-event-tag-mod-' . $data->getId() . '">' . $this->AddTagOnElement($user, $data->getId(), './app/a_event_tag_add.php', 0, $tag_txt) . '</div>
                         </td>
-                        </tr>';
+                    </tr>';
                 }
-                $content = Output::TableHead(['Date', 'Titre', 'Catégorie', 'Emotion', 'Intensité', 'Tags'], $tbody, 'Evénements <button type="button" class="btn btn-primary btn-lg" data-toggle="collapse" href="#f-event-add-collapse">+</button>');
+                $content = Output::TableHead(['Date', 'Titre', 'Catégorie', 'Emotion', 'Intensité', 'Tags'], $tbody, 'Evénements <button type="button" class="btn btn-primary-1 btn-lg" data-toggle="collapse" href="#f-event-add-collapse">+</button>');
             }
         }
         return $content;
@@ -506,7 +506,7 @@ class User
                         </td>
                         </tr>';
                 }
-                $content = Output::TableHead(['Date', 'Message', 'Tags', 'Emotion', 'Intensité', 'Event'], $tbody, 'Messages <button type="button" class="btn btn-primary btn-lg" data-toggle="collapse" href="#f-message-add-collapse">+</button>');
+                $content = Output::TableHead(['Date', 'Message', 'Tags', 'Emotion', 'Intensité', 'Event'], $tbody, 'Messages <button type="button" class="btn btn-primary-1 btn-lg" data-toggle="collapse" href="#f-message-add-collapse">+</button>');
             }
         }
         return $content;
@@ -638,9 +638,9 @@ class User
             $return .= $form->CreateForm($action, 'POST', '')
                 ->AddSelect('tag_id', '', 'tag', ['id', 'tag_name'], 'tag_name', 'id', 'user_id', $user, 'tag_name', 'ASC')
                 ->AddInput('id', '', 'hidden', $element_id)
-                ->EndForm('Ajouter', 'primary');
+                ->EndForm('Ajouter', 'primary-1');
         } else {
-            $return = Output::btnModal('modal-add-btn', '+', 'primary');
+            $return = Output::btnModal('modal-add-btn', '+', 'primary-1');
         }
         return $return;
     }
@@ -657,7 +657,7 @@ class User
         $return .= $form->CreateForm($action, 'POST', '')
             ->AddSelect('emotion', '', 'emotion', ['id', 'em_name'], 'em_name', 'id', '', '', 'em_name', 'ASC')
             ->AddInput('id', '', 'hidden', $id)
-            ->EndForm('Modifier', 'primary');
+            ->EndForm('Modifier', 'primary-1');
         return $return;
     }
 
@@ -675,7 +675,7 @@ class User
         $return .= $form->CreateForm($action, 'POST', '')
             ->AddSelect('event_type', '', 'events_type', ['id', 'event_name'], 'event_name', 'id', '', '', 'event_name', 'ASC')
             ->AddInput('id', '', 'hidden', $id)
-            ->EndForm('Modifier', 'primary');
+            ->EndForm('Modifier', 'primary-1');
         return $return;
     }
 
@@ -691,7 +691,7 @@ class User
         $return .= $form->CreateForm($action, 'POST', '')
             ->AddSelectNumber('note', '', 1, 10)
             ->AddInput('id', '', 'hidden', $id)
-            ->EndForm('Noter', 'primary');
+            ->EndForm('Noter', 'primary-1');
         return $return;
     }
 
@@ -707,7 +707,7 @@ class User
         $return .= $form->CreateForm($action, 'POST', '')
             ->AddSelect('event_id', '', 'event', ['id', DBManager::SQLDateFormat('moment', 'BIRTH'), 'title'], [' : ', 'moment', 'title'], 'id', 'user_id', $_SESSION['id'], 'title', 'DESC')
             ->AddInput('id', '', 'hidden', $id)
-            ->EndForm('Modifier', 'primary');
+            ->EndForm('Modifier', 'primary-1');
         return $return;
     }
 
@@ -786,7 +786,7 @@ class User
                     $content .= Output::viewCard($data_img);
                 }
                 if ($content) {
-                    $content = '<div class="row">' . $content . '</div>';
+                    $content = '<h2 class="h2-bl">' . TXT_IMAGE . '</h2><div class="row">' . $content . '</div>';
                 }
             }
         }
@@ -809,23 +809,172 @@ class User
                 LEFT JOIN tag_link AS tl ON tl.data_id=m.id AND tl.data_type=1
                 WHERE tl.tag_id=" . $tag . " AND m.user_id=" . $user . " ORDER BY m.id ASC";
                 $dbh = DB::connect();
-                $result = $dbh->query($query);
-                if ($result) {
+                $res = $dbh->query($query);
+                if ($res) {
+                    $tags = DBManager::getData('tag', 'id', 'user_id', $user, '', '', '', 'COUNT');
                     $tbody = '';
-                    while ($data = $result->fetchObject()) {
-                        $text = $this->listTagsFromElement(1, $data, $dbh, false);
-                        if ($text) $text .= '<hr>';
-                        $form = new Form();
-                        $text .= $form->CreateForm('./app/a_message_tag_add.php', 'POST', '')
-                            ->AddSelect('tag_id', '', 'tag', ['id', 'tag_name'], 'tag_name', 'id', 'user_id', $user, 'tag_name', 'ASC')
-                            ->AddInput('id', '', 'hidden', $data->id)
-                            ->EndForm('Ajouter', 'primary');
-                        $tbody .= '<tr><td>' . $data->moment . '<br><span class="text-hide">' . $data->id . '</span>
-                        <button type="button" class="btn btn-sm btn-danger btn-modif">Modifier</button>
+                    $result = $res->fetchAll(PDO::FETCH_CLASS, 'Message');
+                    foreach ($result as $data) {
+                        if ($data->getEmotion()) {
+                            $emotion_q = DBManager::getData('emotion', 'em_name', 'id', $data->getEmotion(), '', '', '', 'OBJECT');
+                            $emotion_txt = $emotion_q->em_name;
+                        } else {
+                            $emotion_txt = '<i>&lt;Aucune Emotion&gt;</i>';
+                        }
+                        $event_txt = $data->getMessageEvent($data->id);
+                        $note_txt = $data->getNote();
+                        if (!$note_txt) {
+                            $note_txt = '<i>&lt;Note manquante&gt;</i>';
+                        } else {
+                            $note_txt .= '/10';
+                        }
+                        $tag_txt = $this->listTagsFromElement(1, $data, $dbh);
+                        if (!$tag_txt) {
+                            $tag_txt = '<i>&lt;Aucun Tag&gt;</i>';
+                        }
+                        $tbody .= '<tr><td>' . $data->getMoment() . '<br><span class="text-hide">' . $data->getId() . '</span>
+                        <button type="button" class="btn-modif btn btn-sm btn-danger">Modifier</button></td>
+                        <td class="td-ck"><div class="ck-inline ck-inline-min" contenteditable="true">' . $data->getMessage() . '</div></td>
+                        <td>
+                            ' . $tag_txt . '
+                            <form><button type="button" class="btn btn-lg btn-primary-1" data-toggle="collapse" data-target="#clp-msg-tag-mod-' . $data->getId() . '">+</button></form>
+                            <div class="collapse" id="clp-msg-tag-mod-' . $data->getId() . '">' . $this->AddTagOnElement($user, $data->getId(), './app/a_message_tag_add.php', $tags, $tag_txt) . '</div>
                         </td>
-                        <td><div class="ck-inline" contenteditable="true">' . $data->message . '</div></td><td>' . $text . '</td><td>' . $data->note . $this->AddNoteOnElement($data->id, './app/a_message_note.php') . '</td></tr>';
+                        <td>
+                            ' . $emotion_txt . '
+                            <form><button type="button" class="btn btn-primary-1" data-toggle="collapse" data-target="#clp-msg-emo-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                            <div class="collapse" id="clp-msg-emo-mod-' . $data->getId() . '">' . $this->AddEmotionOnElement($data->getId(), './app/a_message_emo.php') . '</div>
+                        </td>
+                        <td>
+                            ' . $note_txt . '
+                            <form><button type="button" class="btn btn-primary-1" data-toggle="collapse" data-target="#clp-msg-note-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                            <div class="collapse" id="clp-msg-note-mod-' . $data->getId() . '">' . $this->AddNoteOnElement($data->getId(), './app/a_message_note.php') . '</div>
+                        </td>
+                        <td>
+                            ' . $event_txt . '
+                            <form><button type="button" class="btn btn-primary-1" data-toggle="collapse" data-target="#clp-msg-event-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                            <div class="collapse" id="clp-msg-event-mod-' . $data->getId() . '">' . $this->AddEventOnElement($data->getId(), './app/a_message_event.php') . '</div>
+                        </td>
+                        </tr>';
                     }
-                    $content = Output::TableHead(['Date', 'Message', 'Tags', 'Note'], $tbody, 'Messages');
+                    if ($tbody) {
+                        $content = Output::TableHead([TXT_DATE, TXT_MESSAGE, TXT_TAG, TXT_EMOTION, TXT_INTENSITY, TXT_EVENT], $tbody, Output::Plural(TXT_MESSAGE, 2));
+                    } else {
+                        $content = '<h2 class="h2-bl">' . TXT_MESSAGE . '</h2>' . Output::ShowAdvert(TXT_TAG_NO_MESSAGE, 'info');
+                    }
+                }
+            }
+        }
+        return $content;
+    }
+
+    /**
+     * @param int $user
+     * @param int $tag
+     * @param int $event_type
+     * @return bool|string
+     */
+    public function getEventsFromUserByTag($user, $tag, $event_type = 0)
+    {
+        $content = false;
+        if ($user && $tag) {
+            $tag_ok = DBManager::getData('tag', 'id', ['tag_name', 'user_id'], [$tag, $user], '', '', '', 'OBJECT');
+            $tag = $tag_ok->id;
+            if ($tag) {
+                $query = "SELECT m.* FROM event AS m
+                LEFT JOIN tag_link AS tl ON tl.data_id=m.id AND tl.data_type=5
+                WHERE tl.tag_id=" . $tag . " AND m.user_id=" . $user . " ORDER BY m.id ASC";
+                $dbh = DB::connect();
+                $res = $dbh->query($query);
+                if ($res) {
+                    $tbody = '';
+                    $result = $res->fetchAll(PDO::FETCH_CLASS, 'Event');
+                    foreach ($result as $data) {
+                        $tag_txt = $this->listTagsFromElement(5, $data, $dbh);
+                        if (!$tag_txt) {
+                            $tag_txt = '<i>&lt;Aucun Tag&gt;</i>';
+                        }
+                        if (!$event_type) {
+                            $event_type_q = DBManager::getData('events_type', 'event_name', 'id', $data->getEventType(), '', '', '', 'OBJECT');
+                            $event_type_txt = ucfirst($event_type_q->event_name);
+                        }
+                        $emotion_q = DBManager::getData('emotion', 'em_name', 'id', $data->getEmotion(), '', '', '', 'OBJECT');
+                        $emotion_txt = $emotion_q->em_name;
+                        if (!$emotion_txt) {
+                            $emotion_txt = '<i>&lt;Aucune Emotion&gt;</i>';
+                        }
+                        $title_txt = $data->getTitle();
+                        if (!$title_txt) {
+                            $title_txt = '<i>&lt;Titre manquant&gt;</i>';
+                        }
+                        $note_txt = $data->getNote();
+                        if (!$note_txt) {
+                            $note_txt = '<i>&lt;Note manquante&gt;</i>';
+                        } else {
+                            $note_txt .= '/10';
+                        }
+                        $tbody .= '<tr>
+                            <td class="event-time">
+                                <div class="row">
+                                    <div class="col-md-8">' . $data->getMoment() . '</div>
+                                    <div class="col-md-2">
+                                        <form><button type="button" class="btn btn-primary-1" data-toggle="collapse" data-target="#clp-event-time-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                                    </div>
+                                </div>
+                                <div class="collapse" id="clp-event-time-mod-' . $data->getId() . '">' . Event::updateEventDate($data->getId(), './app/a_event_date.php', $data->getMoment()) . '</div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-8">' . $title_txt . '</div>
+                                    <div class="col-md-2">
+                                        <form><button type="button" class="btn btn-primary-1" data-toggle="collapse" data-target="#clp-event-title-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                                    </div>
+                                </div>
+                                <div class="collapse" id="clp-event-title-mod-' . $data->getId() . '">' . Event::updateEventTitle($data->getId(), './app/a_event_title.php') . '</div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-8">' . $event_type_txt . '</div>
+                                    <div class="col-md-2">
+                                        <form><button type="button" class="btn btn-primary-1" data-toggle="collapse" data-target="#clp-event-type-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                                    </div>
+                                </div>
+                                <div class="collapse" id="clp-event-type-mod-' . $data->getId() . '">' . $this->AddCatOnElement($data->getId(), './app/a_event_type.php', $event_type_txt) . '</div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-8">' . $emotion_txt . '</div>
+                                    <div class="col-md-2">
+                                        <form><button type="button" class="btn btn-primary-1" data-toggle="collapse" data-target="#clp-event-emo-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                                    </div>
+                                </div>
+                                <div class="collapse" id="clp-event-emo-mod-' . $data->getId() . '">' . $this->AddEmotionOnElement($data->getId(), './app/a_event_emo.php') . '</div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-8">' . $note_txt . '</div>
+                                    <div class="col-md-2">
+                                        <form><button type="button" class="btn btn-primary-1" data-toggle="collapse" data-target="#clp-event-note-mod-' . $data->getId() . '"><i class="fa fa-pencil-square-o color-primary-1"></i></button></form>
+                                    </div>
+                                </div>
+                                <div class="collapse" id="clp-event-note-mod-' . $data->getId() . '">' . $this->AddNoteOnElement($data->getId(), './app/a_event_note.php') . '</div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-8">' . $tag_txt . '</div>
+                                    <div class="col-md-2">
+                                        <form><button type="button" class="btn btn-lg btn-primary-1" data-toggle="collapse" data-target="#clp-event-tag-mod-' . $data->getId() . '">+</button></form>
+                                    </div>
+                                </div>
+                                <div class="collapse" id="clp-event-tag-mod-' . $data->getId() . '">' . $this->AddTagOnElement($user, $data->getId(), './app/a_event_tag_add.php', 0, $tag_txt) . '</div>
+                            </td>
+                        </tr>';
+                    }
+                    if ($tbody) {
+                        $content = Output::TableHead([TXT_DATE, TXT_TITLE, TXT_CATEGORY, TXT_EMOTION, TXT_INTENSITY, TXT_TAG], $tbody, Output::Plural(TXT_EVENT, 2));
+                    } else {
+                        $content = '<h2 class="h2-bl">' . TXT_EVENT . '</h2>' . Output::ShowAdvert(TXT_TAG_NO_EVENT, 'info');
+                    }
                 }
             }
         }
@@ -860,12 +1009,12 @@ class User
                 $form_tr = $form->CreateForm('./app/a_tag_tr.php', 'POST', '')
                     ->AddSelect('tag_id', 'Vers ce Tag', 'tag', ['id', 'tag_name'], 'tag_name', 'id', 'user_id', $user, 'tag_name', 'ASC')
                     ->AddInput('id', '', 'hidden', $data[0])
-                    ->EndForm('Transférer', 'primary');
+                    ->EndForm('Transférer', 'primary-1');
                 $form_mod = $form->CreateForm('./app/a_tag_mod.php', 'POST', '')
                     ->AddInput('tag_name', '', 'text', $data[1])
                     ->AddInput('id', '', 'hidden', $data[0])
                     ->AddInput('user_id', '', 'hidden', $user)
-                    ->EndForm('Modifier', 'primary');
+                    ->EndForm('Modifier', 'primary-1');
                 $tbody .= '<tr>
                             <td class="tag-editable">
                             <div class="row">
@@ -883,7 +1032,7 @@ class User
                 $tbody .= '<tr><td>' . $data[1] . '</td><td>' . $form_delete . '</td><td>' . Output::Popup('<form><button type="button" class="btn btn-danger"><i class="fa fa-ban"></i></button></form>', $help_txt2) . '</td></tr>';
             }
         }
-        $btn_add = Output::btnModal('modal-add-btn', '+', 'primary');
+        $btn_add = Output::btnModal('modal-add-btn', '+', 'primary-1');
         return Output::TableHead(['Nom du Tag', 'Références', 'Transférer'], $tbody, 'Tags ' . $btn_add);
     }
 

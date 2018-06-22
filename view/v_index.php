@@ -12,8 +12,8 @@ for ($i = 1; $i < $intro_nbr; $i++) {
     $var = 'txt_intro_' . $i;
     $txt_intro .= '<li>' . $$var . '</li>';
 }
-$img_index = '<div class="img-index-lg">' . Output::ShowImage('memories.jpg', TXT_TITLE) . '</div>
-                <div class="img-index-sx">' . Output::ShowImage('memories_sx.jpg', TXT_TITLE) . '</div>';
+$img_index = '<div class="img-index-lg">' . Output::ShowImage('memories.jpg', TXT_MEMORIES) . '</div>
+                <div class="img-index-sx">' . Output::ShowImage('memories_sx.jpg', TXT_MEMORIES) . '</div>';
 
 if (!isset($_SESSION['id'])) {
     $register = '<p><a href="?view=register" class="btn btn-primary-1">' . TXT_SIGNIN . '</a></p>';

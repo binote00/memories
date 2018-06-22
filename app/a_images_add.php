@@ -8,10 +8,10 @@
 require_once '../inc/actions.inc.php';
 
 $image = new Image();
-$ok = $image->addImages($_POST,$_FILES);
-if($ok){
+$ok = $image->addImages($_POST, $_FILES);
+if ($ok) {
     Output::ShowAlert('Images ajoutées avec succès!', 'success');
-}else{
+} else {
     Output::ShowAlert('Erreur dans l\'ajout des images!', 'danger');
 }
 header('Location: ../index.php?view=images');

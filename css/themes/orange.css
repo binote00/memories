@@ -23,6 +23,7 @@ h2 {
     color: #A64B00;
     border-left: 4px solid #0A7878;
     padding-left: 10px;
+    text-transform: capitalize;
 }
 
 label {
@@ -49,6 +50,10 @@ hr .style {
     height: 10px;
     border: 0;
     box-shadow: 0 10px 10px -10px #8c8b8b inset;
+}
+
+.font-15 {
+    font-size: 1.5rem;
 }
 
 .img-people {
@@ -215,6 +220,18 @@ a.popup-light span{
 }
 .page-item.active .page-link {
     background-color: #E48739;
+    border-color: #E48739;
+}
+
+.btn.btn-outline-primary {
+    color: #E48739;
+    background-color: transparent;
+    border-color: #E48739;
+}
+
+.btn.btn-outline-primary:hover {
+    color: #E48739;
+    background-color: hsla(0,0%,60%,.2);
     border-color: #E48739;
 }
 

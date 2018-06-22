@@ -20,12 +20,11 @@ if ($_POST) {
             $photo = $image->addImage($_POST, $_FILES);
         }
     }
-    if (!empty($photo)) {
-        $mod_people = true;
-    } elseif (!empty($_POST['photolist'])) {
-        $fail_msg .= 'toto';
+    if (!empty($_POST['photolist'])) {
         $mod_people = true;
         $photo = $_POST['photolist'];
+    } elseif (!empty($photo)) {
+        $mod_people = true;
     } else {
         $fail_msg .= '<br>L\'image choisie n\'est pas valide';
     }

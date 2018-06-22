@@ -6,14 +6,15 @@
  * Time: 14:26
  */
 
-if(!isset($_SESSION['id'])){
+if (!isset($_SESSION['id'])) {
     header('Location: index.php');
-}else{
+} else {
     $user = new User();
     $images = $user->getImagesFromUserByTag($_SESSION['id'], $_POST['text']);
     $messages = $user->getMessagesFromUserByTag($_SESSION['id'], $_POST['text']);
+    $events = $user->getEventsFromUserByTag($_SESSION['id'], $_POST['text']);
     $content .= $images;
-    if($messages){
-        $content.='<hr class="style">'.$messages;
+    if ($messages) {
+        $content .= '<hr class="style">' . $messages . '<hr class="style">' . $events;
     }
 }

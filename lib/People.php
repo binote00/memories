@@ -305,7 +305,7 @@ class People
                     /*$detail = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-people"
                     data-body="<form method=\"POST\"><input type=\"text\" id=\"first_name\" value="Patrick"><input type=\"text\" id=\"user_id\" value="1"></form></button>';*/
                     $footer .= Output::viewModal('ppl-modal-' . $data->id, $title, $body);
-                    $detail = Output::btnModal('ppl-modal-' . $data->id, '+');
+                    $detail = Output::btnModal('ppl-modal-' . $data->id, '+', 'primary-1');
                     if (isset($data->birth_date) && !empty($data->birth_date)) {
                         $date = DateTime::createFromFormat('Y-m-d', $data->birth_date);
                         $birth_date = $date->format('d-m-Y');
@@ -315,7 +315,7 @@ class People
 
                     $tbody .= '<tr><td>' . $detail . '</td><td>' . $data->first_name . '</td><td>' . $data->last_name . '</td><td>' . $data->nickname . '</td><td>' . $birth_date . '</td><td><a href="mailto:' . $data->email . '">' . $data->email . '</a></td><td>' . $photo . '</td></tr>';
                 }
-                $content = Output::TableHead(['Détail', 'Prénom', 'Nom', 'Surnom', 'Naissance', 'Email', 'Photo'], $tbody, 'Personnes <button type="button" class="btn btn-primary btn-lg" data-toggle="collapse" href="#f-people-add-collapse">+</button>', 'people') . $footer; //.Output::viewModalJS('modal-people', 'lg');
+                $content = Output::TableHead(['Détail', 'Prénom', 'Nom', 'Surnom', 'Naissance', 'Email', 'Photo'], $tbody, 'Personnes <button type="button" class="btn btn-primary-1 btn-lg" data-toggle="collapse" href="#f-people-add-collapse">+</button>', 'people') . $footer; //.Output::viewModalJS('modal-people', 'lg');
             }
         }
         return $content;
