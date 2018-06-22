@@ -16,8 +16,8 @@ $img_index = '<div class="img-index-lg">' . Output::ShowImage('memories.jpg', TX
                 <div class="img-index-sx">' . Output::ShowImage('memories_sx.jpg', TXT_TITLE) . '</div>';
 
 if (!isset($_SESSION['id'])) {
-    $register = '<p><a href="?view=register" class="btn btn-primary">' . TXT_SIGNIN . '</a></p>';
-    $recover = '<p><a href="index.php?view=password_recover" class="btn btn-primary">Mot de passe oublié</a></p>';
+    $register = '<p><a href="?view=register" class="btn btn-primary-1">' . TXT_SIGNIN . '</a></p>';
+    $recover = '<p><a href="index.php?view=password_recover" class="btn btn-primary-1">Mot de passe oublié</a></p>';
     include_once __DIR__ . '/../form/f_login.php';
     $alerts = '
     <div class="row">

@@ -47,10 +47,10 @@ if(!isset($_SESSION['id'])){
     $user = new User();
     $content .= '<h2>Vos Images ['.$offset.'/'.$offset_max.']</h2>';
     if($offset >1){
-        $content .= '<a href="./index.php?view='.$redirect.'" class="btn btn-primary" id="img-prec">Précédent</a>';
+        $content .= '<a href="./index.php?view='.$redirect.'" class="btn btn-primary-1" id="img-prec">Précédent</a>';
     }
     if($offset <2 || $offset < $offset_max){
-        $content .= '<a href="./index.php?view='.$redirect.'" class="btn btn-primary" id="img-next">Suivant</a>';
+        $content .= '<a href="./index.php?view='.$redirect.'" class="btn btn-primary-1" id="img-next">Suivant</a>';
     }
     $content .= $user->getImagesFromUser($_SESSION['id'], 'card', $limit);
 

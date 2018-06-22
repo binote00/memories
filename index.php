@@ -28,8 +28,18 @@ require_once 'inc/index.inc.php';
     <link href="./css/font-awesome.min.css" rel="stylesheet">
     <?php if ($view == 'timeline') {?>
         <link href="./timeline/css/timeline.min.css" rel="stylesheet">
-    <?php } ?>
-    <link href="./css/main.css" rel="stylesheet">
+    <?php }
+    $theme_url = 'main.css';
+    if (isset($_SESSION['id'])) {
+        $param = new Param();
+        $theme_id = $param->getParamValue($_SESSION['id'], 5);
+        if ($theme_id) {
+            $theme = DBManager::getData('theme_color', ['id', 'hex', 'css', 'name'], 'id', $theme_id, '', '', '', 'OBJECT');
+            $theme_url = 'themes/' . $theme->css . '.css';
+        }
+    }
+    ?>
+    <link href="./css/<?=$theme_url?>" rel="stylesheet">
     <script src="./ckeditor/ckeditor.js"></script>
 </head>
 <body>

@@ -65,10 +65,10 @@ if (!isset($_SESSION['id'])) {
     $img_head = '<div class="row"><div class="col-6"></div><div class="col-6">' . $img_del . '</div></div>';
     $img_paginate = '<h2>[' . $offset . '/' . $offset_max . ']</h2>';
     if ($offset > 1) {
-        $img_btn .= '<a href="./index.php?view=' . $redirect . '" class="btn btn-primary" id="img-prec">' . TXT_PREV . '</a>';
+        $img_btn .= '<a href="./index.php?view=' . $redirect . '" class="btn btn-primary-1" id="img-prec">' . TXT_PREV . '</a>';
     }
     if ($offset < 2 || $offset < $offset_max) {
-        $img_btn .= '<a href="./index.php?view=' . $redirect . '" class="btn btn-primary" id="img-next">' . TXT_NEXT . '</a>';
+        $img_btn .= '<a href="./index.php?view=' . $redirect . '" class="btn btn-primary-1" id="img-next">' . TXT_NEXT . '</a>';
     }
     $images = $user->getImagesFromUser($_SESSION['id'], 'card', $limit, $chk_img_del);
     if ($images) {
