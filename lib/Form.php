@@ -121,7 +121,12 @@ class Form
         if ($attr) {
             $attr = ' ' . $attr;
         }
-        $return .= $this->callout.'<input type="' . $type . '" class="form-control' . $class . '" name="' . $name . '" id="' . $this->getId() . '-' . $name . '"' . $placeholder . $value . $attr . '>' . $this->callout_end;
+        if ($type == 'password') {
+            $id = $name;
+        } else {
+            $id = $this->getId() . '-' . $name;
+        }
+        $return .= $this->callout.'<input type="' . $type . '" class="form-control' . $class . '" name="' . $name . '" id="' . $id . '"' . $placeholder . $value . $attr . '>' . $this->callout_end;
         $this->output .= $return;
         return $this;
     }

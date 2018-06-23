@@ -256,8 +256,12 @@ class User
                     Output::ShowAlert('Mot de passe invalide !<br>Le mot de passe doit comporter au minimum 8 caractères et posséder 3 des 4 caractéristiques suivantes : une lettre minuscule, une lettre majuscule, un chiffre, un caractère spécial', 'danger');
                 } else {
                     $pwd = password_hash($vars['pwd'], PASSWORD_DEFAULT);
-                    $date = DateTime::createFromFormat('Y-m-d', $vars['birth_date']);
-                    $birth_date = $date->format('Y-m-d');
+                    if (isset($vars['birth_date']) && !empty($vars['birth_date'])) {
+                        $date = DateTime::createFromFormat('Y-m-d', $vars['birth_date']);
+                        $birth_date = $date->format('Y-m-d');
+                    } else {
+                        $birth_date = '';
+                    }
                     $result = $dbh->prepare("INSERT INTO user (first_name, last_name, birth_date, login, pwd, email, con_date, ip) 
                     VALUES (:first_name, :last_name, :birth_date, :login, :pwd, :email, NOW(), :ip)");
                     $result->bindParam(':first_name', $vars['first_name'], 2);
