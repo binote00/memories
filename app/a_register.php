@@ -6,11 +6,11 @@
  * Time: 09:58
  */
 
-spl_autoload_register(function($classe){
-    require_once '../lib/'.$classe.'.php';
+spl_autoload_register(function ($classe) {
+    require_once '../lib/' . $classe . '.php';
 });
 
-if($_POST){
+if (isset($_POST)) {
     $user = new User();
     $user->addUser($_POST);
 }

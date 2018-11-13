@@ -8,7 +8,7 @@
 
 if (isset($_GET['id']) && isset($_GET['tag'])) {
     require_once '../inc/actions.inc.php';
-    if ($_GET['id'] >0 && $_GET['tag'] >0) {
+    if ($_GET['id'] > 0 && $_GET['tag'] > 0) {
         $user = new User();
         $user->getUser($_GET['id']);
         $tags = $user->getTags($user->getId());
@@ -19,7 +19,7 @@ if (isset($_GET['id']) && isset($_GET['tag'])) {
         }
         //Output
         header('Content-type: application/json');
-        echo json_encode(['data'=>$data]);
+        echo json_encode(['data' => $data]);
     } else {
         echo 'PARAM NOT VALID';
     }
@@ -27,7 +27,8 @@ if (isset($_GET['id']) && isset($_GET['tag'])) {
     echo 'PARAM MISSING';
 }
 
-function in_array_r($needle, $haystack, $strict = false) {
+function in_array_r($needle, $haystack, $strict = false)
+{
     foreach ($haystack as $item) {
         if (($strict ? $item === $needle : $item == $needle) || (is_array($item) && in_array_r($needle, $item, $strict))) {
             return true;
