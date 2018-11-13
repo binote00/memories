@@ -1,0 +1,3 @@
+[submodule "ckeditor"]
+	path = ckeditor
+	url = https://gitlab.com/jf-exercices/ckeditor.git
