@@ -1,6 +1,7 @@
 <?php
 /**
- *
+ * exercice version
+ * 
  * User: JF
  * Date: 22-10-17
  * Time: 12:42
