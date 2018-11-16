@@ -2,8 +2,7 @@
 /**
  * exercice version
  *
- * User: Matth Master
- * User: PATRICK MASTER
+ * User: JF otot
  * Date: 22-10-17
  * Time: 12:42
  */
