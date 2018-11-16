@@ -2,7 +2,7 @@
 /**
  * exercice version
  * 
- * User: JF
+ * User: PATRICK MASTER
  * Date: 22-10-17
  * Time: 12:42
  */
